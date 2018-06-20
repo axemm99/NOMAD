@@ -127,6 +127,11 @@ function addLoadEvent(func) {
                         })
                         
                         User.removeUserById(userId)
+                        for(let i=0; i<requests.length; i++){
+                            if(userId == requests[i].userId)
+                            Request.removeUserById(userId)
+                            localStorage.setItem("requests", JSON.stringify(requests))
+                        }
                         localStorage.setItem("users", JSON.stringify(users))
 
                         renderTableUsers()
@@ -146,6 +151,11 @@ addLoadEvent(function() {
     // LOAD LOCAL STORAGE
         loadUsers()
         console.log(users)
+
+        loadRequest()
+        console.log(requests)
+        
+    
     //
     
 
