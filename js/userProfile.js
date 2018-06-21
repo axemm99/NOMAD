@@ -27,6 +27,7 @@ function addLoadEvent(func) {
                 viewName.value = users[i].userName
                 viewEmail.value = users[i].userEmail
                 viewPassword.value = users[i].userPassword
+                viewFine.value = users[i].fineValue
                 
                 if (users[i].userPhoto != "") {
                 viewPhoto.src = users[i].userPhoto
@@ -89,6 +90,44 @@ function addLoadEvent(func) {
             })
         }
     }
+
+
+
+    function payCurrentFine(){
+        let strHtml = ""
+    
+        for (let i = 0; i < users.length; i++) {
+            if (userCurrent == users[i].id) {
+                strHtml = `<p>${users[i].fineValue}</p>`
+                console.log(users[i].fineValue)
+            }
+        }    
+        viewCurrentFine.innerHTML = strHtml
+    
+    
+    
+    
+        frmFine.addEventListener("submit", function(event){
+    
+            for (let i = 0; i < users.length; i++) {
+                if (users[i].id == userCurrent) {
+                    users[i].fineValue = users[i].fineValue - parseInt(modalPayFine.value)
+                    viewFine.value = users[i].fineValue
+                }
+            }
+            localStorage.setItem("users", JSON.stringify(users))
+            
+            $('#modalViewFine').modal('hide')
+            event.preventDefault()
+        })
+    }
+
+
+
+
+
+
+
 //
 
 // --------------------------------------
@@ -109,19 +148,22 @@ addLoadEvent(function() {
         let frmProfile = document.getElementById("frmProfile")   //////
         let frmPhoto = document.getElementById("frmPhoto")
         let frmPassword = document.getElementById("frmPassword")
+        let frmFine = document.getElementById("frmFine")
 
         /* inputs */
         let viewName = document.getElementById("viewName")
         let viewEmail = document.getElementById("viewEmail")
         let viewPassword = document.getElementById("viewPassword")
+        let viewFine = document.getElementById("viewFine")
         let viewPhoto = document.getElementById("viewPhoto")
+        let viewCurrentFine = document.getElementById("viewCurrentFine")
         let modalChangePhotoLink = document.getElementById("modalChangePhotoLink")
         let modalNewPassword = document.getElementById("modalNewPassword")
-        let modalConfirmPassword = document.getElementById("modalConfirmPassword")   //////
+        let modalConfirmPassword = document.getElementById("modalConfirmPassword")
+        let modalPayFine = document.getElementById("modalPayFine")
     
         /* buttons */
-
-        /* others */
+        let btnViewFine = document.getElementById("btnViewFine")
     //
 
 
@@ -133,6 +175,10 @@ addLoadEvent(function() {
 
         /* user profile */
         addUserInfo()
+
+
+        
+        payCurrentFine()
     //
 
 

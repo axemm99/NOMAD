@@ -168,6 +168,10 @@
                             <!-- EMAIL -->
                             <label for="viewEmail">E-mail</label>
                             <input type="email" class="form-control" id="viewEmail" readonly>
+                            
+                            <!-- FINE -->
+                            <label for="viewFine">Multas</label>
+                            <input type="number" class="form-control" id="viewFine" readonly>
                         
                             <!-- PASSWORD -->
                             <div class="inline col-md-10">
@@ -178,6 +182,7 @@
                             <!-- BUTTON -->
                             <div class="inline edit col-md-2">
                                 <button type="button" id="btnChangePassword" class="btn btn-edit" data-toggle='modal' data-target="#changePasswordModal"><i class="fa fa-pen-square fa-2x"></i></button>
+                                <button type="button" id="btnViewFine" class="btn btn-edit" data-toggle='modal' data-target="#modalViewFine"><i class="fa fa-credit-card fa-2x"></i></button>
                             </div>
                         </div>
                     </div>
@@ -259,6 +264,38 @@
                             <!-- BUTTON -->
                             <div class="modal-footer">
                                 <input type="submit" class="btn btn-primary" value="Confirmar"/>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+         <!-- MODAL PAY FINE -->
+         <div class="modal fade" id="modalViewFine" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="modalTitleId" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header text-center">
+                        <h4 class="modal-title" id="modalTitleId">Pagar Multa</h4>
+                        <button type="button" id="btnClose" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true"><i class="fa fa-times"></i></span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="frmFine">    
+                            <!-- CHANGE PHOTO -->
+                            <div class="form-group">
+                                <h5>Valor Total da Multa</h5>
+                                <p id="viewCurrentFine"></p>
+                            </div>
+                            <div class="form-group">
+                                <label for="modalPayFine">Valor a Pagar</label>
+                                <input required type="number" value="" min="1" class="form-control" id="modalPayFine" required>
+                            </div>
+
+                            <!-- BUTTON -->
+                            <div class="modal-footer">
+                                <input type="submit" class="btn btn-modal btn-primary" value="Pagar"/>
                             </div>
                         </form>
                     </div>
