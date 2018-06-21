@@ -152,7 +152,7 @@ addLoadEvent(function() {
         loadUsers()
         console.log(users)
 
-        loadRequest()
+        loadRequests()
         console.log(requests)
         
     
