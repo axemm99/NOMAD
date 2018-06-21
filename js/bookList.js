@@ -192,6 +192,12 @@ addLoadEvent(function() {
 
         /* catalog */
         let catalogBooks = document.getElementById("catalogBooks")   //////
+
+
+        let collapseFilter = document.getElementById("collapseFilter")
+        let badgeFilter = document.getElementById("badgeFilter")
+
+        
     //
 
 
@@ -216,6 +222,9 @@ addLoadEvent(function() {
         addTagsToFilter()
         addAuthorsToFilter()
         addLibrariesCityToFilter()
+
+
+       // openFilter()
     //
 
     // --------------------------------------

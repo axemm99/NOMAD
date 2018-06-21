@@ -144,14 +144,20 @@
         <!-- CATALOG -->
         <div class="container-fluid middle-catalog col-lg-7">
             <!-- FILTER -->
-            <form id="frmFilter" class="inner">
-                    <!-- FILTER BY TAG -->
+                    <div class="row more-items">
+                        <h5>Filtros</h5>
+                        <a class="btn" data-toggle="collapse" href="#frmFilter" role="button" aria-expanded="false" aria-controls="frmFilter">
+                            <i class="fas fa-plus"></i>
+                        </a>
+                    </div>
+            <form id="frmFilter" class="collapse inner">
+                     <!--FILTER BY TAG -->
                     <div class="form-group">
                         <select id="filterTag" class="form-control">
                         </select>
                     </div>
 
-                    <!-- FILTER BY AUTHOR -->
+                     <!--FILTER BY AUTHOR -->
                     <div class="form-group">
                         <select id="filterAuthor" class="form-control">
                         </select>
@@ -180,7 +186,7 @@
                         </select>
                     </div>
     
-                    <!-- INVERT SORT -->
+                    <!-- INVERT SORT--> 
                     <div class="form-check">
                         <input type="checkbox" class="form-check-input" id="chbInvertSort">
                         <label class="form-check-label" for="exampleCheck1">Ordem decrescente</label>
