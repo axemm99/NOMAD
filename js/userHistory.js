@@ -77,6 +77,11 @@ function addLoadEvent(func) {
                 frmRating.addEventListener("submit", function(event) {
                     Book.rateBookById(bookId)
                     localStorage.setItem("books", JSON.stringify(books))
+                    
+                    bookRequest.disabled = true
+
+                    
+                    $('#modalRating').modal('hide')
                     event.preventDefault()
                 })
             })        
