@@ -387,3 +387,59 @@ addLoadEvent(function() {
         })
     //
 })
+
+
+function orderTitle() { 
+    if (selectSort.value == "Título") {
+    
+        let newBOOKS = books.sort()
+        newBOOKS.sort(function (a, b) {
+        var textA = a.bookTitle.toUpperCase();
+        var textB = b.bookTitle.toUpperCase();
+        return (textA < textB) ? -1 : (textA > textB) ? 1 : 0
+        })
+        console.log(books)
+        
+        // Reverses the order
+        if (chbInvertSort.checked == true) {
+            newBOOKS.reverse()
+        }
+    }
+}   
+
+function orderScore() {
+    if (selectSort.value == "Pontuação") {
+           
+        let newBOOKS = books.slice(0)
+
+        newBOOKS.sort(function(a,b) {
+            return a.bookRatings - b.bookRatings
+        })
+
+        // Reverses the order
+        if (chbInvertSort.checked == true) {
+            let newBOOKS = books.slice(0)
+
+            newBOOKS.sort(function(a,b) {
+                return a.bookRatings - b.bookRatings
+            })
+                
+            newBOOKS.reverse()
+        }
+    }
+}
+
+function orderDate() {
+    if (selectSort.value == "Data de doação") {
+        let newBOOKS = books.sort()
+
+        newBOOKS.sort(function(a, b) {
+            return new Date(b.donationDate) - new Date(a.donationDate);
+        })
+
+        // Reverses the order
+        if (chbInvertSort.checked == true) {
+            newBOOKS.reverse()
+        }
+    }    
+}
