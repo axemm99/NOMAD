@@ -28,7 +28,7 @@ function addLoadEvent(func) {
                 lat: 41.3500040642546,
                 lng: -8.748929042801365
             },
-            zoom: 12
+            zoom: 9
         })
 
         let infoWindow = new google.maps.InfoWindow({map: map})
