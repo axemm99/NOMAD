@@ -94,6 +94,27 @@ function addLoadEvent(func) {
 
 
     function payCurrentFine(){
+
+
+        
+       // <input required type="number" value="" min="1" class="form-control" id="modalPayFine" required>
+
+        let strHtml2 = ""
+        for (let i = 0; i < users.length; i++) {
+            if (userCurrent == users[i].id) {
+                strHtml2 = `<label for="modalPayFine">Valor a Pagar</label> 
+                <input required type="number" value="" min="1" max='${users[i].fineValue}' class="form-control" id="modalPayFine" required>`
+                console.log(users[i].fineValue)
+            }
+        }  
+        finePayTotal.innerHTML = strHtml2
+
+        
+        let modalPayFine = document.getElementById("modalPayFine")
+
+
+
+
         let strHtml = ""
     
         for (let i = 0; i < users.length; i++) {
@@ -101,10 +122,11 @@ function addLoadEvent(func) {
                 strHtml = `<p>${users[i].fineValue}</p>`
                 console.log(users[i].fineValue)
             }
-        }    
+        }  
+
         viewCurrentFine.innerHTML = strHtml
     
-    
+        
     
     
         frmFine.addEventListener("submit", function(event){
@@ -115,8 +137,9 @@ function addLoadEvent(func) {
                     viewFine.value = users[i].fineValue
                 }
             }
+
             localStorage.setItem("users", JSON.stringify(users))
-            
+
             $('#modalViewFine').modal('hide')
             event.preventDefault()
         })
@@ -160,7 +183,7 @@ addLoadEvent(function() {
         let modalChangePhotoLink = document.getElementById("modalChangePhotoLink")
         let modalNewPassword = document.getElementById("modalNewPassword")
         let modalConfirmPassword = document.getElementById("modalConfirmPassword")
-        let modalPayFine = document.getElementById("modalPayFine")
+        let finePayTotal = document.getElementById("finePayTotal")
     
         /* buttons */
         let btnViewFine = document.getElementById("btnViewFine")

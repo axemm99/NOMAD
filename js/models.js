@@ -1316,7 +1316,7 @@ if (!localStorage.users) {
     users.push(user01)
     user02 = new User("o", "o@o.o", 12345, "https://image.flaticon.com/icons/svg/183/183334.svg", 1, 0, "2018-06-02")
     users.push(user02)
-    user03 = new User("s","s@s.s", 12345, "https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&h=350", 2, 6, "2018-06-02")
+    user03 = new User("s","s@s.s", 12345, "https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&h=350", 2, 8, "2018-06-02")
     users.push(user03)
     user04 = new User("Fernando Mendes","oGordo@sapo.pt", 12345, "https://cdn.vidas.pt/images/2011-04/img_650x412$2011_04_17_18_09_00_49374.jpg", 2, 0, "2018-06-02")
     users.push(user04)
