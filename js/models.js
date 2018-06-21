@@ -1539,11 +1539,11 @@ let comment12 = ""
 
                     // userId, bookId, comment
 if (!localStorage.comments) {
-    comment01 = new Review(3, 1, "Porto: Porto Editora, 2015")
+    comment01 = new Review(3, 1, "É um livro bom! Aconcelho.")
     comments.push(comment01)
-    comment02 = new Review(2, 1, "Ana 2018-05-07 or sit amet, consectetur adsuere.")
+    comment02 = new Review(2, 1, "Não presta!")
     comments.push(comment02)
-    comment03 = new Review(3, 1, "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lectus arcu, porttitor eget augue vitae, rhoncus posuere.")
+    comment03 = new Review(3, 1, "Boa leitura e ótima história!")
     comments.push(comment03)
     comment04 = new Review(4, 2, "ESPETÁÁÁCULO!!!!!!")
     comments.push(comment04)
