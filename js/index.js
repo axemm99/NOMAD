@@ -116,6 +116,7 @@ function addLoadEvent(func) {
             if (userCurrent == -1) {
                 if (i >= 0 & i <= 4) {
                     strHtml += `<div class='book col-md-2'>
+                                    <h6 id="badgeNumbers">${i+1}</h6>
                                     <img src='${sortBooksRating[i].bookCover}' class='img-fluid book-tippy' width='140'/>
                                     <h5>${sortBooksRating[i].bookTitle}</h5>
                                     <p>${sortBooksRating[i].bookAuthors}</p>
@@ -126,6 +127,7 @@ function addLoadEvent(func) {
             else {
                 if (i >= 0 & i <= 4) {
                     strHtml += `<div class='book col-md-2'>
+                                    <h6 id="badgeNumbers">${i+1}</h6>
                                     <a id='${sortBooksRating[i].id}' href='html/bookSelect.html' class='book-page'>
                                         <img src='${sortBooksRating[i].bookCover}' class='img-fluid' width='140'/>
                                     </a>

@@ -634,3 +634,52 @@
     font-weight: 400;
     font-size: 18px;
 }
+
+
+
+#badgeNumbers{
+    position: absolute;
+    background: red;
+    height:2rem;
+    top:-0.5rem;
+    right:-0.5rem;
+    width:2rem;
+    text-align: center;
+    line-height: 2rem;;
+    font-size: 1rem;
+    border-radius: 50%;
+    color:white;
+    border:1px solid red;
+
+}
+
+/*
+#badgeNumbers{
+    background: red;
+    width: 80px;
+    height: 80px;
+    position: relative;
+    text-align: center;
+}
+
+#badgeNumbers:before, #badgeNumbers:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 80px;
+    width: 80px;
+    background: red;
+}
+#badgeNumbers:before {
+    -webkit-transform: rotate(30deg);
+       -moz-transform: rotate(30deg);
+        -ms-transform: rotate(30deg);
+         -o-transform: rotate(30deg);
+}
+#badgeNumbers:after {
+    -webkit-transform: rotate(60deg);
+       -moz-transform: rotate(60deg);
+        -ms-transform: rotate(60deg);
+         -o-transform: rotate(60deg);
+}*/
