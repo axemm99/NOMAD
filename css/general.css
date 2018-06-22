@@ -90,6 +90,12 @@ img {
     color: white !important;
 }
 
+.form-control:disabled, .form-control[readonly] {
+    background-color: #ebebeb;
+    border: none;
+    opacity: 1;
+}
+
 
 /* NAV BAR */                             /*     ////////////////////////////////////////////////////     */
 .top {

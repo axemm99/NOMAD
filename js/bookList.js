@@ -160,6 +160,9 @@ addLoadEvent(function() {
         loadBooks()
         console.log(books)
 
+        loadWishlists()
+        console.log(wishlists)
+
         loadLibraries()
         console.log(libraries)
     //
@@ -185,19 +188,13 @@ addLoadEvent(function() {
 
         /* buttons */
         let btnClose = document.getElementById("btnClose")
-        let btnFiltrar = document.getElementById("btnFiltrar")
+        let btnFilter = document.getElementById("btnFilter")
 
         /* tables */
-        let tblBooks = document.getElementById("tblBooks")   //////
+        let tblBooks = document.getElementById("tblBooks")
 
         /* catalog */
-        let catalogBooks = document.getElementById("catalogBooks")   //////
-
-
-        let collapseFilter = document.getElementById("collapseFilter")
-        let badgeFilter = document.getElementById("badgeFilter")
-
-        
+        let catalogBooks = document.getElementById("catalogBooks")
     //
 
 
@@ -208,10 +205,15 @@ addLoadEvent(function() {
         navbarVisible()
 
         /* donate book modal */
-        addCategoriesToModal()
-        addTagsToModal()
-        addCitiesToModal()
         viewDonateStep(count)
+        modalDonateCategories.innerHTML = addCategoriesToModal()
+        modalDonateTags.innerHTML = addTagsToModal()
+        modalDonateCity.innerHTML = addCitiesToModal()
+
+        /* notifications */
+        if (userPermissions == 2) {
+            viewNotificationPanel()
+        }
 
         /* catalog */
         addCategoryCurrentTitle(categoryCurrent)
@@ -222,9 +224,6 @@ addLoadEvent(function() {
         addTagsToFilter()
         addAuthorsToFilter()
         addLibrariesCityToFilter()
-
-
-       // openFilter()
     //
 
     // --------------------------------------
@@ -236,12 +235,6 @@ addLoadEvent(function() {
             event.preventDefault()
         })
 
-        /* donate cover */
-        modalDonateCover.addEventListener("change", function(event) {
-            viewInputCover()
-            event.preventDefault()
-        })
-
         /* donate book */
         frmDonate.addEventListener("submit", function(event){
             checkBookValid()
@@ -250,6 +243,18 @@ addLoadEvent(function() {
                 frmDonate.reset()
             }
 
+            event.preventDefault()
+        })
+
+        /* cities donate */
+        modalDonateCity.addEventListener("change", function(event) {
+            modalDonateParish.innerHTML = addParishToModal(modalDonateCity.value)
+            event.preventDefault()
+        })
+
+        /* donate cover */
+        modalDonateCover.addEventListener("change", function(event) {
+            viewInputCover()
             event.preventDefault()
         })
     //
@@ -281,7 +286,7 @@ addLoadEvent(function() {
         })
 
         /* filter */
-        btnFiltrar.addEventListener("click", function(event) {
+        btnFilter.addEventListener("click", function(event) {
             // SORT BY TITLE
             if (selectSort.value == "Título") {    
                 books.sort(function(a, b) {
@@ -387,3 +392,75 @@ addLoadEvent(function() {
         })
     //
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function orderTitle() { 
+    if (selectSort.value == "Título") {
+    
+        let newBOOKS = books.sort()
+        newBOOKS.sort(function (a, b) {
+        var textA = a.bookTitle.toUpperCase();
+        var textB = b.bookTitle.toUpperCase();
+        return (textA < textB) ? -1 : (textA > textB) ? 1 : 0
+        })
+        console.log(books)
+        
+        // Reverses the order
+        if (chbInvertSort.checked == true) {
+            newBOOKS.reverse()
+        }
+    }
+}   
+
+function orderScore() {
+    if (selectSort.value == "Pontuação") {
+           
+        let newBOOKS = books.slice(0)
+
+        newBOOKS.sort(function(a,b) {
+            return a.bookRatings - b.bookRatings
+        })
+
+        // Reverses the order
+        if (chbInvertSort.checked == true) {
+            let newBOOKS = books.slice(0)
+
+            newBOOKS.sort(function(a,b) {
+                return a.bookRatings - b.bookRatings
+            })
+                
+            newBOOKS.reverse()
+        }
+    }
+}
+
+function orderDate() {
+    if (selectSort.value == "Data de doação") {
+        let newBOOKS = books.sort()
+
+        newBOOKS.sort(function(a, b) {
+            return new Date(b.donationDate) - new Date(a.donationDate);
+        })
+
+        // Reverses the order
+        if (chbInvertSort.checked == true) {
+            newBOOKS.reverse()
+        }
+    }    
+}

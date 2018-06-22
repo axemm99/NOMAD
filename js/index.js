@@ -31,7 +31,7 @@ function addLoadEvent(func) {
             }
         }
 
-        if(userCurrent != -1) {
+        if (userCurrent != -1) {
             $('#modalLogin').modal('hide')
 
             location.reload()
@@ -115,7 +115,8 @@ function addLoadEvent(func) {
 
             if (userCurrent == -1) {
                 if (i >= 0 & i <= 4) {
-                    strHtml += `<div class='book col-md-2'>
+                    strHtml += `<div class='book col-md-2'>                                
+                                    <h6 id="badgeNumbers">${i+1}</h6>
                                     <img src='${sortBooksRating[i].bookCover}' class='img-fluid book-tippy' width='140'/>
                                     <h5>${sortBooksRating[i].bookTitle}</h5>
                                     <p>${sortBooksRating[i].bookAuthors}</p>
@@ -126,13 +127,16 @@ function addLoadEvent(func) {
             else {
                 if (i >= 0 & i <= 4) {
                     strHtml += `<div class='book col-md-2'>
+                                    <h6 id="badgeNumbers">${i+1}</h6>
                                     <a id='${sortBooksRating[i].id}' href='html/bookSelect.html' class='book-page'>
                                         <img src='${sortBooksRating[i].bookCover}' class='img-fluid' width='140'/>
                                     </a>
                                     <a id='${sortBooksRating[i].id}' href='html/bookSelect.html' class='book-page'>
                                         <h5>${sortBooksRating[i].bookTitle}</h5>
                                     </a>
-                                    <p>${sortBooksRating[i].bookAuthors}</p>
+                                    <a id='${sortBooksRating[i].id}' href='html/bookSelect.html' class='book-page'>
+                                        <p>${sortBooksRating[i].bookAuthors}</p>
+                                    </a>
                                     <a id='${sortBooksRating[i].id}' href='html/bookSelect.html' class='book-page'>
                                         ${convertRatingToStars(Book.calculateRating(sortBooksRating[i].bookRatings))}
                                     </a>
@@ -149,6 +153,7 @@ function addLoadEvent(func) {
 
     /* recent books */
     function addRecentBooksToIndex() {
+        
         // prevents original array from new sorting
         let sortBooksRecent = [...books].sort()
         let strHtml = "<h1 class='bottom'>NOVIDADES</h1>"
@@ -183,7 +188,9 @@ function addLoadEvent(func) {
                                     <a id='${sortBooksRecent[i].id}' href='html/bookSelect.html' class='book-page'>
                                         <h5>${sortBooksRecent[i].bookTitle}</h5>
                                     </a>
-                                    <p>${sortBooksRecent[i].bookAuthors}</p>
+                                    <a id='${sortBooksRecent[i].id}' href='html/bookSelect.html' class='book-page'>
+                                        <p>${sortBooksRecent[i].bookAuthors}</p>
+                                    </a>
                                     <a id='${sortBooksRecent[i].id}' href='html/bookSelect.html' class='book-page'>
                                         ${convertRatingToStars(Book.calculateRating(sortBooksRecent[i].bookRatings))}
                                     </a>
@@ -274,10 +281,9 @@ addLoadEvent(function() {
         navbarVisible()
 
         /* donate book modal */
-        addCategoriesToModal()
-        addTagsToModal()
-        addCitiesToModal()
-        viewDonateStep(count)
+        modalDonateCategories.innerHTML = addCategoriesToModal()
+        modalDonateTags.innerHTML = addTagsToModal()
+        modalDonateCity.innerHTML = addCitiesToModal()
 
         /* notifications */
         if (userPermissions == 2) {
@@ -344,17 +350,22 @@ addLoadEvent(function() {
         })
 
         /* donate book */
-        frmDonate.addEventListener("submit", function(event) {
-            event.preventDefault()
+        frmDonate.addEventListener("submit", function(event){
             checkBookValid()
+
+            if (checkBookValid() == true) {
+                frmDonate.reset()
+            }
+
+            event.preventDefault()
         })
 
-        /* donate parish */
+        /* cities donate */
         modalDonateCity.addEventListener("change", function(event) {
-            addParishToModal(modalDonateCity.value)
+            modalDonateParish.innerHTML = addParishToModal(modalDonateCity.value)
             event.preventDefault()
         })
-    
+
         /* donate cover */
         modalDonateCover.addEventListener("change", function(event) {
             viewInputCover()

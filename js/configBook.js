@@ -23,17 +23,18 @@ function addLoadEvent(func) {
 
     /* books */
     function renderTableBooks() {
-        // HEADER
-        let strHtml = `<thead class='thead-midoffice'><tr>
-                        <th class='w-5'>Id</th>
-                        <th class='w-20'>Título</th>
-                        <th class='w-10'>Categoria</th>
-                        <th class='w-10'>Tags</th>
-                        <th class='w-10'>Estado</th>
-                        <th class='w-10'>Biblioteca</th>
-                        <th class='w-2'></th>
-                        </tr>
-                        </thead><tbody>`
+        let strHtml = `<thead class='thead-midoffice'>
+                            <tr>
+                                <th class='w-5'>Id</th>
+                                <th class='w-20'>Título</th>
+                                <th class='w-10'>Categoria</th>
+                                <th class='w-10'>Tags</th>
+                                <th class='w-10'>Estado</th>
+                                <th class='w-10'>Biblioteca</th>
+                                <th class='w-2'></th>
+                            </tr>
+                        </thead>
+                        <tbody>`
             
         for (let i = 0; i < books.length; i++) {
             strHtml += `<tr>

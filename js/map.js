@@ -28,7 +28,7 @@ function addLoadEvent(func) {
                 lat: 41.3500040642546,
                 lng: -8.748929042801365
             },
-            zoom: 12
+            zoom: 10
         })
 
         let infoWindow = new google.maps.InfoWindow({map: map})
@@ -47,11 +47,6 @@ function addLoadEvent(func) {
     function addMarkerLibrary() {    
         let marker, count
         let locations = []
-        let center = {                         //////
-                lat: 41.3500040642546,
-                lng: -8.748929042801365
-        }
-
         let icon = {
                     url: "https://pbs.twimg.com/media/DfepSQJX0AE0OMI.png:large", // url
                     scaledSize: new google.maps.Size(28, 42), // scaled size
@@ -63,8 +58,11 @@ function addLoadEvent(func) {
         let infowindow =  new google.maps.InfoWindow({})
 
         for (let i = 0; i < libraries.length; i++) {
-            locations.push([libraries[i].parish, parseFloat(libraries[i].latitude), parseFloat(libraries[i].longitude)])
+            locations.push([libraries[i].parish, libraries[i].latitude, libraries[i].longitude])
         }
+
+        console.log(locations)
+
 
         for (let i = 0; i < libraries.length; i++) {
             for (count = 0; count < locations.length; count++) {
@@ -72,12 +70,12 @@ function addLoadEvent(func) {
                     marker = new google.maps.Marker({
                                             position: new google.maps.LatLng(locations[count][1], locations[count][2]),
                                             map: map,
-                                            title: locations[count][0],
+                                            title: Library.getParishById(locations[count][0]),
                                             icon: icon
                     })
 
                     let librariesContent = `<div id="content">
-                                                <h4>${locations[count][0]}</h4>
+                                                <h4>${Library.getParishById(locations[count][0])}</h4>
                                                 <p>Morada: ${libraries[i].address}</p>
                                                 <p>Coordenadas: ${libraries[i].latitude}, ${libraries[i].longitude}</p>
                                                 <p>Capacidade de Livros: ${libraries[i].bookCapacity}</p>
@@ -213,21 +211,15 @@ addLoadEvent(function() {
         initMap()
 
         /* donate book modal */
-        addCategoriesToModal()
-        addTagsToModal()
-        addCitiesToModal()
         viewDonateStep(count)
+        modalDonateCategories.innerHTML = addCategoriesToModal()
+        modalDonateTags.innerHTML = addTagsToModal()
+        modalDonateCity.innerHTML = addCitiesToModal()
     //
 
     
     // --------------------------------------
     // FORMS
-    
-        /* donate cover */
-        modalDonateCover.addEventListener("change", function(event) {
-            viewInputCover()
-            event.preventDefault()
-        })
 
         /* donate book */
         frmDonate.addEventListener("submit", function(event){
@@ -237,6 +229,18 @@ addLoadEvent(function() {
                 frmDonate.reset()
             }
 
+            event.preventDefault()
+        })
+
+        /* cities donate */
+        modalDonateCity.addEventListener("change", function(event) {
+            modalDonateParish.innerHTML = addParishToModal(modalDonateCity.value)
+            event.preventDefault()
+        })
+
+        /* donate cover */
+        modalDonateCover.addEventListener("change", function(event) {
+            viewInputCover()
             event.preventDefault()
         })
     //

@@ -30,7 +30,7 @@
         <div class="container-fluid top col-lg-8">
             <nav class="navbar navbar-expand-lg navbar-custom">
                 <a class="navbar-brand" href="#">
-                    <img src="../images/icon_b.png" height="40"/>
+                    <img src="../images/icon_b.png" height="50"/>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
                     <img src="../images/menu_b.png" width="28"/>
@@ -48,7 +48,7 @@
                         </li>
 
                         <!-- PROFILE -->
-                        <li class="nav-item dropdown">
+                        <li id="optUser" class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <img src="../images/profile_a.png" id="userIconLogIn" height="32" width="32">
                             </a>
@@ -57,7 +57,7 @@
                                 <a id="optRegister" class="dropdown-item" data-toggle="modal" data-target="#registerModal" href="#">Registar</a>
                                 <a id="optProfile" class="dropdown-item" href="userProfile.html">Perfil</a>
                                 <a id="optHistory" class="dropdown-item" href="userHistory.html">Histórico</a>
-                                <a id="optNotifications" class="dropdown-item" href="userPreferences.html">Preferências</a>
+                                <a id="optPreferences" class="dropdown-item" href="userPreferences.html">Preferências</a>
                                 <a id="optLogout" class="dropdown-item" href="#">Log Out</a>
                             </div>
                         </li>
@@ -69,37 +69,37 @@
                             </a>
                             <div id="notificationPanel" class="dropdown-menu">
                                 <!-- CATEGORIES -->
-                                <a class="dropdown-header accordion" data-toggle="collapse" data-target="#collapseCategories" aria-expanded="true" aria-controls="collapseCategories"><h6>Categorias<span id="badgeCategories" class="badge"></span></h6></a>
+                                <a class="dropdown-header accordion" data-toggle="collapse" data-target="#panelCategories" aria-expanded="true" aria-controls="panelCategories"><h6>Categorias<span id="badgeCategories" class="badge"></span></h6></a>
                                 <div class="panel">
                                     <table class="table-notifications">
-                                        <tbody id='collapseCategories'></tbody>
+                                        <tbody id='panelCategories'></tbody>
                                     </table>
                                 </div>
                                 <div class="dropdown-divider"></div>
 
                                 <!-- TAGS -->
-                                <a class="dropdown-header accordion" data-toggle="collapse" data-target="#collapseTags" aria-expanded="true" aria-controls="collapseTags"><h6>Tags<span id="badgeTags" class="badge"></span></h6></a>
+                                <a class="dropdown-header accordion" data-toggle="collapse" data-target="#panelTags" aria-expanded="true" aria-controls="panelTags"><h6>Tags<span id="badgeTags" class="badge"></span></h6></a>
                                 <div class="panel">
                                     <table class="table-notifications">
-                                        <tbody id='collapseTags'></tbody>
+                                        <tbody id='panelTags'></tbody>
                                     </table>
                                 </div>
                                 <div class="dropdown-divider"></div>
 
                                 <!-- BOOKS -->
-                                <a class="dropdown-header accordion" data-toggle="collapse" data-target="#collapseBooks" aria-expanded="true" aria-controls="collapseBooks"><h6>Books<span id="badgeBooks" class="badge"></span></h6></a>
+                                <a class="dropdown-header accordion" data-toggle="collapse" data-target="#panelBooks" aria-expanded="true" aria-controls="panelBooks"><h6>Books<span id="badgeBooks" class="badge"></span></h6></a>
                                 <div class="panel">
                                     <table class="table-notifications">
-                                        <tbody id='collapseBooks'></tbody>
+                                        <tbody id='panelBooks'></tbody>
                                     </table>
                                 </div>
                                 <div class="dropdown-divider"></div>
                                 
                                 <!-- LIBRARIES -->
-                                <a class="dropdown-header accordion" data-toggle="collapse" data-target="#collapseLibraries" aria-expanded="true" aria-controls="collapseLibraries"><h6>Bibliotecas<span id="badgeLibraries" class="badge"></span></h6></a>
+                                <a class="dropdown-header accordion" data-toggle="collapse" data-target="#panelLibraries" aria-expanded="true" aria-controls="panelLibraries"><h6>Bibliotecas<span id="badgeLibraries" class="badge"></span></h6></a>
                                 <div class="panel">
                                     <table class="table-notifications">
-                                        <tbody id='collapseLibraries'></tbody>
+                                        <tbody id='panelLibraries'></tbody>
                                     </table>
                                 </div>
                             </div>
@@ -223,7 +223,7 @@
                     </div>
                     <div class="modal-body">
                         <form id="frmViewUser">
-                            <div class="row">        
+                            <div class="row">
                                 <!-- PHOTO -->
                                 <div class="form-group photo col-md-12">
                                     <img id="viewUserPhoto" class="img-fluid img-thumbnail" src="" alt="">
@@ -248,7 +248,7 @@
                                 </div>
             
                                 <!-- PERMISSIONS -->
-                                <div class="form-group col-md-5">
+                                <div class="form-group col-md-5 ml-4">
                                     <label for="viewUserPermissions">Permissões</label>                                    
                                     <select id="viewUserPermissions" class="form-control">
                                         <option value="2">Standard</option>
@@ -256,7 +256,7 @@
                                         <option value="0">Administrador</option>
                                     </select>
                                 </div>
-                                <div class="form-group edit col-md-2">
+                                <div class="form-group edit">
                                     <button type="button" id="btnEdit" class="btn btn-edit"><i class="fa fa-pen-square fa-2x"></i></button>
                                 </div>
             

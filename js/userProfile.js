@@ -26,7 +26,7 @@ function addLoadEvent(func) {
             if (userCurrent == users[i].id) {
                 viewName.value = users[i].userName
                 viewEmail.value = users[i].userEmail
-                viewPassword.value = users[i].userPassword
+                viewPassword.value = users[i].userPassword                
                 viewFine.value = users[i].fineValue
                 
                 if (users[i].userPhoto != "") {
@@ -48,7 +48,7 @@ function addLoadEvent(func) {
 
         viewPhoto.src = newPhoto
     
-        $('#changePhotoModal').modal('hide')
+        $('#modalChangePhoto').modal('hide')
     }
 
     /* edit user password */
@@ -77,7 +77,7 @@ function addLoadEvent(func) {
                 allowOutsideClick: false                
             })
 
-            $('#changePasswordModal').modal('hide')
+            $('#modalChangePassword').modal('hide')
         }
         else {
             console.log(strError)
@@ -91,66 +91,31 @@ function addLoadEvent(func) {
         }
     }
 
-
-
-    function payCurrentFine(){
-
-
-        
-       // <input required type="number" value="" min="1" class="form-control" id="modalPayFine" required>
-
-        let strHtml2 = ""
-        for (let i = 0; i < users.length; i++) {
-            if (userCurrent == users[i].id) {
-                strHtml2 = `<label for="modalPayFine">Valor a Pagar</label> 
-                <input required type="number" value="" min="1" max='${users[i].fineValue}' class="form-control" id="modalPayFine" required>`
-                console.log(users[i].fineValue)
-            }
-        }  
-        finePayTotal.innerHTML = strHtml2
-
-        
-        let modalPayFine = document.getElementById("modalPayFine")
-
-
-
-
+    /* pay fine */
+    function payPendentFine(){
         let strHtml = ""
     
         for (let i = 0; i < users.length; i++) {
             if (userCurrent == users[i].id) {
                 strHtml = `<p>${users[i].fineValue}</p>`
-                console.log(users[i].fineValue)
             }
-        }  
+        }
+        viewFineCurrent.innerHTML = strHtml
 
-        viewCurrentFine.innerHTML = strHtml
-    
-        
-    
-    
-        frmFine.addEventListener("submit", function(event){
-    
+        frmFine.addEventListener("submit", function(event) {    
             for (let i = 0; i < users.length; i++) {
                 if (users[i].id == userCurrent) {
-                    users[i].fineValue = users[i].fineValue - parseInt(modalPayFine.value)
+                    users[i].fineValue -= parseInt(viewFinePay.value)
                     viewFine.value = users[i].fineValue
                 }
             }
-
             localStorage.setItem("users", JSON.stringify(users))
-
+            
             $('#modalViewFine').modal('hide')
+
             event.preventDefault()
         })
     }
-
-
-
-
-
-
-
 //
 
 // --------------------------------------
@@ -168,22 +133,22 @@ addLoadEvent(function() {
     // USER PROFILE VARIABLES
 
         /* forms */
-        let frmProfile = document.getElementById("frmProfile")   //////
+        let frmProfile = document.getElementById("frmProfile")
         let frmPhoto = document.getElementById("frmPhoto")
         let frmPassword = document.getElementById("frmPassword")
         let frmFine = document.getElementById("frmFine")
 
         /* inputs */
+        let viewPhoto = document.getElementById("viewPhoto")
         let viewName = document.getElementById("viewName")
         let viewEmail = document.getElementById("viewEmail")
         let viewPassword = document.getElementById("viewPassword")
         let viewFine = document.getElementById("viewFine")
-        let viewPhoto = document.getElementById("viewPhoto")
-        let viewCurrentFine = document.getElementById("viewCurrentFine")
-        let modalChangePhotoLink = document.getElementById("modalChangePhotoLink")
-        let modalNewPassword = document.getElementById("modalNewPassword")
-        let modalConfirmPassword = document.getElementById("modalConfirmPassword")
-        let finePayTotal = document.getElementById("finePayTotal")
+        let changePhotoNewLink = document.getElementById("changePhotoNewLink")
+        let changePasswordNew = document.getElementById("changePasswordNew")
+        let changePasswordConfirm = document.getElementById("changePasswordConfirm")
+        let viewFineCurrent = document.getElementById("viewFineCurrent")
+        let viewFinePay = document.getElementById("viewFinePay")
     
         /* buttons */
         let btnViewFine = document.getElementById("btnViewFine")
@@ -200,8 +165,7 @@ addLoadEvent(function() {
         addUserInfo()
 
 
-        
-        payCurrentFine()
+        payPendentFine()
     //
 
 
@@ -210,13 +174,13 @@ addLoadEvent(function() {
 
         /* edit photo */
         frmPhoto.addEventListener("submit", function(event) {
-            editUserPhoto(modalChangePhotoLink.value)
+            editUserPhoto(changePhotoNewLink.value)
             event.preventDefault()
         })
     
         /* edit password */
         frmPassword.addEventListener("submit", function(event) {            
-            editUserPassword(modalNewPassword.value, modalConfirmPassword.value)
+            editUserPassword(changePasswordNew.value, changePasswordConfirm.value)
             event.preventDefault()
         })
     //

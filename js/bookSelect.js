@@ -27,16 +27,15 @@ function addLoadEvent(func) {
             if (bookCurrent == books[i].id) {
                 let categoryTitle = document.getElementById("categoryTitle")
                 let tagsId = books[i].bookTags
-                let tempTags = []
+                let arrayTags = []
                 
                 for (let j = 0; j < tagsId.length; j++) {
-                    tempTags.push(" " + convertFirstToUpperCase(Tag.getTagById(tagsId[j])))
+                    arrayTags.push(" " + convertFirstToUpperCase(Tag.getTagById(tagsId[j])))
                 }
 
                 categoryTitle.innerHTML += `<h1>${Category.getCategoryById(books[i].bookCategory).toUpperCase()}</h1>`
 
                 if (books[i].bookRatings.length != 0) {
-                    console.log(books[i].bookRatings)
                     stars.innerHTML = convertRatingToStars(Book.calculateRating(books[i].bookRatings))
                 }
                 
@@ -47,7 +46,7 @@ function addLoadEvent(func) {
                 viewYear.innerHTML = books[i].bookYear
                 viewDescription.innerHTML = books[i].bookDescription
                 viewCategory.innerHTML = convertFirstToUpperCase(Category.getCategoryById(books[i].bookCategory))
-                viewTags.innerHTML = tempTags
+                viewTags.innerHTML = arrayTags
                 viewCondition.innerHTML = books[i].bookCondition
                 viewPages.innerHTML = books[i].bookPages
             }
@@ -167,6 +166,8 @@ function addLoadEvent(func) {
         strHtml += "</tbody>"
         tblBooks.innerHTML = strHtml
 
+        
+/*
         for (let i = 0; i < requests.length; i++) {
             for (let j = 0; j < arrayBooks.length; j++) {
                 let tempRequest = document.getElementById(`btnRequest_${arrayBooks[j].id}`)
@@ -175,12 +176,7 @@ function addLoadEvent(func) {
                 let bookStatus = document.getElementById(`bookStatus_${arrayBooks[j].id}`)
 
                 if (requests[i].userId == userCurrent) {
-                    console.log("userCurrent   " + userCurrent + "    userId  " + requests[i].userId)
-                    console.log("  ")
-
                     if (requests[i].bookId == arrayBooks[j].id) {
-                        console.log("bookId   " + requests[i].bookId + "    id  " + requests[i].id)
-
                         tempRequest.style.display = "none"
                         tempNotify.style.display = "none"
                         requestUnavailable.style.display = "block"
@@ -210,7 +206,7 @@ function addLoadEvent(func) {
                 let requestId = bookRequest[i].getAttribute("id")
                 Book.requestBookById(requestId.substring("btnRequest_".length))
             })
-        }
+        }*/
     }
     
     /* comments */
@@ -253,14 +249,18 @@ addLoadEvent(function() {
         loadBooks()
         console.log(books)
 
-        loadLibraries()
-        console.log(libraries)
-
         loadRequests()
         console.log(requests)
 
+        loadWishlists()
+        console.log(wishlists)
+
         loadComments()
         console.log(comments)
+
+        loadLibraries()
+        console.log(libraries)
+
     //
 
 
@@ -295,6 +295,7 @@ addLoadEvent(function() {
         /* tables */
         let tblAddComment = document.getElementById("tblAddComment")
         let tblMoreComments = document.getElementById("tblMoreComments")
+        let tblBooks = document.getElementById("tblBooks")
 
         /* others */
         let userIcon = document.getElementById("userIcon")
@@ -309,13 +310,18 @@ addLoadEvent(function() {
         navbarVisible()
 
         /* donate book modal */
-        addCategoriesToModal()
-        addTagsToModal()
-        addCitiesToModal()
         viewDonateStep(count)
+        modalDonateCategories.innerHTML = addCategoriesToModal()
+        modalDonateTags.innerHTML = addTagsToModal()
+        modalDonateCity.innerHTML = addCitiesToModal()
 
         /* user */
         userIcon.src = User.viewUserPhotoById(userCurrent)
+
+        /* notifications */
+        if (userPermissions == 2) {
+            viewNotificationPanel()
+        }
 
         /* book select */
         addSelectBookInfo(bookCurrent)
@@ -329,12 +335,6 @@ addLoadEvent(function() {
 
     // --------------------------------------
     // FORMS
-    
-        /* donate cover */
-        modalDonateCover.addEventListener("change", function(event) {
-            viewInputCover()
-            event.preventDefault()
-        })
 
         /* donate book */
         frmDonate.addEventListener("submit", function(event){
@@ -344,6 +344,18 @@ addLoadEvent(function() {
                 frmDonate.reset()
             }
 
+            event.preventDefault()
+        })
+
+        /* cities donate */
+        modalDonateCity.addEventListener("change", function(event) {
+            modalDonateParish.innerHTML = addParishToModal(modalDonateCity.value)
+            event.preventDefault()
+        })
+
+        /* donate cover */
+        modalDonateCover.addEventListener("change", function(event) {
+            viewInputCover()
             event.preventDefault()
         })
     //

@@ -16,6 +16,59 @@ function addLoadEvent(func) {
         }
     }
 }
+//
+
+
+// --------------------------------------
+// COMBOBOX
+
+    /* cities */
+    function addCity() {
+        let strHtml = "<option value=''>...</option>"
+        let tempArray = []
+
+        for (let i = 0; i < portugal.length; i++) {
+            if (portugal[i].level == 2) {
+                let tempCity = {
+                            id: portugal[i].code,
+                            name: portugal[i].name
+                }
+
+                tempArray.push(tempCity)
+            }
+        }
+
+        tempArray.sort(function(a, b) {
+            let txtA = a.name
+            let txtB = b.name
+
+            return (txtA < txtB) ? -1 : (txtA > txtB) ? 1 : 0
+        })
+
+        for (let i = 0; i < tempArray.length; i++) {
+            strHtml += `<option value='${tempArray[i].id}'>${tempArray[i].name}</option>`
+        }
+        
+        inputCity.innerHTML = strHtml
+    }
+
+    /* parishes */
+    function addParish(city) {
+        let strHtml = "<option value=''>...</option>"
+
+        for (let i = 0; i < portugal.length; i++) {
+            if (portugal[i].level == 3) {
+                let tempStr = (portugal[i].code).toString()
+
+                if (tempStr.startsWith(city, 0)) {
+                    strHtml += `<option value='${portugal[i].code}'>${portugal[i].name}</option>`
+                }
+            }
+        }
+        
+        inputParish.innerHTML = strHtml
+    }
+//
 
 
 // --------------------------------------
@@ -126,6 +179,7 @@ function addLoadEvent(func) {
                             confirmButtonColor: '#9fc490',
                             allowOutsideClick: false
                         })
+                        
                         Book.removeBookByLibraryId(libraryId)
                         Library.removeLibraryById(libraryId)
                         
@@ -137,58 +191,6 @@ function addLoadEvent(func) {
                 })
             })
         }
-    }
-//
-
-
-// --------------------------------------
-// COMBOBOX
-
-    /* cities */
-    function addCity() {
-        let strHtml = "<option value=''>...</option>"
-        let tempArray = []
-
-        for (let i = 0; i < portugal.length; i++) {
-            if (portugal[i].level == 2) {
-                let tempCity = {
-                            id: portugal[i].code,
-                            name: portugal[i].name
-                }
-
-                tempArray.push(tempCity)
-            }
-        }
-
-        tempArray.sort(function(a, b) {
-            let txtA = a.name
-            let txtB = b.name
-
-            return (txtA < txtB) ? -1 : (txtA > txtB) ? 1 : 0
-        })
-
-        for (let i = 0; i < tempArray.length; i++) {
-            strHtml += `<option value='${tempArray[i].id}'>${tempArray[i].name}</option>`
-        }
-        
-        inputCity.innerHTML = strHtml
-    }
-
-    /* parishes */
-    function addParish(city) {
-        let strHtml = "<option value=''>...</option>"
-
-        for (let i = 0; i < portugal.length; i++) {
-            if (portugal[i].level == 3) {
-                let tempStr = (portugal[i].code).toString()
-
-                if (tempStr.startsWith(city, 0)) {
-                    strHtml += `<option value='${portugal[i].code}'>${portugal[i].name}</option>`
-                }
-            }
-        }
-        
-        inputParish.innerHTML = strHtml
     }
 //
 

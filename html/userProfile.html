@@ -30,7 +30,7 @@
         <div class="container-fluid top col-lg-8">
             <nav class="navbar navbar-expand-lg navbar-custom">
                 <a class="navbar-brand" href="#">
-                    <img src="../images/logo.png" height="40"/>
+                    <img src="../images/logo.png" height="50"/>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
                     <img src="../images/menu.png" width="28"/>
@@ -48,7 +48,7 @@
                         </li>
 
                         <!-- PROFILE -->
-                        <li class="nav-item dropdown">
+                        <li id="optUser" class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <img src="../images/profile_s.png" id="userIconLogIn" height="32" width="32">
                             </a>
@@ -57,7 +57,7 @@
                                 <a id="optRegister" class="dropdown-item" data-toggle="modal" data-target="#registerModal" href="#">Registar</a>
                                 <a id="optProfile" class="dropdown-item" href="userProfile.html">Perfil</a>
                                 <a id="optHistory" class="dropdown-item" href="userHistory.html">Histórico</a>
-                                <a id="optNotifications" class="dropdown-item" href="userPreferences.html">Preferências</a>
+                                <a id="optPreferences" class="dropdown-item" href="userPreferences.html">Preferências</a>
                                 <a id="optLogout" class="dropdown-item" href="#">Log Out</a>
                             </div>
                         </li>
@@ -69,37 +69,37 @@
                             </a>
                             <div id="notificationPanel" class="dropdown-menu">
                                 <!-- CATEGORIES -->
-                                <a class="dropdown-header accordion" data-toggle="collapse" data-target="#collapseCategories" aria-expanded="true" aria-controls="collapseCategories"><h6>Categorias<span id="badgeCategories" class="badge"></span></h6></a>
+                                <a class="dropdown-header accordion" data-toggle="collapse" data-target="#panelCategories" aria-expanded="true" aria-controls="panelCategories"><h6>Categorias<span id="badgeCategories" class="badge"></span></h6></a>
                                 <div class="panel">
                                     <table class="table-notifications">
-                                        <tbody id='collapseCategories'></tbody>
+                                        <tbody id='panelCategories'></tbody>
                                     </table>
                                 </div>
                                 <div class="dropdown-divider"></div>
 
                                 <!-- TAGS -->
-                                <a class="dropdown-header accordion" data-toggle="collapse" data-target="#collapseTags" aria-expanded="true" aria-controls="collapseTags"><h6>Tags<span id="badgeTags" class="badge"></span></h6></a>
+                                <a class="dropdown-header accordion" data-toggle="collapse" data-target="#panelTags" aria-expanded="true" aria-controls="panelTags"><h6>Tags<span id="badgeTags" class="badge"></span></h6></a>
                                 <div class="panel">
                                     <table class="table-notifications">
-                                        <tbody id='collapseTags'></tbody>
+                                        <tbody id='panelTags'></tbody>
                                     </table>
                                 </div>
                                 <div class="dropdown-divider"></div>
 
                                 <!-- BOOKS -->
-                                <a class="dropdown-header accordion" data-toggle="collapse" data-target="#collapseBooks" aria-expanded="true" aria-controls="collapseBooks"><h6>Books<span id="badgeBooks" class="badge"></span></h6></a>
+                                <a class="dropdown-header accordion" data-toggle="collapse" data-target="#panelBooks" aria-expanded="true" aria-controls="panelBooks"><h6>Books<span id="badgeBooks" class="badge"></span></h6></a>
                                 <div class="panel">
                                     <table class="table-notifications">
-                                        <tbody id='collapseBooks'></tbody>
+                                        <tbody id='panelBooks'></tbody>
                                     </table>
                                 </div>
                                 <div class="dropdown-divider"></div>
                                 
                                 <!-- LIBRARIES -->
-                                <a class="dropdown-header accordion" data-toggle="collapse" data-target="#collapseLibraries" aria-expanded="true" aria-controls="collapseLibraries"><h6>Bibliotecas<span id="badgeLibraries" class="badge"></span></h6></a>
+                                <a class="dropdown-header accordion" data-toggle="collapse" data-target="#panelLibraries" aria-expanded="true" aria-controls="panelLibraries"><h6>Bibliotecas<span id="badgeLibraries" class="badge"></span></h6></a>
                                 <div class="panel">
                                     <table class="table-notifications">
-                                        <tbody id='collapseLibraries'></tbody>
+                                        <tbody id='panelLibraries'></tbody>
                                     </table>
                                 </div>
                             </div>
@@ -154,35 +154,43 @@
                 <!-- PROFILE FORM -->
                 <form id="frmProfile">
                     <div class="row">
-                        <!-- PHOTO -->
-                        <div class="photo col-md-4">
-                            <img src="" class="img-fluid img-thumbnail" id="viewPhoto">
-                            <button type="button" class="btn btn-edit" id="btnChangePhoto" data-toggle='modal' data-target="#changePhotoModal"><i class="fa fa-pen-square fa-2x"></i></button>
+                        <!-- PHOTO -->                        
+                        <div class="col-md-3">
+                            <img src="" class="img-fluid img-thumbnail photo" id="viewPhoto">
+                            <div class="edit">
+                                <button type="button" class="btn btn-edit" id="btnChangePhoto" data-toggle='modal' data-target="#modalChangePhoto"><i class="fa fa-pen-square fa-2x"></i></button>
+                            </div>
                         </div>
 
-                        <div class="col-md-6">
-                            <!-- NAME -->
-                            <label for="viewName">Nome</label>
-                            <input type="text" class="form-control" id="viewName" readonly>
-        
-                            <!-- EMAIL -->
-                            <label for="viewEmail">E-mail</label>
-                            <input type="email" class="form-control" id="viewEmail" readonly>
-                            
-                            <!-- FINE -->
-                            <label for="viewFine">Multas</label>
-                            <input type="number" class="form-control" id="viewFine" readonly>
-                        
-                            <!-- PASSWORD -->
-                            <div class="inline col-md-10">
-                                <label for="viewPassword">Password</label>
-                                <input type="password" class="form-control" id="viewPassword" readonly>
+                        <div class="col-md-7" style="margin-left: 5%;">
+                            <div class="row">
+                                <!-- NAME -->
+                                <label for="viewName">Nome</label>
+                                <input type="text" class="form-control" id="viewName" readonly>
+            
+                                <!-- EMAIL -->
+                                <label for="viewEmail">E-mail</label>
+                                <input type="email" class="form-control" id="viewEmail" readonly>
                             </div>
+                            
+                            <div class="row">
+                                <!-- PASSWORD -->
+                                <div class="col-md-5" style="padding-left: 0px;">
+                                    <label for="viewPassword">Password</label>
+                                    <input type="password" class="form-control" id="viewPassword" readonly>
+                                </div>
+                                <div class="edit col-md-2">
+                                    <button type="button" id="btnChangePassword" class="btn btn-edit" data-toggle='modal' data-target="#modalChangePassword"><i class="fa fa-pen-square fa-2x"></i></button>
+                                </div>
 
-                            <!-- BUTTON -->
-                            <div class="inline edit col-md-2">
-                                <button type="button" id="btnChangePassword" class="btn btn-edit" data-toggle='modal' data-target="#changePasswordModal"><i class="fa fa-pen-square fa-2x"></i></button>
-                                <button type="button" id="btnViewFine" class="btn btn-edit" data-toggle='modal' data-target="#modalViewFine"><i class="fa fa-credit-card fa-2x"></i></button>
+                                <!-- FINE -->
+                                <div class="col-md-3" style="padding-left: 0px;">
+                                    <label for="viewFine">Multas</label>
+                                    <input type="number" class="form-control" id="viewFine" readonly>
+                                </div>
+                                <div class="edit">
+                                    <button type="button" id="btnViewFine" class="btn btn-edit" data-toggle='modal' data-target="#modalViewFine"><i class="fa fa-credit-card"></i></button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -210,7 +218,7 @@
         </div>
     
         <!-- MODAL CHANGE PROFILE PHOTO -->
-        <div class="modal fade" id="changePhotoModal" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="modalTitleId" aria-hidden="true">
+        <div class="modal fade" id="modalChangePhoto" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="modalTitleId" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header text-center">
@@ -223,8 +231,8 @@
                         <form id="frmPhoto">    
                             <!-- CHANGE PHOTO -->
                             <div class="form-group">
-                                <label for="modalChangePhotoLink">Nova Fotografia (180 x 180 px)</label>
-                                <input required type="url" value="" class="form-control" id="modalChangePhotoLink" required>
+                                <label for="changePhotoNewLink">Nova Fotografia (180 x 180 px)</label>
+                                <input required type="url" value="" class="form-control" id="changePhotoNewLink" required>
                             </div>
 
                             <!-- BUTTON -->
@@ -238,7 +246,7 @@
         </div>
                     
         <!-- MODAL CHANGE PASSWORD -->
-        <div class="modal fade" id="changePasswordModal" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="modalTitleId" aria-hidden="true">
+        <div class="modal fade" id="modalChangePassword" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="modalTitleId" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header text-center">
@@ -251,14 +259,14 @@
                         <form id="frmPassword">
                             <!-- NEW PASSWORD -->
                             <div class="form-group">
-                                <label for="modalNewPassword">Nova password:</label>
-                                <input type="password" minlength="5" minlength="10" class="form-control" id="modalNewPassword" required>
+                                <label for="changePasswordNew">Nova password:</label>
+                                <input type="password" minlength="5" minlength="10" class="form-control" id="changePasswordNew" required>
                             </div>
 
                             <!-- CONFIRM NEW PASSWORD -->
                             <div class="form-group">
-                                <label for="modalConfirmPassword">Confirmar password:</label>
-                                <input type="password" minlength="5" minlength="10" class="form-control" id="modalConfirmPassword" required>                        
+                                <label for="changePasswordConfirm">Confirmar password:</label>
+                                <input type="password" minlength="5" minlength="10" class="form-control" id="changePasswordConfirm" required>                        
                             </div>
 
                             <!-- BUTTON -->
@@ -270,37 +278,38 @@
                 </div>
             </div>
         </div>
-
-         <!-- MODAL PAY FINE -->
-         <div class="modal fade" id="modalViewFine" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="modalTitleId" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header text-center">
-                        <h4 class="modal-title" id="modalTitleId">Pagar Multa</h4>
-                        <button type="button" id="btnClose" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true"><i class="fa fa-times"></i></span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <form id="frmFine">    
-                            <!-- CHANGE PHOTO -->
-                            <div class="form-group">
-                                <h5>Valor Total da Multa</h5>
-                                <p id="viewCurrentFine"></p>
-                            </div>
-                            <div class="form-group" id="finePayTotal">
-                            </div>
-
-                            <!-- BUTTON -->
-                            <div class="modal-footer">
-                                <input type="submit" class="btn btn-modal btn-primary" value="Pagar"/>
-                            </div>
-                        </form>
+        
+        <!-- MODAL PAY FINE -->
+        <div class="modal fade" id="modalViewFine" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="modalTitleId" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header text-center">
+                            <h4 class="modal-title" id="modalTitleId">Pagar Multa</h4>
+                            <button type="button" id="btnClose" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true"><i class="fa fa-times"></i></span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="frmFine">    
+                                <!-- CHANGE PHOTO -->
+                                <div class="form-group">
+                                    <h5 class="inline">Valor total da multa</h5>
+                                    <p id="viewFineCurrent" class="inline"></p>
+                                </div>
+                                <div class="form-group">
+                                    <label for="modalPayFine">Valor a pagar</label>
+                                    <input required type="number" value="" min="1" class="form-control" id="viewFinePay" required>
+                                </div>
+    
+                                <!-- BUTTON -->
+                                <div class="modal-footer">
+                                    <input type="submit" class="btn btn-modal btn-primary" value="Pagar"/>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        
 
         
         <!-- Sweet Alert -->

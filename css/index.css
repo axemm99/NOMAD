@@ -4,6 +4,22 @@
     background-color: #8fc8dd;
 }
 
+.middle-catalog, .middle-user {
+    margin-top: 60px;
+    margin-bottom: 60px;
+    padding: 0px 0px 40px 0px;
+    min-height: 460px;
+}
+
+.bottom {
+    margin-top: 120px;
+}
+
+.inner {
+    min-height: 200px;
+    padding-left: 4%;
+}
+
 .btn {
     background-color: #FFD892;
 }
@@ -71,6 +87,7 @@
 /* TOP BAR */                             /*     ////////////////////////////////////////////////////     */
 .carousel {
     margin: auto;
+    width: auto;
 }
 
 .bar {
@@ -149,23 +166,8 @@
 }
 
 
-/* HOMEPAGE */ /* CATALOG */              /*     ////////////////////////////////////////////////////     */
-.middle-catalog, .middle-user {
-    margin-top: 60px;
-    margin-bottom: 60px;
-    padding: 0px 0px 40px 0px;
-    min-height: 460px;
-}
 
-.bottom {
-    margin-top: 120px;
-}
-
-.inner {
-    min-height: 200px;
-    padding-left: 4%;
-}
-
+/* HOMEPAGE */                            /*     ////////////////////////////////////////////////////     */
 .tippy-tooltip.custom-theme {
     background-color: white;
     box-shadow: 0 4px 8px -1px rgba(0,32,128,.2), 0 8px 24px -2px rgba(0,128,255,.1);
@@ -181,6 +183,28 @@
     margin: 10px 0px;
 }
 
+.book a {
+    color: black;
+    text-decoration: none;
+}
+
+#badgeNumbers {
+    position: absolute;
+    background: rgb(255, 51, 51);
+    height: 3rem;
+    top: -1rem;
+    right: -1rem;
+    width: 3rem;
+    text-align: center;
+    line-height: 3rem;;
+    font-size: 1.5rem;
+    border-radius: 50%;
+    color: white;
+}
+
+
+
+/* CATALOG */                             /*     ////////////////////////////////////////////////////     */
 .category-favourite {
     position: absolute;
     top: 5%;
@@ -451,16 +475,20 @@
 }
 
 #btnChangePhoto{
-    margin-top: 5px;
+    margin-top: 0px !important;
 }
 
 .photo {
-    margin: 0% 10% 0% 5%;
+    margin: 0%;
 }
 
 #viewPhoto {
     height: 180px;
     width: 180px;
+}
+
+.fa-credit-card {    
+    font-size: 1.6em;
 }
 
 .btn-edit i:hover {
@@ -474,6 +502,7 @@
 .middle-user .table-responsive {
     overflow: auto;
 }
+
 
 /* history */
 .history {
@@ -536,12 +565,12 @@
   background-color: #8fc8dd;
 }
 
-#modalRatingBookInfo h4, #modalRequestBookInfo h4 {
+#modalRatingBookDetails h4, #modalRequestBookDetails h4 {
     font-weight: 300;
     margin: 20px 0px 10px 0px;
 }
 
-#modalRatingBookInfo h6, #modalRequestBookInfo h6 {
+#modalRatingBookDetails h6, #modalRequestBookDetails h6 {
     margin-bottom: 40px;
 }
 
@@ -565,6 +594,11 @@
 #addRating {
     margin: 10px auto;
 }
+
+#frmDeliveries label {
+    text-align: left !important;
+}
+
 
 /* preferences */
 .table-preferences {
@@ -602,7 +636,7 @@
     margin-bottom: 20px;
 }
 
-#optPreferences {
+#selectPreferences {
     background-color: #ffd892;
     color: white;
     height: 40px;
@@ -618,9 +652,6 @@
     border-bottom-left-radius: 0px;
     border-left: none;
 }
-
-
-
 
 
 

@@ -30,7 +30,7 @@
         <div class="container-fluid top col-lg-8">
             <nav class="navbar navbar-expand-lg navbar-custom">
                 <a class="navbar-brand" href="#">
-                    <img src="../images/logo.png" height="40"/>
+                    <img src="../images/logo.png" height="50"/>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
                     <img src="../images/menu.png" width="28"/>
@@ -48,7 +48,7 @@
                         </li>
 
                         <!-- PROFILE -->
-                        <li class="nav-item dropdown">
+                        <li id="optUser" class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <img src="../images/profile_s.png" id="userIconLogIn" height="32" width="32">
                             </a>
@@ -57,7 +57,7 @@
                                 <a id="optRegister" class="dropdown-item" data-toggle="modal" data-target="#registerModal" href="#">Registar</a>
                                 <a id="optProfile" class="dropdown-item" href="userProfile.html">Perfil</a>
                                 <a id="optHistory" class="dropdown-item" href="userHistory.html">Histórico</a>
-                                <a id="optNotifications" class="dropdown-item" href="userPreferences.html">Preferências</a>
+                                <a id="optPreferences" class="dropdown-item" href="userPreferences.html">Preferências</a>
                                 <a id="optLogout" class="dropdown-item" href="#">Log Out</a>
                             </div>
                         </li>
@@ -69,42 +69,42 @@
                             </a>
                             <div id="notificationPanel" class="dropdown-menu">
                                 <!-- CATEGORIES -->
-                                <a class="dropdown-header accordion" data-toggle="collapse" data-target="#collapseCategories" aria-expanded="true" aria-controls="collapseCategories"><h6>Categorias<span id="badgeCategories" class="badge"></span></h6></a>
+                                <a class="dropdown-header accordion" data-toggle="collapse" data-target="#panelCategories" aria-expanded="true" aria-controls="panelCategories"><h6>Categorias<span id="badgeCategories" class="badge"></span></h6></a>
                                 <div class="panel">
                                     <table class="table-notifications">
-                                        <tbody id='collapseCategories'></tbody>
+                                        <tbody id='panelCategories'></tbody>
                                     </table>
                                 </div>
                                 <div class="dropdown-divider"></div>
 
                                 <!-- TAGS -->
-                                <a class="dropdown-header accordion" data-toggle="collapse" data-target="#collapseTags" aria-expanded="true" aria-controls="collapseTags"><h6>Tags<span id="badgeTags" class="badge"></span></h6></a>
+                                <a class="dropdown-header accordion" data-toggle="collapse" data-target="#panelTags" aria-expanded="true" aria-controls="panelTags"><h6>Tags<span id="badgeTags" class="badge"></span></h6></a>
                                 <div class="panel">
                                     <table class="table-notifications">
-                                        <tbody id='collapseTags'></tbody>
+                                        <tbody id='panelTags'></tbody>
                                     </table>
                                 </div>
                                 <div class="dropdown-divider"></div>
 
                                 <!-- BOOKS -->
-                                <a class="dropdown-header accordion" data-toggle="collapse" data-target="#collapseBooks" aria-expanded="true" aria-controls="collapseBooks"><h6>Books<span id="badgeBooks" class="badge"></span></h6></a>
+                                <a class="dropdown-header accordion" data-toggle="collapse" data-target="#panelBooks" aria-expanded="true" aria-controls="panelBooks"><h6>Books<span id="badgeBooks" class="badge"></span></h6></a>
                                 <div class="panel">
                                     <table class="table-notifications">
-                                        <tbody id='collapseBooks'></tbody>
+                                        <tbody id='panelBooks'></tbody>
                                     </table>
                                 </div>
                                 <div class="dropdown-divider"></div>
                                 
                                 <!-- LIBRARIES -->
-                                <a class="dropdown-header accordion" data-toggle="collapse" data-target="#collapseLibraries" aria-expanded="true" aria-controls="collapseLibraries"><h6>Bibliotecas<span id="badgeLibraries" class="badge"></span></h6></a>
+                                <a class="dropdown-header accordion" data-toggle="collapse" data-target="#panelLibraries" aria-expanded="true" aria-controls="panelLibraries"><h6>Bibliotecas<span id="badgeLibraries" class="badge"></span></h6></a>
                                 <div class="panel">
                                     <table class="table-notifications">
-                                        <tbody id='collapseLibraries'></tbody>
+                                        <tbody id='panelLibraries'></tbody>
                                     </table>
                                 </div>
                             </div>
                         </li>
-
+                        
                         <!-- DONATE -->
                         <li id="optDonate" class="nav-item">
                             <a class="nav-link" data-toggle="modal" data-target="#modalDonate" href="#">
@@ -205,12 +205,12 @@
                     <div class="modal-body">
                         <form id="frmViewRequestDetails">
                             <!-- BOOK --> 
-                            <div id="modalRequestBookInfo">
+                            <div id="modalRequestBookDetails">
                             </div>
 
                             <!-- BUTTON -->
                             <div class="modal-footer">
-                                <input type="submit" id="btnAddRating" class="btn btn-modal btn-primary" value="Submeter"/>
+                                <button type="button" id="btnModalRating" class="btn btn-modal btn-primary"><i class='fa fa-star'></i></button>
                             </div>
                         </form>
                     </div>
@@ -228,14 +228,14 @@
                             <span aria-hidden="true"><i class="fa fa-times"></i></span>
                         </button>
                     </div>
-                    <div class="modal-body text-center">
-                        <form id="frmRating">
+                    <div class="modal-body">
+                        <form id="frmRatings">
                             <!-- BOOK --> 
-                            <div id="modalRatingBookInfo" class="container-fluid col-lg-6">
+                            <div id="modalRatingBookDetails">
                             </div>
 
                             <!-- RATING -->
-                            <div id="addRating" class="container-fluid col-md-7">
+                            <div id="addRating">
                                 <input id="modalRatingInput" type="range" class="form-control-range slider" min="1" max="5">
                             </div>
 
@@ -250,10 +250,10 @@
         </div>
         
         <!-- MODAL DELIVER BOOK -->
-        <div class="modal fade" id="modalDeliverBook" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+        <div class="modal fade" id="modalDeliverBook" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="modalTitleId" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                    <div class="modal-header text-center">
+                    <div class="modal-header">
                         <h4 id="modalTitleId" class="modal-title">Entregar Livro</h4>
                         <button type="button" id="btnClose" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true"><i class="fa fa-times"></i></span>
@@ -261,21 +261,28 @@
                     </div>
                     <div class="modal-body">
                         <form id="frmDeliveries">
-                            <!-- BOOK TITLE -->
-                            <div class="form-group">
-                                <center>
-                                    <h5 id="deliverBookTitle">Nome do livro</h5>
-                                    <img src="https://about.canva.com/wp-content/uploads/sites/3/2015/01/art_bookcover.png"  id="deliverBookCover" width="100"/><br><br>
-                                    <label for="deliverLibraries">Escolha uma biblioteca para entregar o livro</label><br> 
-                                    <br>          
-                                    <select id="deliverLibraries" required>  
-                                    </select>
-                                </center>   
+                            <!-- BOOK -->
+                            <div id="modalDeliverDetails">
                             </div>
 
-                            <!--BUTTON -->
+                            <!-- LIBRARY -->                            
+                            <div class="row col-md-12" style="margin: auto;">
+                                <div class="form-group col-md-6" style="padding-left: 0px;">
+                                    <label for="modalDeliverCity">Cidade</label>
+                                    <select id="modalDeliverCity" class="form-control" required>  
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="modalDeliverParish">Freguesia</label>
+                                    <select id="modalDeliverParish" class="form-control" required>
+                                        <option value="">...</option>  
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- BUTTON -->
                             <div class="modal-footer">
-                                <input type="submit" id="btnDeliver" class="btn btn-primary" value="Entregar"/>
+                                <input type="submit" id="btnDeliver" class="btn btn-modal btn-primary" value="Entregar"/>
                             </div>
                         </form>
                     </div>

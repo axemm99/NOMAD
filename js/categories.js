@@ -106,7 +106,6 @@ function addLoadEvent(func) {
         sortCategories.sort(function(a, b) {
             let txtA = a.name
             let txtB = b.name
-
             return (txtA < txtB) ? -1 : (txtA > txtB) ? 1 : 0
         })
 
@@ -114,9 +113,8 @@ function addLoadEvent(func) {
             if (i == 0) {
                 strHtml += "<div class='row new-row text-center' style='margin: auto;'>"
             }
-
             strHtml += `<div class='new-category rounded col-md-2'>
-                            <a id='${sortCategories[i].id}' href='#' class='category-favourite'><i class="fas fa-heart"></i></a><br>
+                            <a id='${sortCategories[i].id}' href='#' class='category-favourite'><i class='fas fa-heart'></i></a><br>
                             <a id='${sortCategories[i].id}' href='bookList.html' class='category-filter'>
                                 <p>${convertFirstToUpperCase(sortCategories[i].name)}</p>
                             </a>
@@ -125,7 +123,6 @@ function addLoadEvent(func) {
             if (i == sortCategories.length - 1) {
                 strHtml += "</div>"   
             }
-
             categoriesAll.innerHTML = strHtml
         }
     }
@@ -169,8 +166,8 @@ addLoadEvent(function() {
 
         /* others */
         let categoryFilter = document.getElementsByClassName("category-filter")
-        let categoriesFavourites = document.getElementById("categoriesFavourites")   //////
-        let categoriesAll = document.getElementById("categoriesAll")   //////
+        let categoriesFavourites = document.getElementById("categoriesFavourites")
+        let categoriesAll = document.getElementById("categoriesAll")
         let count = 0
     //
 
@@ -182,10 +179,15 @@ addLoadEvent(function() {
         navbarVisible()
 
         /* donate book modal */
-        addCategoriesToModal()
-        addTagsToModal()
-        addCitiesToModal()
         viewDonateStep(count)
+        modalDonateCategories.innerHTML = addCategoriesToModal()
+        modalDonateTags.innerHTML = addTagsToModal()
+        modalDonateCity.innerHTML = addCitiesToModal()
+
+        /* notifications */
+        if (userPermissions == 2) {
+            viewNotificationPanel()
+        }
 
         /* categories */
         addFavouritesToCatalog()
@@ -195,12 +197,6 @@ addLoadEvent(function() {
     
     // --------------------------------------
     // FORMS
-    
-        /* donate cover */
-        modalDonateCover.addEventListener("change", function(event) {
-            viewInputCover()
-            event.preventDefault()
-        })
 
         /* donate book */
         frmDonate.addEventListener("submit", function(event){
@@ -209,12 +205,20 @@ addLoadEvent(function() {
             if (checkBookValid() == true) {
                 frmDonate.reset()
             }
+
             event.preventDefault()
         })
 
         /* cities donate */
         modalDonateCity.addEventListener("change", function(event) {
-            addParishToModal(modalDonateCity.value)
+            modalDonateParish.innerHTML = addParishToModal(modalDonateCity.value)
+            event.preventDefault()
+        })
+
+        /* donate cover */
+        modalDonateCover.addEventListener("change", function(event) {
+            viewInputCover()
+            event.preventDefault()
         })
     //
 

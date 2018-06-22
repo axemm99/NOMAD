@@ -24,7 +24,7 @@ function addLoadEvent(func) {
     /* select item */
     function checkPreferenceValid() {        
         if (inputPreference.value != "") {
-            switch (optPreferences.value) {
+            switch (selectPreferences.value) {
                 case "Categorias":
                     checkCategoryInputValid(Wishlist.getCategoriesByUserId(userCurrent))
                     break
@@ -401,12 +401,12 @@ addLoadEvent(function() {
         })
 
         /* categories */
-        optPreferences.addEventListener("change", function(event) {
-            if (optPreferences.value == "Categorias") {
+        selectPreferences.addEventListener("change", function(event) {
+            if (selectPreferences.value == "Categorias") {
                 addCategoriesToInput()
                 event.preventDefault()
             }
-            else if (optPreferences.value == "Tags") {
+            else if (selectPreferences.value == "Tags") {
                 addTagsToInput()
                 event.preventDefault()
             }

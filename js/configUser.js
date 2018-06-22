@@ -50,7 +50,7 @@ function addLoadEvent(func) {
                 allowOutsideClick: false
             })
         }
-    }
+    }    
 //
 
 
@@ -59,7 +59,6 @@ function addLoadEvent(func) {
 
     /* users */
     function renderTableUsers() {
-        // HEADER
         let strHtml = `<thead class='thead-dark'>
                             <tr>
                                 <th class='w-5'>#</th>
@@ -78,8 +77,8 @@ function addLoadEvent(func) {
                             <td>${users[i].userName}</td>
                             <td>${users[i].userEmail}</td>
                             <td>${users[i].userPassword}</td>
-                            <td>${users[i].userPermissions}</td>
-                            <td>${users[i].fineValue}</td>
+                            <td>${User.convertPermissions(users[i].userPermissions)}</td>
+                            <td>${User.checkFineByPermissions(users[i].userPermissions, users[i].fineValue)} €</td>
                             <td>
                                 <a id=' ${users[i].id}' class='view mr-1' data-toggle='modal' data-target='#viewUserModal'><i class='fa fa-info-circle'></i></a>
                                 <a id='${users[i].id}' class='remove'><i class='fa fa-times-circle'></i></a>
@@ -127,20 +126,10 @@ function addLoadEvent(func) {
                         })
                         
                         User.removeUserById(userId)
-
-
-                        for(let i=0; i<requests.length; i++){
-                            if(userId == requests[i].userId)
-                            Request.removeUserById(userId)
-                            localStorage.setItem("requests", JSON.stringify(requests))
-                        }
-
-
-
-
-
+                        Request.removeRequestByUserId(userId)
 
                         localStorage.setItem("users", JSON.stringify(users))
+                        localStorage.setItem("requests", JSON.stringify(requests))
 
                         renderTableUsers()
                     }
@@ -180,18 +169,18 @@ addLoadEvent(function() {
         let inputPermissions = document.getElementById("inputPermissions")
 
         /* modal */
-        let viewUserName = document.getElementById("viewUserName")   //////
+        let viewUserName = document.getElementById("viewUserName")
         let viewUserEmail = document.getElementById("viewUserEmail")
-        let viewUserPassword = document.getElementById("viewUserPassword")   //////
+        let viewUserPassword = document.getElementById("viewUserPassword")
         let viewUserPermissions = document.getElementById("viewUserPermissions")
-        let viewUserPhoto = document.getElementById("viewUserPhoto")   //////
+        let viewUserPhoto = document.getElementById("viewUserPhoto")
 
         /* buttons */
         let btnEdit = document.getElementById("btnEdit")
         let btnClose = document.getElementById("btnClose")
 
         /* tables */
-        let tblUsers = document.getElementById("tblUsers")   //////
+        let tblUsers = document.getElementById("tblUsers")
     //
 
 
