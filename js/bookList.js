@@ -171,31 +171,62 @@ function addLoadEvent(func) {
 // CATALOG
 
     /* fill catalog with books */
-    function addBookToCatalog(categoryCurrent) {
+    function addBookToCatalog(categoryCurrent, viewMode) {
         let strHtml = ""
-        
+
         for (let i = 0; i < books.length; i++) {
             if ((books[i].bookCategory) == categoryCurrent) {
-                if (i == 0) {
-                    strHtml += "<div class='row new-row text-center' style='margin: auto;'>"
+                if (viewMode == "grid") {
+                    if (i == 0) {
+                        strHtml += "<div class='row new-row text-center' style='margin: auto;'>"
+                    }
+
+                    strHtml += `<div class='book col-md-2'>
+                                    <a id='${books[i].id}' href='bookSelect.html' class='book-page'>
+                                        <img src='${books[i].bookCover}' class='img-fluid' width='140'/>
+                                    </a>
+                                    <a id='${books[i].id}' href='bookSelect.html' class='book-page'>
+                                        <h5>${books[i].bookTitle}</h5>
+                                    </a>
+                                        <a id='${books[i].id}' href='bookSelect.html' class='book-page'>
+                                            <p>${books[i].bookAuthors}</p>
+                                        </a>
+                                    <a id='${books[i].id}' href='bookSelect.html' class='book-page'>
+                                        ${convertRatingToStars(Book.calculateRating(books[i].bookRatings))}
+                                    </a>
+                                </div>`
+
+                    if (i == books.length - 1) {
+                        strHtml += "</div>"   
+                    }     
                 }
+                else if (viewMode == "list") {
+                    let sinopse = ""
 
-                strHtml += `<div class='book col-md-2'>
-                                <a id='${books[i].id}' href='bookSelect.html' class='book-page'>
-                                    <img src='${books[i].bookCover}' class='img-fluid' width='140'/>
-                                </a>
-                                <a id='${books[i].id}' href='bookSelect.html' class='book-page'>
-                                    <h5>${books[i].bookTitle}</h5>
-                                </a>
-                                <p>${books[i].bookAuthors}</p>
-                                <a id='${books[i].id}' href='bookSelect.html' class='book-page'>
-                                    ${convertRatingToStars(Book.calculateRating(books[i].bookRatings))}
-                                </a>
-                            </div>`
+                    if (books[i].bookDescription.length > 150) {
+                        sinopse = books[i].bookDescription.substring(0, books[i].bookDescription.indexOf("", 150))
+                    }
 
-                if (i == books.length - 1) {
-                    strHtml += "</div>"   
-                }     
+                    strHtml += `<div class='row new-row' style='margin: 40px auto;'>
+                                    <div class='book col-md-2'>
+                                        <a id='${books[i].id}' href='bookSelect.html' class='book-page'>
+                                            <img src='${books[i].bookCover}' class='img-fluid' width='140' style='margin-bottom: 10px;'/>
+                                        </a>
+                                        <a id='${books[i].id}' href='bookSelect.html' class='book-page'>
+                                            ${convertRatingToStars(Book.calculateRating(books[i].bookRatings))}
+                                        </a>
+                                    </div>
+                                    <div class='book col-md-9'>
+                                        <a id='${books[i].id}' href='bookSelect.html' class='book-page'>
+                                            <h5>${books[i].bookTitle}</h5>
+                                        </a>
+                                        <a id='${books[i].id}' href='bookSelect.html' class='book-page'>
+                                            <p>${books[i].bookAuthors}</p>
+                                        </a>
+                                        <p>${sinopse}[...]</p>
+                                    </div>
+                                </div>`
+                }
             }
             catalogBooks.innerHTML = strHtml
         }
@@ -282,12 +313,16 @@ addLoadEvent(function() {
         /* buttons */
         let btnClose = document.getElementById("btnClose")
         let btnFiltrar = document.getElementById("btnFiltrar")
+        let btnList = document.getElementById("btnList")
+        let btnGrid = document.getElementById("btnGrid")
 
         /* tables */
         let tblBooks = document.getElementById("tblBooks")
 
         /* catalog */
         let catalogBooks = document.getElementById("catalogBooks")
+        let listElements = document.getElementsByClassName("book")
+        let viewMode = "grid"
     //
 
 
@@ -310,7 +345,7 @@ addLoadEvent(function() {
 
         /* catalog */
         addCategoryCurrentTitle(categoryCurrent)
-        addBookToCatalog(categoryCurrent)
+        addBookToCatalog(categoryCurrent, viewMode)
         getSelectBook()
 
         /* filter */
@@ -495,5 +530,36 @@ addLoadEvent(function() {
 
             event.preventDefault()
         })*/
+
+
+        // Get the elements with class="column"
+
+        /* list view */
+        /*btnList.addEventListener ("click", function(){
+            for (let i = 0; i < listElements.length; i++) {
+                $(".book").removeClass("col-md-2")
+                $(".book").addClass("col-md-12", true)
+            }
+        })*/
+
+        /* grid view */
+       /* btnGrid.addEventListener ("click", function(){
+            for (let i = 0; i < listElements.length; i++) {
+                $(".book").removeClass("col-md-12")
+                $(".book").addClass("col-md-2", true)
+            }
+        })*/
+
+        btnGrid.addEventListener("click", function () {
+            viewMode = "grid"
+            addBookToCatalog(categoryCurrent, viewMode)
+            getSelectBook()
+        })
+
+        btnList.addEventListener("click", function () {
+            viewMode = "list"
+            addBookToCatalog(categoryCurrent, viewMode)
+            getSelectBook()
+        })
     //
 })

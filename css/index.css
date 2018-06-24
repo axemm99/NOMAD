@@ -230,7 +230,6 @@
 }
 
 .book {
-    text-align: center;
     display: inline-block;
     vertical-align: top;
     padding: 0px;
@@ -240,7 +239,6 @@
 .book h5, .book p {
     font-weight: 300;
     margin: 10px 0px 0px 0px;
-    text-align: center;
 }
 
 .book h5{    
@@ -305,6 +303,15 @@
     float: right;
 }
 
+#btnContainer {
+    text-align: right;
+    margin-bottom: 15px;
+}
+
+#btnList .fa, #btnGrid .fa, #btnList, #btnGrid {
+    color: white;
+}
+
 /* book info */
 .col {
     padding: 0px;
@@ -321,10 +328,6 @@
 
 #viewCover, #viewBookCover {
     max-width: 180px;
-}
-
-#viewDescription {
-    text-align: justify;
 }
 
 #stars {

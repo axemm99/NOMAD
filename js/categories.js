@@ -266,35 +266,4 @@ addLoadEvent(function() {
             })
         }
     //
-
-
-
-
-
-
-
-    // --------------------------------------
-    // TEST GRID                                                ????????????????????????????
-
-    
-    // Get the elements with class="column"
-    let elements = document.getElementsByClassName("new-category")
-    let lista = document.getElementById("lista")
-    let grelha = document.getElementById("grelha")
-
-    // List View
-    lista.addEventListener ("click", function(){
-        for (let i = 0; i < elements.length; i++) {
-            $(".new-category").removeClass("col-md-2")
-            $(".new-category").addClass("col-md-12", true)
-        }
-    })
-
-    // Grid View
-    grelha.addEventListener ("click", function(){
-        for (let i = 0; i < elements.length; i++) {
-            $(".new-category").removeClass("col-md-12")
-            $(".new-category").addClass("col-md-2", true)
-        }
-    })
 })

@@ -2497,8 +2497,10 @@
         categoryTitle.innerHTML += `<h1 id='${id}'>${tempCategory.toUpperCase()}</h1>`
     }
 
+
+    console.log(bookPage)
     /* select book */
-    function getSelectBook() {    
+    function getSelectBook() {
         for (let i = 0; i < bookPage.length; i++) {
             bookPage[i].addEventListener("click", function() {
                 sessionStorage.setItem("bookCurrent", bookPage[i].getAttribute("id"))

@@ -77,7 +77,7 @@ function addLoadEvent(func) {
                             <td>${users[i].userName}</td>
                             <td>${users[i].userEmail}</td>
                             <td>${users[i].userPassword}</td>
-                            <td>${User.convertPermissions(users[i].userPermissions)}</td>
+                            <td>${User.convertPermissions(parseInt(users[i].userPermissions))}</td>
                             <td>${User.checkFineByPermissions(users[i].userPermissions, users[i].fineValue)} €</td>
                             <td>
                                 <a id=' ${users[i].id}' class='view mr-1' data-toggle='modal' data-target='#viewUserModal'><i class='fa fa-info-circle'></i></a>

@@ -16,6 +16,7 @@ function addLoadEvent(func) {
         }
     }
 }
+//
 
 
 // --------------------------------------
@@ -32,8 +33,7 @@ function addLoadEvent(func) {
                 for (let j = 0; j < tagsId.length; j++) {
                     arrayTags.push(" " + convertFirstToUpperCase(Tag.getTagById(tagsId[j])))
                 }
-                console.log(arrayTags)
-
+                
                 categoryTitle.innerHTML += `<h1>${Category.getCategoryById(books[i].bookCategory).toUpperCase()}</h1>`
 
                 if (books[i].bookRatings.length != 0) {
@@ -74,23 +74,23 @@ function addLoadEvent(func) {
 // VALIDATION
 
     /* new request */
-    function checkRequestValid(bookCurrent, newRequest) {
+    function checkRequestValid(bookSelect) {
         let strError = ""
         let count = 0
-        
-        // CHECK NUMBER OF REQUESTS
+
+        /* count current request by current user */
         for (let i = 0; i < requests.length; i++) {
             if (requests[i].userId == userCurrent && requests[i].deliveryDate == "") {
                 count++
             }
         }
 
-        // CHECKS IF USER DIDN'T REQUEST MORE THAN 2 BOOKS
+        /* check if user doesn't have more than 2 requested books */
         if (count == 2) {
             strError = 'Já tem dois livros requisitados!'
         }
         
-        // CHECKS IF USER DOESN'T HAVE FINES TO PAY
+        /* check if current user doesn't have fines to pay */
         for (let i = 0; i < users.length; i++) {
             if (users[i].id == userCurrent) {
                 if (users[i].fineValue != 0) {
@@ -100,37 +100,25 @@ function addLoadEvent(func) {
         }
 
         if (strError == "") {
-           
-           /////
-            // Uptades the library code of the book to 0
-            for (let i = 0; i < books.length; i++) {
-                if (books[i].id == bookCurrent) {
-                    books[i].libraryId = 0 
-                }
-            }
-            localStorage.setItem("books", JSON.stringify(books))        
-            //   
-           
-            
-            let newRequest = new Request(userCurrent, bookCurrent, getCurrentDate(), "")
+            let newRequest = new Request(parseInt(userCurrent), parseInt(bookSelect), getCurrentDate(), "")
             saveRequest(newRequest)
             
-            let arrayBooks = Book.getSimilarBooks(bookCurrent)
+            let arrayBooks = Book.getSimilarBooks(bookSelect)
 
             for (let i = 0; i < arrayBooks.length; i++) {      
-                if (arrayBooks[i].id == bookCurrent) {  
+                if (arrayBooks[i].id == bookSelect) {  
                     let tempRequest = document.getElementById(`btnRequest_${arrayBooks[i].id}`)
-                    let tempNotify = document.getElementById(`btnNotify_${arrayBooks[i].id}`)
+                    let tempText = document.getElementById(`requestUnavailable_${arrayBooks[i].id}`)
         
                     tempRequest.style.display = "none"
-                    tempNotify.style.display = "block"
+                    tempText.style.display = "block"
                 }
             }
 
             swal({
                 type: 'success',
                 title: 'Reservado',
-                text: `O livro "${Book.getBookTitleById(bookCurrent)}" foi requisitado com sucesso!`,
+                text: `O livro "${Book.getBookTitleById(bookSelect)}" foi requisitado com sucesso!`,
                 confirmButtonColor: '#FFD892',
                 allowOutsideClick: false
             })
@@ -155,14 +143,15 @@ function addLoadEvent(func) {
     function renderTableBooks(bookCurrent) {
         let arrayBooks = Book.getSimilarBooks(bookCurrent)
 
-        // HEADER
-        let strHtml = `<thead><tr>
-                        <th class='w-20'>CIDADE</th>
-                        <th class='w-30'>FREGUESIA</th>
-                        <th class='w-20'>ESTADO</th>
-                        <th class='w-2 btn-center'>FILA DE ESPERA</th>
-                        </tr>
-                        </thead><tbody>`
+        let strHtml = `<thead>
+                            <tr>
+                                <th class='w-20'>CIDADE</th>
+                                <th class='w-30'>FREGUESIA</th>
+                                <th class='w-20'>ESTADO</th>
+                                <th class='w-2 btn-center'>FILA DE ESPERA</th>
+                            </tr>
+                        </thead>
+                        <tbody>`
 
         for (let i = 0; i < arrayBooks.length; i++) {
             strHtml += `<tr>
@@ -180,10 +169,6 @@ function addLoadEvent(func) {
         strHtml += "</tbody>"
         tblBooks.innerHTML = strHtml
 
-
-/////
-
-
         for (let i = 0; i < requests.length; i++) {
             for (let j = 0; j < arrayBooks.length; j++) {
                 let tempRequest = document.getElementById(`btnRequest_${arrayBooks[j].id}`)
@@ -191,23 +176,20 @@ function addLoadEvent(func) {
                 let requestUnavailable = document.getElementById(`requestUnavailable_${arrayBooks[j].id}`)
                 let bookStatus = document.getElementById(`bookStatus_${arrayBooks[j].id}`)
 
-                if (requests[i].userId == userCurrent) {
-                    //console.log("userCurrent   " + userCurrent + "    userId  " + requests[i].userId)
-                    //console.log("  ")
+            
 
-                    if (requests[i].bookId == arrayBooks[j].id) {
-                        //console.log("bookId   " + requests[i].bookId + "    id  " + requests[i].id)
-
+                if (requests[i].bookId == arrayBooks[j].id) {
+                    if (requests[i].userId == userCurrent && requests[i].deliveryDate == "") {
                         tempRequest.style.display = "none"
                         tempNotify.style.display = "none"
                         requestUnavailable.style.display = "block"
                         bookStatus.innerHTML = "Indisponível"
                     }
                     else {
-                        tempRequest.style.display = "block"
-                        tempNotify.style.display = "none"
+                        tempRequest.style.display = "none"
+                        tempNotify.style.display = "block"
                         requestUnavailable.style.display = "none"
-                        bookStatus.innerHTML = "Disponível"
+                        bookStatus.innerHTML = "Indisponível"
                     }
                 }
                 else {
@@ -219,14 +201,14 @@ function addLoadEvent(func) {
             }
         }
 
-        // LINKS FROM TABLE
+        /* request link from table */
         let bookRequest = document.getElementsByClassName("request")
 
         for (let i = 0; i < bookRequest.length; i++) {
             bookRequest[i].addEventListener("click", function() {
                 let requestId = bookRequest[i].getAttribute("id")
-                
-                checkRequestValid(bookCurrent, Book.requestBookById(requestId.substring("btnRequest_".length)))
+                                
+                checkRequestValid(requestId.substring("btnRequest_".length))
             })
         }
     }
