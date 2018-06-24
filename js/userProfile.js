@@ -106,8 +106,13 @@ function addLoadEvent(func) {
         frmFine.addEventListener("submit", function(event) {
             for (let i = 0; i < users.length; i++) {
                 if (users[i].id == userCurrent) {
-                    users[i].fineValue -= parseInt(viewFinePay.value)
-                    viewFine.value = users[i].fineValue
+                    if(users[i].fineValue > 0){
+                        users[i].fineValue -= parseInt(viewFinePay.value)
+                        viewFine.value = users[i].fineValue
+                    }
+                    else{
+                        alert("Já não tem multas por pagar!")
+                    }
                 }
             }
             localStorage.setItem("users", JSON.stringify(users))
