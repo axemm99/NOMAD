@@ -65,8 +65,8 @@ function addLoadEvent(func) {
                     wishlists[i].categoryList.push(parseInt(inputPreference.value))
                 }
                 else {
-                    let newWishlist = new Wishlist(userCurrent,
-                                                    parseInt(inputPreference.value),
+                    let newWishlist = new Wishlist(parseInt(userCurrent),
+                                                    [parseInt(inputPreference.value)],
                                                     [],
                                                     [],
                                                     [],
@@ -77,8 +77,9 @@ function addLoadEvent(func) {
                     saveWishlist(newWishlist)
                 }
             }
-            localStorage.setItem("wishlists", JSON.stringify(wishlists))
             renderTableCategories()
+            renderTableTags()
+            renderTableLibraries()
         }
         else {
             swal({
@@ -109,9 +110,9 @@ function addLoadEvent(func) {
                     wishlists[i].tagList.push(parseInt(inputPreference.value))
                 }
                 else {
-                    let newWishlist = new Wishlist(userCurrent,                                                    
+                    let newWishlist = new Wishlist(parseInt(userCurrent),
                                                     [],
-                                                    parseInt(inputPreference.value),
+                                                    [parseInt(inputPreference.value)],
                                                     [],
                                                     [],
                                                     [],
@@ -121,8 +122,9 @@ function addLoadEvent(func) {
                     saveWishlist(newWishlist)
                 }
             }
-            localStorage.setItem("wishlists", JSON.stringify(wishlists))
+            renderTableCategories()
             renderTableTags()
+            renderTableLibraries()
         }
         else {
             swal({
@@ -153,11 +155,11 @@ function addLoadEvent(func) {
                     wishlists[i].libraryList.push(parseInt(inputPreference.value))
                 }
                 else {
-                    let newWishlist = new Wishlist(userCurrent,                                                    
+                    let newWishlist = new Wishlist(parseInt(userCurrent),
                                                     [],
                                                     [],
                                                     [],
-                                                    parseInt(inputPreference.value),
+                                                    [parseInt(inputPreference.value)],
                                                     [],
                                                     [],
                                                     [],
@@ -165,7 +167,8 @@ function addLoadEvent(func) {
                     saveWishlist(newWishlist)
                 }
             }
-            localStorage.setItem("wishlists", JSON.stringify(wishlists))
+            renderTableCategories()
+            renderTableTags()
             renderTableLibraries()
         }
         else {
