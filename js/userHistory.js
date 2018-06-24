@@ -72,7 +72,7 @@ function addLoadEvent(func) {
                 frmRatings.addEventListener("submit", function(event) {
                     let bookId = Request.getBookIdById(requestId)
                     console.log("bookId")
-                    console.log(bookId)
+                    console.log("hhh: " + bookId)
                     
                     Book.rateBookById(bookId)                    
                     localStorage.setItem("books", JSON.stringify(books))
@@ -169,6 +169,10 @@ function addLoadEvent(func) {
         let strHtml = ""
         let checkFine = 0
 
+
+        
+       // delayedDays(id)
+
         for (let i = 0; i < users.length; i++) {
             if (users[i].id == userCurrent) {
                 checkFine = users[i].fineValue
@@ -207,6 +211,9 @@ function addLoadEvent(func) {
             }
         }
         return strHtml
+
+
+        ////////////////////////////////////////////
     }
 
     /* add book details to modal: rating */
@@ -289,6 +296,29 @@ function addLoadEvent(func) {
             })
         }
     }
+
+
+    function delayedDays(id){
+        let delay
+        let timeDifference
+
+        let today = getCurrentDate()
+
+        for (let i = 0; i < requests.length; i++) {
+            if(requests[i].userId == userCurrent && requests[i].id == id){
+
+                delay = today - requests[i].requestDate
+
+                console.log("data de requisição: " + requests[i].requestDate)
+                console.log(delay)
+            }            
+        }
+        console.log("hoje: " + parseInt(today))
+
+
+
+       // calculateFineValue()
+    }
 //
 
 
@@ -340,6 +370,9 @@ addLoadEvent(function() {
         let modalDeliverDetails = document.getElementById("modalDeliverDetails")
         let modalDeliverCity = document.getElementById("modalDeliverCity")
         let modalDeliverParish = document.getElementById("modalDeliverParish")
+
+        /*buttons*/
+        let btnModalRating = document.getElementById("btnModalRating")
     //
 
 
@@ -367,9 +400,17 @@ addLoadEvent(function() {
             event.preventDefault()
         })
 
+        btnModalRating.addEventListener("click", function(event){
+            $('#modalViewRequestDetails').modal('hide')
+
+            event.preventDefault()
+        })
+
         /* rating */
        /*  modalRating.addEventListener("click", function(event) {
              Book.rateBookById()
              event.preventDefault()
         })*/
 })
+
+

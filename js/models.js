@@ -654,8 +654,9 @@
             for (let i = books.length - 1; i >= 0 ; i--) {
                 if (books[i].libraryId == id) {
                     books.splice(i, 1)
+                    removeRequestByUserId(id)
                 }
-            }removeRequestByUserId
+            }
         }
 
         // RATE BOOK BY ID
