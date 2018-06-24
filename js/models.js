@@ -631,6 +631,25 @@ class Book {
                 // load de todas as categorias, tags e bibliotecas 
                 // passar a select as que estao no livro correspondente
 
+                for (let i = 0; i < categories.length; i++) {
+
+                    addCategoriesToModal()
+                    
+                }
+
+                for (let i = 0; i < tags.length; i++) {
+                    
+                    addTagsToModal()
+                    
+                }
+
+                for (let i = 0; i < libraries.length; i++) {
+                    
+                    viewBookCity.innerHTML = addCitiesToModal()
+                    viewBookParish.innerHTML = addParishToModal(viewBookCity.value)
+                    
+                }
+
 
                 viewBookCity.value = Library.getCityById(Library.getLibraryCityById(books[i].libraryId))
                 viewBookParish.value = Library.getParishById(Library.getLibraryParishById(books[i].libraryId))                   
@@ -2254,7 +2273,6 @@ function bookSelect() {
     return tempPath
 }
 //
-
 
 
 
