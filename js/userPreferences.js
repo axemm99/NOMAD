@@ -64,6 +64,18 @@ function addLoadEvent(func) {
                 if (wishlists[i].userId == userCurrent) {
                     wishlists[i].categoryList.push(parseInt(inputPreference.value))
                 }
+                else {
+                    let newWishlist = new Wishlist(userCurrent,
+                                                    parseInt(inputPreference.value),
+                                                    [],
+                                                    [],
+                                                    [],
+                                                    [],
+                                                    [],
+                                                    [],
+                                                    [])
+                    saveWishlist(newWishlist)
+                }
             }
             localStorage.setItem("wishlists", JSON.stringify(wishlists))
             renderTableCategories()
@@ -81,7 +93,6 @@ function addLoadEvent(func) {
     
     /* input category */        
     function checkTagInputValid(tempTags) {
-        console.log("2")
         let strError = ""
         let strTitle = ""
 
@@ -96,6 +107,18 @@ function addLoadEvent(func) {
             for (let i = 0; i < wishlists.length; i++) {
                 if (wishlists[i].userId == userCurrent) {
                     wishlists[i].tagList.push(parseInt(inputPreference.value))
+                }
+                else {
+                    let newWishlist = new Wishlist(userCurrent,                                                    
+                                                    [],
+                                                    parseInt(inputPreference.value),
+                                                    [],
+                                                    [],
+                                                    [],
+                                                    [],
+                                                    [],
+                                                    [])
+                    saveWishlist(newWishlist)
                 }
             }
             localStorage.setItem("wishlists", JSON.stringify(wishlists))
@@ -128,6 +151,18 @@ function addLoadEvent(func) {
             for (let i = 0; i < wishlists.length; i++) {
                 if (wishlists[i].userId == userCurrent) {
                     wishlists[i].libraryList.push(parseInt(inputPreference.value))
+                }
+                else {
+                    let newWishlist = new Wishlist(userCurrent,                                                    
+                                                    [],
+                                                    [],
+                                                    [],
+                                                    parseInt(inputPreference.value),
+                                                    [],
+                                                    [],
+                                                    [],
+                                                    [])
+                    saveWishlist(newWishlist)
                 }
             }
             localStorage.setItem("wishlists", JSON.stringify(wishlists))
@@ -363,9 +398,9 @@ addLoadEvent(function() {
 
         /* wishlist arrays */
         let tempWishlist = {   //////
-                        id: 0,
-                        userId: 0,
-                        tagList: ""
+                                id: 0,
+                                userId: 0,
+                                tagList: ""
         }
 
         let tempArray = []   //////
