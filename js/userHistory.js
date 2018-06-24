@@ -370,6 +370,9 @@ addLoadEvent(function() {
         let modalDeliverDetails = document.getElementById("modalDeliverDetails")
         let modalDeliverCity = document.getElementById("modalDeliverCity")
         let modalDeliverParish = document.getElementById("modalDeliverParish")
+
+        /*buttons*/
+        let btnModalRating = document.getElementById("btnModalRating")
     //
 
 
@@ -394,6 +397,12 @@ addLoadEvent(function() {
         /* add parish to modal: deliver */
         modalDeliverCity.addEventListener("change", function(event){
             modalDeliverParish.innerHTML = addParishToModal(modalDeliverCity.value)
+            event.preventDefault()
+        })
+
+        btnModalRating.addEventListener("click", function(event){
+            $('#modalViewRequestDetails').modal('hide')
+
             event.preventDefault()
         })
 
