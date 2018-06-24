@@ -72,7 +72,7 @@ function addLoadEvent(func) {
                 frmRatings.addEventListener("submit", function(event) {
                     let bookId = Request.getBookIdById(requestId)
                     console.log("bookId")
-                    console.log(bookId)
+                    console.log("hhh: " + bookId)
                     
                     Book.rateBookById(bookId)                    
                     localStorage.setItem("books", JSON.stringify(books))
