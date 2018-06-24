@@ -169,6 +169,10 @@ function addLoadEvent(func) {
         let strHtml = ""
         let checkFine = 0
 
+
+        
+       // delayedDays(id)
+
         for (let i = 0; i < users.length; i++) {
             if (users[i].id == userCurrent) {
                 checkFine = users[i].fineValue
@@ -207,6 +211,9 @@ function addLoadEvent(func) {
             }
         }
         return strHtml
+
+
+        ////////////////////////////////////////////
     }
 
     /* add book details to modal: rating */
@@ -288,6 +295,29 @@ function addLoadEvent(func) {
                 allowOutsideClick: false
             })
         }
+    }
+
+
+    function delayedDays(id){
+        let delay
+        let timeDifference
+
+        let today = getCurrentDate()
+
+        for (let i = 0; i < requests.length; i++) {
+            if(requests[i].userId == userCurrent && requests[i].id == id){
+
+                delay = today - requests[i].requestDate
+
+                console.log("data de requisição: " + requests[i].requestDate)
+                console.log(delay)
+            }            
+        }
+        console.log("hoje: " + parseInt(today))
+
+
+
+       // calculateFineValue()
     }
 //
 
@@ -373,3 +403,5 @@ addLoadEvent(function() {
              event.preventDefault()
         })*/
 })
+
+
