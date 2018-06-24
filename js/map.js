@@ -228,7 +228,7 @@ addLoadEvent(function() {
             if (checkBookValid() == true) {
                 frmDonate.reset()
             }
-
+            addRecentBooksToIndex()
             event.preventDefault()
         })
 

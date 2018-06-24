@@ -65,7 +65,7 @@ function addLoadEvent(func) {
 
                 if (i == sortFavourites.length - 1) {
                     if ((5 - sortFavourites.length) != 0) {
-                        for (let j = 0; j < 6 - sortFavourites.length; j++) {
+                        for (let j = 0; j < 5 - sortFavourites.length; j++) {
                             strHtml += "<div class='category-empty rounded col-md-2'></div>"
                         }
                     }
@@ -147,6 +147,12 @@ addLoadEvent(function() {
         loadBooks()
         console.log(books)
 
+        loadComments()
+        console.log(comments)
+
+        loadRequests()
+        console.log(requests)
+
         loadWishlists()
         console.log(wishlists)
 
@@ -202,10 +208,11 @@ addLoadEvent(function() {
         frmDonate.addEventListener("submit", function(event){
             checkBookValid()
 
+            event.preventDefault()
             if (checkBookValid() == true) {
                 frmDonate.reset()
             }
-
+            addRecentBooksToIndex()
             event.preventDefault()
         })
 

@@ -47,6 +47,16 @@
                             <a id="optMap" class="nav-link" href="map.html">Bibliotecas</a>
                         </li>
 
+                        <!-- SEARCH -->
+                        <li id="optSearch" class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img src="../images/search.png" height="32" width="32">
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownId">
+                                <input type="search" id="inputSearch" class="form-control" aria-describedby="searchId">
+                            </div>
+                        </li>
+
                         <!-- PROFILE -->
                         <li id="optUser" class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -146,41 +156,47 @@
             <h1 id="viewBookTitle" class="select-book"></h1>
 
             <!-- INFO -->
-            <div class="row select-book">
+            <div class="container-fluid row select-book">
                 <div class="col col-md-3 mr-2">
-                    <img id="viewCover" src=""/><br><br>
-                    <div style="width: 180px;">
-                        <div id="stars">
+                    <div class="text-center" style="float: left;">
+                        <img id="viewCover" class="img-fluid" src=""/><br><br>
+                        <div style="min-width: 180px;">
+                            <div id="stars">
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col col-md-6">
-                    <h6>Autor(es):</h6>
-                    <p id="viewAuthors"></p>
-                    <br>
-                    <h6>Editora:</h6>
-                    <p id="viewPublisher"></p>
-                    <br>
-                    <h6>Ano:</h6>
-                    <p id="viewYear"></p>
-                    <br>
-                    <h6>Descrição:</h6>
-                    <p id="viewDescription"></p>
-                    <br>
-                </div>
-                <div class="col col-md-2" style="margin-left: 5%;">
-                    <h6>Categoria:</h6>
-                    <p id="viewCategory"></p>
-                    <br>
-                    <h6>Tags:</h6>
-                    <p id="viewTags"></p>
-                    <br>
-                    <h6>Estado:</h6>
-                    <p id="viewCondition"></p>
-                    <br>
-                    <h6>Nº de páginas:</h6>
-                    <p id="viewPages"></p>
-                    <br>
+                </div>                
+                <div class="col-md-8">
+                    <div class="row">
+                        <div class="col col-md-8 mr-4">
+                            <h6>Autor(es):</h6>
+                            <p id="viewAuthors"></p>
+                            <br>
+                            <h6>Editora:</h6>
+                            <p id="viewPublisher"></p>
+                            <br>
+                            <h6>Ano:</h6>
+                            <p id="viewYear"></p>
+                            <br>
+                            <h6>Descrição:</h6>
+                            <p id="viewDescription"></p>
+                            <br>
+                        </div>
+                        <div class="col col-md-2" style="margin-left: 5%;">
+                            <h6>Categoria:</h6>
+                            <p id="viewCategory"></p>
+                            <br>
+                            <h6>Tags:</h6>
+                            <p id="viewTags"></p>
+                            <br>
+                            <h6>Estado:</h6>
+                            <p id="viewCondition"></p>
+                            <br>
+                            <h6>Nº de páginas:</h6>
+                            <p id="viewPages"></p>
+                            <br>
+                        </div>
+                    </div>
                 </div>
             </div>
                 
@@ -217,7 +233,7 @@
                                     <img src="../images/logo.png" id="userIcon" class="img-fluid img-thumbnail rounded-circle" alt="">
                                 </td>
                                 <td>
-                                    <textarea name="" id="inputComment" class="form-control" cols="10" rows="2" placeholder="Adicionar um comentário" readonly></textarea>
+                                    <textarea id="inputComment" class="form-control" cols="10" rows="2" placeholder="Adicionar um comentário" readonly></textarea>
                                 </td>
                             </tr>
                             <tr>
@@ -273,36 +289,37 @@
                                     <!-- TITLE -->
                                     <div class="form-group">
                                         <label for="modalDonateTitle">Título</label>
-                                        <input type="text" class="form-control" id="modalDonateTitle" value="a" required>                        
+                                        <input type="text" class="form-control" id="modalDonateTitle" value="a">                        
                                     </div>
 
                                     <!-- AUTHORS -->
                                     <div class="form-group">
                                         <label for="modalDonateAuthors">Autores</label>
-                                        <input type="text" class="form-control" id="modalDonateAuthors" value="a" required>
+                                        <input type="text" class="form-control" id="modalDonateAuthors" value="a">
                                     </div>
 
                                     <!-- PUBLISHER -->
                                     <div class="form-group">
                                         <label for="modalDonatePublisher">Editora</label>
-                                        <input type="text" class="form-control" id="modalDonatePublisher" value="a" required>
+                                        <input type="text" class="form-control" id="modalDonatePublisher" value="a">
                                     </div>
 
                                     <div class="row">
                                         <!-- YEAR -->
                                         <div class="form-group col-md-6">
                                             <label for="modalDonateYear">Ano</label>
-                                            <input type="date" id="modalDonateYear"  class="form-control inline" required>
+                                            <input type="number" id="modalDonateYear"  class="form-control inline" value="2012">
                                         </div>
+
+                                        <!-- PAGES -->
                                         <div class="form-group col-md-6">
-                                            <!-- PAGES -->
                                             <label for="modalDonatePages">Nº de páginas</label>
-                                            <input type="number" id="modalDonatePages" class="form-control inline" value="10" required>                    
+                                            <input type="number" id="modalDonatePages" class="form-control inline" value="10">                    
                                         </div>
                                     </div>
                                 </div>
 
-                                <div id="donateStep2">                                        
+                                <div id="donateStep2">
                                     <div class="row">
                                         <!-- LIBRARY -->
                                         <div class="form-group col-md-6">
@@ -330,19 +347,18 @@
                                         <!-- TAG -->
                                         <div class="form-group col-md-6">
                                             <label for="modalDonateTags">Tag</label>
-                                            <select id="modalDonateTags" class="form-control inline">
+                                            <select id="modalDonateTags" class="form-control inline" size="4" multiple>
                                             </select>
                                         </div>
                                     </div>
-
+                                    
                                     <div class="row">
                                         <!-- CONDITION -->
                                         <div class="form-group col-md-6">
                                             <label for="modalDonateCondition">Estado</label>
                                             <select id="modalDonateCondition" class="form-control">
-                                                <option value="">...</option>>
-                                                <option value="Bom">Bom</option>
-                                                <option value="Usado">Aceitável</option>
+                                                <option value="Bom" selected>Bom</option>
+                                                <option value="Aceitável">Aceitável</option>
                                                 <option value="Fraco">Fraco</option>
                                             </select>
                                         </div>
@@ -365,7 +381,7 @@
 
                                 <div class="container-fluid step3 col-md-12">
                                     <div id="donateStep3">
-                                        <!-- COVER -->                                         
+                                        <!-- COVER -->
                                         <div class="row">
                                             <div class="form-group col-md-6">
                                                 <label for="modalDonateCover">Capa</label>
@@ -379,8 +395,7 @@
 
                                         <!-- DESCRIPTION -->
                                         <label for="modalDonateDescription">Sinopse</label>
-                                        <textarea id="modalDonateDescription" class="form-control" rows="3" value="aaaa" required></textarea>
-                                                
+                                        <textarea id="modalDonateDescription" class="form-control" rows="3" value="aaaa"></textarea>    
                                     </div>
                                 </div>
                             </div>

@@ -112,17 +112,18 @@ function addLoadEvent(func) {
 
     /* libraries */
     function renderTableLibraries() {
-        // HEADER
-        let strHtml = `<thead class='thead-dark'><tr>
-                        <th class='w-5'>Id</th>
-                        <th class='w-20'>Cidade</th>
-                        <th class='w-20'>Freguesia</th>
-                        <th class='w-40'>Morada</th>
-                        <th class='w-15'>Coordenadas</th>
-                        <th class='w-10'>Capacidade de Livros</th>
-                        <th class='w-2'></th>
-                        </tr>
-                        </thead><tbody>`
+        let strHtml = `<thead class='thead-dark'>
+                            <tr>
+                                <th class='w-5'>Id</th>
+                                <th class='w-20'>Cidade</th>
+                                <th class='w-20'>Freguesia</th>
+                                <th class='w-40'>Morada</th>
+                                <th class='w-15'>Coordenadas</th>
+                                <th class='w-10'>Capacidade de Livros</th>
+                                <th class='w-2'></th>
+                            </tr>
+                        </thead>
+                        <tbody>`
             
         for (let i = 0; i < libraries.length; i++) {
             strHtml += `<tr>
@@ -258,9 +259,10 @@ addLoadEvent(function() {
         /* buttons */
         let btnEdit = document.getElementById("btnEdit")
         let btnClose = document.getElementById("btnClose")
+        let count = 0
         
         /* tables */
-        let tblLibraries = document.getElementById("tblLibraries")   //////
+        let tblLibraries = document.getElementById("tblLibraries")
     //
 
 
@@ -269,6 +271,10 @@ addLoadEvent(function() {
 
         /* nav bar */
         navbarVisible()
+
+        /* items disabled */
+        viewLibraryAddress.readOnly = true
+        viewLibraryBookCapacity.readOnly = true
 
         /* tables */
         renderTableLibraries()
@@ -281,8 +287,6 @@ addLoadEvent(function() {
     // --------------------------------------
     // INPUTS
 
-        viewLibraryAddress.readOnly = true
-        viewLibraryBookCapacity.readOnly = true
 
         /* fill parish according to city select */
         inputCity.addEventListener("change", function(event) {
@@ -326,19 +330,30 @@ addLoadEvent(function() {
         /* view library */
         frmViewLibrary.addEventListener("submit", function(event) {
             for (let i = 0; i < libraries.length; i++) {
-                if(libraries[i].city == viewLibraryCity.value && libraries[i].parish == viewLibraryParish.value){
-                    let tempId = Library.getLibraryIdByLocation(viewLibraryCity.value, viewLibraryParish.value)
+                if (Library.getCityById(libraries[i].city) == viewLibraryCity.value && Library.getParishById(libraries[i].parish) == viewLibraryParish.value) {
+                    let tempId = Library.getLibraryIdByLocation(libraries[i].city, libraries[i].parish)
 
                     Library.editLibraryById(tempId)
-                    event.preventDefault()
-
                     localStorage.setItem("libraries", JSON.stringify(libraries))
+
+                    swal({
+                        type: 'success',
+                        title: 'Alterado!',
+                        text: 'As informações foram alteradas com sucesso',
+                        showConfirmButton: true,
+                        confirmButtonColor: '#9fc490',
+                        allowOutsideClick: false
+                    })
                 }
-            }       
-             
-            $('#viewLibraryModal').modal('hide')
+            }
+            $('#viewLibraryModal').modal('hide')            
 
             renderTableLibraries()
+
+            viewLibraryAddress.readOnly = true
+            viewLibraryBookCapacity.readOnly = true
+
+            event.preventDefault()
         })
     //
 
@@ -348,9 +363,16 @@ addLoadEvent(function() {
     
         /* edit user */
         btnEdit.addEventListener("click", function(event) {
-            viewLibraryAddress.readOnly = false
-            viewLibraryBookCapacity.readOnly = false
-
+            if (count == 0) {
+                viewLibraryAddress.readOnly = false
+                viewLibraryBookCapacity.readOnly = false
+                count = 1
+            }
+            else if (count == 1) {
+                viewLibraryAddress.readOnly = true
+                viewLibraryBookCapacity.readOnly = true
+                count = 0
+            }
             event.preventDefault()
         })
 

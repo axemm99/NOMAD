@@ -192,7 +192,7 @@
                     viewUserName.value= users[i].userName
                     viewUserEmail.value = users[i].userEmail
                     viewUserPassword.value =  users[i].userPassword
-                    // fine value
+                    viewUserFine.value =  users[i].fineValue
                     viewUserPermissions.value =  users[i].userPermissions
                     viewUserPhoto.setAttribute("src", users[i].userPhoto)
                 }                  
@@ -203,7 +203,7 @@
         static editUserPermissionsById(id) {
             for (let i = 0; i < users.length; i++) {
                 if (users[i].id == id) {
-                    users[i].userPermissions = parseInt(modalUserPermissions.value)
+                    users[i].userPermissions = parseInt(viewUserPermissions.value)
                 }
             }
         }
@@ -567,7 +567,9 @@
                 }
             }
             tempArray = tempArray.reduce((a, b) => a.concat(b), [])
-            let newArray = [...new Set(tempArray)]        
+
+            let newArray = [...new Set(tempArray)]
+
             return newArray
         }
         
@@ -581,6 +583,7 @@
                 }
             }
             let newArray = [...new Set(tempArray)]
+
             return newArray
         }
         
@@ -594,6 +597,7 @@
                 }                  
             }
             let newArray = [...new Set(tempArray)]
+
             return newArray
         } 
 
@@ -620,16 +624,18 @@
                 if(books[i].id == id) {
                     viewBookTitle.value = books[i].bookTitle
                     viewBookAuthors.value = books[i].bookAuthors
-                    viewBookPublisher.value =  books[i].bookPublisher
-                    viewBookYear.value =  books[i].bookYear
-                    viewBookPages.value =  books[i].bookPages
+                    viewBookPublisher.value = books[i].bookPublisher
+                    viewBookYear.value = books[i].bookYear
+                    viewBookPages.value = books[i].bookPages
+                    viewBookCity.value = Library.getCityById(Library.getLibraryCityById(books[i].libraryId))
+                    viewBookParish.value = Library.getParishById(Library.getLibraryParishById(books[i].libraryId))
                     viewBookCategory.value = Category.getCategoryById(books[i].bookCategory)
                     viewBookTags.value = books[i].bookTags
-                    viewBookCondition.value =  books[i].bookCondition
-                    viewBookDonor.value =  books[i].bookDonor
-                    viewBookDonate.value =  books[i].bookDonation
-                    viewBookCover.value =  books[i].bookCover
-                    viewBookDescription.value =  books[i].bookDescription
+                    viewBookCondition.value = books[i].bookCondition
+                    viewBookDonor.value = books[i].bookDonor
+                    viewBookDonate.value = books[i].bookDonation
+                    viewBookCover.src = books[i].bookCover
+                    viewBookDescription.value = books[i].bookDescription
                 }                  
             }
         }
@@ -649,13 +655,14 @@
                 if (books[i].libraryId == id) {
                     books.splice(i, 1)
                 }
-            }
+            }removeRequestByUserId
         }
 
         // RATE BOOK BY ID
         static rateBookById(id) {
             for (let i = 0; i < books.length; i++) {
                 if (books[i].id == id) {
+                    console.log(books[i].id)
                     books[i].bookRatings.push(parseInt(modalRatingInput.value))
                 }                    
             }
@@ -779,11 +786,47 @@
             return lastId
         }
         
+        // GET BOOK ID BY ID
+        static getBookIdById(id) {
+            for (let i = 0; i < requests.length; i++) {
+                if (requests[i].id == id) {
+                    return requests[i].bookId
+                }                  
+            }
+        }
+        
+        // REQUEST BOOK ID
+        static requestBookById(id) {
+            for (let i = 0; i < requests.length; i++) {
+                if (requests[i].id == id && requests[i].userId == userCurrent) {
+                    requests[i].deliveryDate = getCurrentDate()
+                }
+            }
+        }
+        
         // UPDATE DELIVERY DATE BY REQUEST ID
         static receiveRequestBookById(id) {
             for (let i = 0; i < requests.length; i++) {
                 if (requests[i].id == id && requests[i].userId == userCurrent) {
                     requests[i].deliveryDate = getCurrentDate()
+                }
+            }
+        }
+
+        // REMOVE REQUEST BY USER ID
+        static removeRequestByUserId(id) {
+            for (let i = requests.length - 1; i >= 0 ; i--) {
+                if (requests[i].userId == id) {
+                    requests.splice(i, 1)
+                }
+            }
+        }
+
+        // REMOVE REQUEST BY BOOK ID
+        static removeRequestByBookId(id) {
+            for (let i = requests.length - 1; i >= 0 ; i--) {
+                if (requests[i].bookId == id) {
+                    requests.splice(i, 1)
                 }
             }
         }
@@ -1246,7 +1289,7 @@
             // GET LIBRARY LOCATION ID
             static getLibraryById(id) {
                 for (let i = 0; i < libraries.length; i++) {
-                    if(libraries[i].id == id) {
+                    if (libraries[i].id == id) {
                         return libraries[i].city + ", " + libraries[i].parish
                     }
                 }
@@ -1258,13 +1301,13 @@
         // VIEW LIBRARY FROM ID
         static viewLibraryById(id) {
             for (let i = 0; i < libraries.length; i++) {
-                if(libraries[i].id == id) {
-                    modalLibraryCity.value= libraries[i].city
-                    modalLibraryParish.value= libraries[i].parish
-                    modalLibraryAddress.value = libraries[i].address
-                    modalLibraryLatitude.value =  libraries[i].latitude  
-                    modalLibraryLongitude.value =  libraries[i].longitude
-                    modalLibraryBookCapacity.value =  libraries[i].bookCapacity  
+                if (libraries[i].id == id) {
+                    viewLibraryCity.value = Library.getCityById(libraries[i].city)
+                    viewLibraryParish.value = Library.getParishById(libraries[i].parish)
+                    viewLibraryAddress.value = libraries[i].address
+                    viewLibraryLatitude.value =  libraries[i].latitude  
+                    viewLibraryLongitude.value =  libraries[i].longitude
+                    viewLibraryBookCapacity.value =  libraries[i].bookCapacity  
                 }                  
             }
         }
@@ -1272,9 +1315,9 @@
         // EDIT LIBRARY FROM ID
         static editLibraryById(id) {
             for (let i = 0; i < libraries.length; i++) {
-                if(libraries[i].id == id) {
-                    libraries[i].address = modalLibraryAddress.value
-                    libraries[i].bookCapacity = parseInt(modalLibraryBookCapacity.value)
+                if (libraries[i].id == id) {
+                    libraries[i].address = viewLibraryAddress.value
+                    libraries[i].bookCapacity = parseInt(viewLibraryBookCapacity.value)
                 }                  
             }
         }
@@ -1282,7 +1325,7 @@
         // REMOVE LIBRARY FROM ID
         static removeLibraryById(id) {
             for (let i = 0; i < libraries.length; i++) {
-                if(libraries[i].id == id) {
+                if (libraries[i].id == id) {
                     libraries.splice(i, 1)
                 }
             }
@@ -1488,7 +1531,7 @@
         books.push(book04)
         book05 = new Book("Sete Minutos Depois da Meia-Noite", ["Patrick Ness"], "Editorial Presença", "2015", 216, 4, [5, 4], "Bom", "Bruno", "2018-03-05", "http://3.bp.blogspot.com/-VkTlgOzWN_I/VQS9zXXm5PI/AAAAAAAAAxo/FlT58W4EfAc/s1600/60990283_Sete_Minutos_Meia_Noite.jpg", "Passava pouco da meia-noite quando o monstro apareceu. Inspirado numa ideia original da escritora Siobhan Dowd, que morreu de cancro em 2007, Patrick Ness criou uma história de uma beleza tocante, que aborda verdades dolorosas com elegância e profundidade, sem nunca perder de vista a esperança no futuro. Fala-nos dos sentimentos de perda, medo e solidão e também da coragem e da compaixão necessárias para os ultrapassar. Fantasia e realidade misturam-se num livro de exceção, com ilustrações soberbas que complementam e expandem a beleza do texto.", [0, 2, 4, 3], 3)
         books.push(book05)
-        book06 = new Book("Aquilo que os olhos vêem ou o Adamastor", ["Manuel António Pina"], "Angelus Novus", "2012", 56, 1, [1, 22, 7], "Bom", "Alexandra", "2017-06-05", "https://images.portoeditora.pt/getresourcesservlet/image?EBbDj3QnkSUjgBOkfaUbsKIiGhhTnv74wHCxfUMk1Ojv%2FP6U4Vl2IrY0I7VRGKGY&width=300", "A história é contada, em finais do primeiro quarte do séc. XVI, pelo físico e astrólogo Mestre João, que regressa, velho e doente, a Portugal, depois de muitos anos no Oriente, e que, à passagem do Cabo da Boa Esperança, recorda os acontecimentos de que fora, aí, testemunha muitos anos antes. A acção narrada por Mestre João passa-se no mar, em 1501, no interior de uma nau da frota de Pedro Álvares Cabral, que o mesmo Mestre João acompanhara na sua viagem, primeiro, ao Brasil e, depois, pela rota de Vasco da Gama à Índia. Regressando à Índia, a nau recolhera então na Angra de S. Brás, perto do Cabo da Boa Esperança, onde fazia aguada, um náufrago (Manuel) que contou uma história fantástica e terrível.", [0, 4, 5, 3, 4, 2, 4], 2)
+        book06 = new Book("Aquilo que os olhos vêem ou O Adamastor", ["Manuel António Pina"], "Angelus Novus", "2012", 56, 1, [1, 22, 7], "Bom", "Alexandra", "2017-06-05", "https://images.portoeditora.pt/getresourcesservlet/image?EBbDj3QnkSUjgBOkfaUbsKIiGhhTnv74wHCxfUMk1Ojv%2FP6U4Vl2IrY0I7VRGKGY&width=300", "A história é contada, em finais do primeiro quarte do séc. XVI, pelo físico e astrólogo Mestre João, que regressa, velho e doente, a Portugal, depois de muitos anos no Oriente, e que, à passagem do Cabo da Boa Esperança, recorda os acontecimentos de que fora, aí, testemunha muitos anos antes. A acção narrada por Mestre João passa-se no mar, em 1501, no interior de uma nau da frota de Pedro Álvares Cabral, que o mesmo Mestre João acompanhara na sua viagem, primeiro, ao Brasil e, depois, pela rota de Vasco da Gama à Índia. Regressando à Índia, a nau recolhera então na Angra de S. Brás, perto do Cabo da Boa Esperança, onde fazia aguada, um náufrago (Manuel) que contou uma história fantástica e terrível.", [0, 4, 5, 3, 4, 2, 4], 2)
         books.push(book06)
         book07 = new Book("Odisseia de Homero", ["Frederico Lourenço"], "Claro Enigma", "2018", 688, 2, [6, 11], "Aceitável", "Alexandre", "2017-04-01", "https://images.livrariasaraiva.com.br/imagemnet/imagem.aspx/?pro_id=4238174&qld=90&l=430&a=-1", "A Odisseia não é apenas um dos grandes épicos da literatura grega; é também um dos pilares do cânone ocidental, um poema de rara e extraordinária beleza - e o livro que mais influência exerceu, ao longo dos tempos, no imaginário ocidental.", [0, 5, 5, 3], 3)
         books.push(book07)
@@ -1852,6 +1895,7 @@
 
     /* options */
     let optHome = document.getElementById("optHome")
+    let optSearch = document.getElementById("optSearch")
     let optCatalog = document.getElementById("optCatalog")
     let optMap = document.getElementById("optMap")
     let optUser = document.getElementById("optUser")
@@ -1872,6 +1916,7 @@
 
     /* initial load */
     optHome.style.display = "none"
+    optSearch.style.display = "none"
     optCatalog.style.display = "none"
     optMap.style.display = "none"
     optUser.style.display = "none"
@@ -1883,6 +1928,7 @@
     function navbarVisible() {
         if (userCurrent == -1) {
             optHome.style.display = "none"
+            optSearch.style.display = "none"
             optCatalog.style.display = "none"
             optMap.style.display = "none"
             optUser.style.display = "block"
@@ -1897,6 +1943,7 @@
         }
         else {
             optHome.style.display = "block"
+            optSearch.style.display = "block"
             optCatalog.style.display = "block"
             optMap.style.display = "block"
             optUser.style.display = "block"
@@ -2330,11 +2377,12 @@
             for (let i = 0; i < wishlists.length; i++) {
                 let tempCategory = parseInt(inputCategory)
                 let tempArray = wishlists[i].categoryList
-                let temp2 = wishlists[i].notificationsCategories
-                console.log(temp2)
-                
-                if (tempArray.indexOf(tempCategory) != -1) {
+
+                if (tempArray.includes(tempCategory)) {
+                    console.log("bookId")
+                    console.log(bookId)
                     wishlists[i].notificationsCategories.push(bookId)
+                    console.log(wishlists)
                 }
             }
         }
@@ -2348,7 +2396,7 @@
                 if (tempArray.includes(tempTags)) {
                     wishlists[i].notificationsTags.push(bookId)
                 }
-            }        
+            }
         }
 
         /* add new book notification to user wishlists by library */
@@ -2360,14 +2408,14 @@
                 if (tempArray.includes(tempLibrary)) {
                     wishlists[i].notificationsLibraries.push(bookId)
                 }
-            }        
+            }
         }
     }
 //
 
 
 // --------------------------------------
-// VALIDATION                                    ?????????????????????
+// VALIDATION
 
     /* new book */
     function checkBookValid() {
@@ -2398,7 +2446,7 @@
                                     modalDonatePublisher.value,
                                     modalDonateYear.value,
                                     modalDonatePages.value,
-                                    parseInt(modalDonateCategories.value),
+                                    modalDonateCategories.value,
                                     arrayTags,
                                     modalDonateCondition.value,
                                     modalDonateDonor.value,
@@ -2408,10 +2456,8 @@
                                     [0],
                                     Library.getLibraryIdByLocation(modalDonateCity.value, modalDonateParish.value))
 
-
-                console.log(newBook)
             saveBook(newBook)
-            injectNotification(modalDonateCategories.value, modalDonateTags.value, newBook.id, modalDonateParish.value)
+            injectNotification(modalDonateCategories.value, arrayTags, newBook.id, modalDonateParish.value)
 
             swal({
                 type: 'success',

@@ -47,6 +47,16 @@
                             <a id="optMap" class="nav-link" href="map.html">Bibliotecas</a>
                         </li>
 
+                        <!-- SEARCH -->
+                        <li id="optSearch" class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img src="../images/search.png" height="32" width="32">
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownId">
+                                <input type="search" id="inputSearch" class="form-control" aria-describedby="searchId">
+                            </div>
+                        </li>
+
                         <!-- PROFILE -->
                         <li id="optUser" class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -215,7 +225,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header text-center">
-                        <img class="modal-title" src="../images/favicon_w.png" width="32"/>
+                        <h4 class="modal-title" id="modalTitleId">Detalhes</h4>
                         <button type="button" id="btnClose" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true"></span><i class="fa fa-times"></i></span>
                         </button>
@@ -242,20 +252,20 @@
                                 </div>
             
                                 <!-- COORDINATES -->
-                                <div class="form-group col-md-6">
+                                <div class="form-group col-md-7">
                                     <label for="viewLibraryCoordinates">Coordenadas</label>
                                     <div class="row">
                                         <div id="viewLibraryCoordinates" class="form-group col-md-6">
                                             <input type="number" id="viewLibraryLatitude" class="form-control"  step="any" placeholder="latitude" readonly>
                                         </div>
                                         <div id="viewLibraryCoordinates" class="form-group col-md-6" style="padding-left: 0px;">
-                                            <input type="number"step="any" placeholder="longitude" readonly>
+                                            <input type="number" id="viewLibraryLongitude" class="form-control"  step="any" placeholder="longitude" readonly>
                                         </div>
                                     </div>
                                 </div>     
                                 
                                 <!-- BOOK CAPACITY -->
-                                <div class="form-group col-md-6">
+                                <div class="form-group col-md-5">
                                     <label for="viewLibraryBookCapacity">Capacidade de Livros</label>
                                     <input type="number" value="7" min="1" max="999" class="form-control" id="viewLibraryBookCapacity" min="1">
                                 </div>

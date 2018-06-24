@@ -47,6 +47,16 @@
                             <a id="optMap" class="nav-link" href="map.html">Bibliotecas</a>
                         </li>
 
+                        <!-- SEARCH -->
+                        <li id="optSearch" class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img src="../images/search.png" height="32" width="32">
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownId">
+                                <input type="search" id="inputSearch" class="form-control" aria-describedby="searchId">
+                            </div>
+                        </li>
+
                         <!-- PROFILE -->
                         <li id="optUser" class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -183,36 +193,37 @@
                                     <!-- TITLE -->
                                     <div class="form-group">
                                         <label for="modalDonateTitle">Título</label>
-                                        <input type="text" class="form-control" id="modalDonateTitle" value="a" required>                        
+                                        <input type="text" class="form-control" id="modalDonateTitle" value="a">                        
                                     </div>
 
                                     <!-- AUTHORS -->
                                     <div class="form-group">
                                         <label for="modalDonateAuthors">Autores</label>
-                                        <input type="text" class="form-control" id="modalDonateAuthors" value="a" required>
+                                        <input type="text" class="form-control" id="modalDonateAuthors" value="a">
                                     </div>
 
                                     <!-- PUBLISHER -->
                                     <div class="form-group">
                                         <label for="modalDonatePublisher">Editora</label>
-                                        <input type="text" class="form-control" id="modalDonatePublisher" value="a" required>
+                                        <input type="text" class="form-control" id="modalDonatePublisher" value="a">
                                     </div>
 
                                     <div class="row">
                                         <!-- YEAR -->
                                         <div class="form-group col-md-6">
                                             <label for="modalDonateYear">Ano</label>
-                                            <input type="date" id="modalDonateYear"  class="form-control inline" required>
+                                            <input type="number" id="modalDonateYear"  class="form-control inline" value="2012">
                                         </div>
+
+                                        <!-- PAGES -->
                                         <div class="form-group col-md-6">
-                                            <!-- PAGES -->
                                             <label for="modalDonatePages">Nº de páginas</label>
-                                            <input type="number" id="modalDonatePages" class="form-control inline" value="10" required>                    
+                                            <input type="number" id="modalDonatePages" class="form-control inline" value="10">                    
                                         </div>
                                     </div>
                                 </div>
 
-                                <div id="donateStep2">                                        
+                                <div id="donateStep2">
                                     <div class="row">
                                         <!-- LIBRARY -->
                                         <div class="form-group col-md-6">
@@ -240,19 +251,18 @@
                                         <!-- TAG -->
                                         <div class="form-group col-md-6">
                                             <label for="modalDonateTags">Tag</label>
-                                            <select id="modalDonateTags" class="form-control inline">
+                                            <select id="modalDonateTags" class="form-control inline" size="4" multiple>
                                             </select>
                                         </div>
                                     </div>
-
+                                    
                                     <div class="row">
                                         <!-- CONDITION -->
                                         <div class="form-group col-md-6">
                                             <label for="modalDonateCondition">Estado</label>
                                             <select id="modalDonateCondition" class="form-control">
-                                                <option value="">...</option>>
-                                                <option value="Bom">Bom</option>
-                                                <option value="Usado">Aceitável</option>
+                                                <option value="Bom" selected>Bom</option>
+                                                <option value="Aceitável">Aceitável</option>
                                                 <option value="Fraco">Fraco</option>
                                             </select>
                                         </div>
@@ -275,7 +285,7 @@
 
                                 <div class="container-fluid step3 col-md-12">
                                     <div id="donateStep3">
-                                        <!-- COVER -->                                         
+                                        <!-- COVER -->
                                         <div class="row">
                                             <div class="form-group col-md-6">
                                                 <label for="modalDonateCover">Capa</label>
@@ -289,8 +299,7 @@
 
                                         <!-- DESCRIPTION -->
                                         <label for="modalDonateDescription">Sinopse</label>
-                                        <textarea id="modalDonateDescription" class="form-control" rows="3" value="aaaa" required></textarea>
-                                                
+                                        <textarea id="modalDonateDescription" class="form-control" rows="3" value="aaaa"></textarea>    
                                     </div>
                                 </div>
                             </div>
@@ -312,7 +321,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header text-center">
-                        <img class="modal-title" src="../images/favicon_w.png" width="32"/>
+                        <h4 class="modal-title" id="modalTitleId">Detalhes</h4>
                         <button type="button" id="btnClose" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true"></span><i class="fa fa-times"></i></span>
                         </button>
@@ -320,112 +329,102 @@
                     <div class="modal-body">
                         <form id="frmViewBooks">
                             <div class="row">
+                                <!-- BOOK COVER -->
+                                <div class="form-group col-md-12 text-center">
+                                    <img id="viewBookCover" class="img-fluid img-thumbnail" src="" alt="">                 
+                                </div>
+
                                 <!-- TITLE -->
-                                <div class="form-group col-md-6">
+                                <div class="form-group col-md-12">
                                     <label for="viewBookTitle">Título</label>
                                     <input type="text" class="form-control" id="viewBookTitle" readonly>
                                 </div>
             
                                 <!-- AUTHORS -->
-                                <div class="form-group col-md-6">
+                                <div class="form-group col-md-12">
                                     <label for="viewBookAuthors">Autor(es)</label>
                                     <input type="text" id="viewBookAuthors" class="form-control" readonly>
                                 </div>
             
                                 <!-- PUBLISHER -->
-                                <div class="form-group col-md-12">
+                                <div class="form-group col-md-6">
                                     <label for="viewBookPublisher">Editora</label>
                                     <input type="text" id="viewBookPublisher" class="form-control" readonly>
                                 </div>
 
-                                <div class="row">
-                                    <!-- YEAR -->
-                                    <div class="form-group col-md-6">
-                                        <label for="viewBookYear">Ano</label>
-                                        <input type="date" id="viewBookYear" class="form-control inline" readonly>
-                                    </div>
-
-                                    <!-- PAGES -->
-                                    <div class="form-group col-md-6">
-                                        <label for="viewBookPages">Nº de páginas</label>
-                                        <input type="number" id="viewBookPages" class="form-control inline" readonly>                    
-                                    </div>
+                                <!-- YEAR -->
+                                <div class="form-group col-md-6">
+                                    <label for="viewBookYear">Ano</label>
+                                    <input type="number" id="viewBookYear" class="form-control inline" readonly>
                                 </div>
 
-                                </div>  <div class="row">
-                                    <!-- LIBRARY -->
-                                    <div class="form-group col-md-6">
-                                        <label for="viewBookCity">Cidade</label>
-                                        <input type="text" id="viewBookCity" class="form-control inline" readonly>
-                                    </div>
+                                <!-- PAGES -->
+                                <div class="form-group col-md-6">
+                                    <label for="viewBookPages">Páginas</label>
+                                    <input type="number" id="viewBookPages" class="form-control inline" readonly>                    
+                                </div>
 
-                                    <div class="form-group col-md-6">
-                                        <label for="viewBookParish">Freguesia</label>
-                                        <input type="text" id="viewBookParish" class="form-control inline" readonly>
-                                    </div>
+                                <!-- CONDITION -->
+                                <div class="form-group col-md-6">
+                                    <label for="viewBookCondition">Estado</label>
+                                    <select id="viewBookCondition" class="form-control">
+                                        <option value="Bom">Bom</option>
+                                        <option value="Aceitável">Aceitável</option>
+                                        <option value="Fraco">Fraco</option>
+                                    </select>
+                                </div>
+                                <hr>
+
+                                <!-- LIBRARY -->
+                                <div class="form-group col-md-6">
+                                    <label for="viewBookCity">Cidade</label>
+                                    <select id="viewBookCity" class="form-control inline">
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="viewBookParish">Freguesia</label>
+                                    <select id="viewBookParish" class="form-control inline">
+                                    </select>
                                 </div>
                                 
-                                <div class="row">
-                                    <!-- CATEGORY -->
-                                    <div class="form-group col-md-6">
-                                        <label for="viewBookCategory">Categoria</label>
-                                        <select id="viewBookCategory" class="form-control inline">
-                                        </select>
-                                    </div>
-
-                                    <!-- TAG -->
-                                    <div class="form-group col-md-6">
-                                        <label for="viewBookTags">Tag</label>
-                                        <select id="viewBookTags" class="form-control inline">
-                                        </select>
-                                    </div>
+                                <!-- CATEGORY -->
+                                <div class="form-group col-md-6">
+                                    <label for="viewBookCategory">Categoria</label>
+                                    <select id="viewBookCategory" class="form-control inline">
+                                    </select>
                                 </div>
 
-                                <div class="row">
-                                    <!-- CONDITION -->
-                                    <div class="form-group col-md-6">
-                                        <label for="viewBookCondition">Estado</label>
-                                        <select id="viewBookCondition" class="form-control">
-                                            <option value="">...</option>>
-                                            <option value="Bom">Bom</option>
-                                            <option value="Usado">Aceitável</option>
-                                            <option value="Fraco">Fraco</option>
-                                        </select>
-                                    </div>
+                                <!-- TAG -->
+                                <div class="form-group col-md-6">
+                                    <label for="viewBookTags">Tag</label>
+                                    <select id="viewBookTags" class="form-control inline">
+                                    </select>
                                 </div>
                                 <hr>
-                                <div class="row last-row">
-                                    <!-- DONOR NAME -->
-                                    <div class="form-group col-md-6">
-                                        <label for="viewBookDonor">Nome do doador</label>
-                                        <input type="text" id="viewBookDonor" class="form-control inline" readonly>                        
-                                    </div>
 
-                                    <!-- DONATION DATE -->
-                                    <div class="form-group col-md-6">
-                                        <label for="viewBookDonate">Data de doação</label>
-                                        <input type="date" id="viewBookDonate" class="form-control inline" readonly>
-                                    </div>
+                                <!-- DONOR NAME -->
+                                <div class="form-group col-md-6">
+                                    <label for="viewBookDonor">Nome do doador</label>
+                                    <input type="text" id="viewBookDonor" class="form-control inline" readonly>                        
+                                </div>
+
+                                <!-- DONATION DATE -->
+                                <div class="form-group col-md-6">
+                                    <label for="viewBookDonate">Data de doação</label>
+                                    <input type="date" id="viewBookDonate" class="form-control inline" readonly>
                                 </div>
                                 <hr>
-                                <div class="row last-row">
-                                    <!-- BOOK COVER -->
-                                    <div class="form-group col-md-6">
-                                        <label for="viewBookCover"></label>
-                                        <input type="text" id="viewBookCover" class="form-control inline">                        
-                                    </div>
 
-                                    <!-- DESCRIPTION -->
-                                    <div class="form-group col-md-6">
-                                        <label for="viewBookDescription">Descrição</label>
-                                        <input type="text" id="viewBookDescription" class="form-control inline">
-                                    </div>
+                                <!-- DESCRIPTION -->
+                                <div class="form-group col-md-12">
+                                    <label for="viewBookDescription">Descrição</label>
+                                    <textarea id="viewBookDescription" class="form-control" rows="5" readonly></textarea>
                                 </div>
             
                                 <!-- BUTTONS -->
                                 <div class="form-group buttons col-md-12">
                                     <input type="submit" id="btnSubmit" class="btn btn-modal btn-secondary" value="Submeter"/>
-                                    <button type="button" id="btnEdit" class="btn btn-modal btn-edit"><i class="fa fa-pen-square fa-2x"></i></button>																   
+                                    <button type="button" id="btnEdit" class="btn btn-modal btn-edit mr-2"><i class="fa fa-pen-square fa-2x"></i></button>																   
                                 </div>
                             </div>
                         </form>

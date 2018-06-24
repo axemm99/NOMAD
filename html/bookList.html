@@ -47,6 +47,16 @@
                             <a id="optMap" class="nav-link" href="map.html">Bibliotecas</a>
                         </li>
 
+                        <!-- SEARCH -->
+                        <li id="optSearch" class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img src="../images/search.png" height="32" width="32">
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownId">
+                                <input type="search" id="inputSearch" class="form-control" aria-describedby="searchId">
+                            </div>
+                        </li>
+
                         <!-- PROFILE -->
                         <li id="optUser" class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -144,12 +154,13 @@
         <!-- CATALOG -->
         <div class="container-fluid middle-catalog col-lg-7">
             <!-- FILTER -->
-            <div class="row filter">
-                <h5>Filtrar</h5>
-                <a class="btn" data-toggle="collapse" href="#frmFilter" role="button" aria-expanded="false" aria-controls="frmFilter"><i class="fas fa-plus"></i></a>
-            </div>
+            <!--<div class="row filter">
+                <a class="btn" data-toggle="collapse" href="#frmFilter" role="button" aria-expanded="false" aria-controls="frmFilter">
+                    <i class="fa fa-filter ml-4 mr-2 mb-6"></i>Filtar
+                </a>
+            </div>-->
         
-            <form id="frmFilter" class="collapse inner">
+            <form id="frmFilter" class="inner">
                 <!-- FILTER BY TAG -->
                 <div class="form-group">
                     <select id="filterTag" class="form-control">
@@ -175,11 +186,6 @@
                     </div>
                 </div>
 
-                <!-- BUTTON -->
-                <button type="submit" id="btnFilter" class="btn btn-primary">Filtrar</button>
-            </form>
-
-            <form id="frmSort" class="inner">
                 <!-- SORT -->
                 <div class="form-group">
                     <select id="selectSort" class="form-control">
@@ -197,7 +203,7 @@
                 </div>
                 
                 <!-- BUTTON -->
-                <button type="submit" id="btnSort" class="btn btn-primary">Filtrar</button>
+                <button type="button" id="btnFilter" class="btn btn-primary">Filtrar</button>
             </form>
 
             <!-- BOOKS -->
@@ -241,37 +247,37 @@
                                     <!-- TITLE -->
                                     <div class="form-group">
                                         <label for="modalDonateTitle">Título</label>
-                                        <input type="text" class="form-control" id="modalDonateTitle" value="a" required>                        
+                                        <input type="text" class="form-control" id="modalDonateTitle" value="a">                        
                                     </div>
 
                                     <!-- AUTHORS -->
                                     <div class="form-group">
                                         <label for="modalDonateAuthors">Autores</label>
-                                        <input type="text" class="form-control" id="modalDonateAuthors" value="a" required>
+                                        <input type="text" class="form-control" id="modalDonateAuthors" value="a">
                                     </div>
 
                                     <!-- PUBLISHER -->
                                     <div class="form-group">
                                         <label for="modalDonatePublisher">Editora</label>
-                                        <input type="text" class="form-control" id="modalDonatePublisher" value="a" required>
+                                        <input type="text" class="form-control" id="modalDonatePublisher" value="a">
                                     </div>
 
                                     <div class="row">
                                         <!-- YEAR -->
                                         <div class="form-group col-md-6">
                                             <label for="modalDonateYear">Ano</label>
-                                            <input type="date" id="modalDonateYear"  class="form-control inline" required>
+                                            <input type="number" id="modalDonateYear"  class="form-control inline" value="2012">
                                         </div>
 
                                         <!-- PAGES -->
                                         <div class="form-group col-md-6">
                                             <label for="modalDonatePages">Nº de páginas</label>
-                                            <input type="number" id="modalDonatePages" class="form-control inline" value="10" required>                    
+                                            <input type="number" id="modalDonatePages" class="form-control inline" value="10">                    
                                         </div>
                                     </div>
                                 </div>
 
-                                <div id="donateStep2">                                        
+                                <div id="donateStep2">
                                     <div class="row">
                                         <!-- LIBRARY -->
                                         <div class="form-group col-md-6">
@@ -299,19 +305,18 @@
                                         <!-- TAG -->
                                         <div class="form-group col-md-6">
                                             <label for="modalDonateTags">Tag</label>
-                                            <select id="modalDonateTags" class="form-control inline">
+                                            <select id="modalDonateTags" class="form-control inline" size="4" multiple>
                                             </select>
                                         </div>
                                     </div>
-
+                                    
                                     <div class="row">
                                         <!-- CONDITION -->
                                         <div class="form-group col-md-6">
                                             <label for="modalDonateCondition">Estado</label>
                                             <select id="modalDonateCondition" class="form-control">
-                                                <option value="">...</option>>
-                                                <option value="Bom">Bom</option>
-                                                <option value="Usado">Aceitável</option>
+                                                <option value="Bom" selected>Bom</option>
+                                                <option value="Aceitável">Aceitável</option>
                                                 <option value="Fraco">Fraco</option>
                                             </select>
                                         </div>
@@ -348,7 +353,7 @@
 
                                         <!-- DESCRIPTION -->
                                         <label for="modalDonateDescription">Sinopse</label>
-                                        <textarea id="modalDonateDescription" class="form-control" rows="3" value="aaaa" required></textarea>
+                                        <textarea id="modalDonateDescription" class="form-control" rows="3" value="aaaa"></textarea>    
                                     </div>
                                 </div>
                             </div>

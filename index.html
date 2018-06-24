@@ -48,32 +48,18 @@
                             <a id="optCatalog" class="nav-link" href="html/categories.html">Catálogo</a>
                         </li>
                         <li class="nav-item text">
-                            <a id="optMap" class="nav-link" href="html/map.html">Agenda</a>
+                            <a id="optMap" class="nav-link" href="html/map.html">Bibliotecas</a>
                         </li>
 
-                        <!-- //////////   -->
+                        <!-- SEARCH -->
                         <li id="optSearch" class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img src="images/profile_s.png" id="userSearch" height="32" width="32">
+                                <img src="images/search.png" height="32" width="32">
                             </a>
                             <div class="dropdown-menu" aria-labelledby="dropdownId">
-                              <!--  <a id="optLogin" class="dropdown-item" data-toggle="modal" data-target="#modalLogin" href="#">Log in</a>
-                                <a id="optRegister" class="dropdown-item" data-toggle="modal" data-target="#modalRegister" href="#">Registar</a>
-                                <a id="optProfile" class="dropdown-item" href="html/userProfile.html">Perfil</a>
-                                <a id="optHistory" class="dropdown-item" href="html/userHistory.html">Histórico</a>
-                                <a id="optPreferences" class="dropdown-item" href="html/userPreferences.html">Preferências</a>
-                                <a id="optLogout" class="dropdown-item" href="#">Log Out</a>-->
-                                <input type="submit" id="btnSearch">
+                                <input type="search" id="inputSearch" class="form-control" aria-describedby="searchId">
                             </div>
                         </li>
-
-
-
-                     <!--   <form action="/action_page.php">
-                            <input list="search" id="srchBooks">
-                            <input type="submit" id="btnSearch">
-                        </form>-->
-                        <!-- //////////   -->
 
                         <!-- PROFILE -->
                         <li id="optUser" class="nav-item dropdown">
@@ -382,9 +368,8 @@
                                         <div class="form-group col-md-6">
                                             <label for="modalDonateCondition">Estado</label>
                                             <select id="modalDonateCondition" class="form-control">
-                                                <option value="">...</option>>
                                                 <option value="Bom" selected>Bom</option>
-                                                <option value="Usado">Aceitável</option>
+                                                <option value="Aceitável">Aceitável</option>
                                                 <option value="Fraco">Fraco</option>
                                             </select>
                                         </div>

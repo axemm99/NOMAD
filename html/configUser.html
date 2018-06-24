@@ -47,6 +47,16 @@
                             <a id="optMap" class="nav-link" href="map.html">Bibliotecas</a>
                         </li>
 
+                        <!-- SEARCH -->
+                        <li id="optSearch" class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img src="../images/search.png" height="32" width="32">
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownId">
+                                <input type="search" id="inputSearch" class="form-control" aria-describedby="searchId">
+                            </div>
+                        </li>
+
                         <!-- PROFILE -->
                         <li id="optUser" class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -216,7 +226,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header text-center">
-                        <img id="modalTitleId" class="modal-title" src="../images/favicon_w.png" width="32"/>
+                        <h4 class="modal-title" id="modalTitleId">Detalhes</h4>
                         <button type="button" id="btnClose" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true"><i class="fa fa-times"></i></span>
                         </button>
@@ -242,14 +252,20 @@
                                 </div>
             
                                 <!-- PASSWORD -->
-                                <div class="form-group col-md-5">
+                                <div class="form-group col-md-8">
                                     <label for="viewUserPassword">Password</label>
                                     <input type="text" class="form-control" id="viewUserPassword" readonly>
                                 </div>
+
+                                <!-- FINE -->
+                                <div class="form-group col-md-4">
+                                    <label for="viewUserFine">Multa (€)</label>
+                                    <input type="number" class="form-control" id="viewUserFine" readonly>
+                                </div>
             
                                 <!-- PERMISSIONS -->
-                                <div class="form-group col-md-5 ml-4">
-                                    <label for="viewUserPermissions">Permissões</label>                                    
+                                <div class="form-group col-md-6">
+                                    <label for="viewUserPermissions">Permissões</label>
                                     <select id="viewUserPermissions" class="form-control">
                                         <option value="2">Standard</option>
                                         <option value="1">Operador</option>

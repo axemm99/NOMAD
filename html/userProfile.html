@@ -47,6 +47,16 @@
                             <a id="optMap" class="nav-link" href="map.html">Bibliotecas</a>
                         </li>
 
+                        <!-- SEARCH -->
+                        <li id="optSearch" class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img src="../images/search.png" height="32" width="32">
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownId">
+                                <input type="search" id="inputSearch" class="form-control" aria-describedby="searchId">
+                            </div>
+                        </li>
+
                         <!-- PROFILE -->
                         <li id="optUser" class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -185,7 +195,7 @@
 
                                 <!-- FINE -->
                                 <div class="col-md-3" style="padding-left: 0px;">
-                                    <label for="viewFine">Multas</label>
+                                    <label for="viewFine">Multa (€)</label>
                                     <input type="number" class="form-control" id="viewFine" readonly>
                                 </div>
                                 <div class="edit">
@@ -290,15 +300,15 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form id="frmFine">    
-                                <!-- CHANGE PHOTO -->
-                                <div class="form-group">
-                                    <h5 class="inline">Valor total da multa</h5>
-                                    <p id="viewFineCurrent" class="inline"></p>
+                            <form id="frmFine">
+                                <!-- VIEW CURRENT FINE -->
+                                <div id="viewFineCurrent" class="form-group">
                                 </div>
+
+                                <!-- VALUE TO PAY -->
                                 <div class="form-group">
-                                    <label for="modalPayFine">Valor a pagar</label>
-                                    <input required type="number" value="" min="1" class="form-control" id="viewFinePay" required>
+                                    <h6 class="inline">Valor a pagar: &nbsp;</h6>
+                                    <input type="number" value="" min="1" class="form-control inline col-md-4" id="viewFinePay" required>
                                 </div>
     
                                 <!-- BUTTON -->

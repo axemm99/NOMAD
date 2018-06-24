@@ -32,6 +32,7 @@ function addLoadEvent(func) {
                 for (let j = 0; j < tagsId.length; j++) {
                     arrayTags.push(" " + convertFirstToUpperCase(Tag.getTagById(tagsId[j])))
                 }
+                console.log(arrayTags)
 
                 categoryTitle.innerHTML += `<h1>${Category.getCategoryById(books[i].bookCategory).toUpperCase()}</h1>`
 
@@ -54,15 +55,15 @@ function addLoadEvent(func) {
     }
 
     /* block comments if user didn't request book */
-    function blockCommentByUser() {
+    function blockCommentByUserId() {
         for (let i = 0; i < requests.length; i++) {
             if (userPermissions == 2) {
-                if (userCurrent == requests[i].userId) {
-                    inputComment.readonly = false
+                if (requests[i].userId == userCurrent && requests[i].bookId == bookCurrent) {
+                    $("#inputComment").removeAttr('readonly')
                 }
             }
             else {
-                inputComment.readonly = false
+                $("#inputComment").removeAttr('readonly')
             }
         }
     }
@@ -99,6 +100,19 @@ function addLoadEvent(func) {
         }
 
         if (strError == "") {
+           
+           /////
+            // Uptades the library code of the book to 0
+            for (let i = 0; i < books.length; i++) {
+                if (books[i].id == bookCurrent) {
+                    books[i].libraryId = 0 
+                }
+            }
+            localStorage.setItem("books", JSON.stringify(books))        
+            //   
+           
+            
+            let newRequest = new Request(userCurrent, bookCurrent, getCurrentDate(), "")
             saveRequest(newRequest)
             
             let arrayBooks = Book.getSimilarBooks(bookCurrent)
@@ -152,8 +166,8 @@ function addLoadEvent(func) {
 
         for (let i = 0; i < arrayBooks.length; i++) {
             strHtml += `<tr>
-                            <td>${Library.getLibraryCityById(arrayBooks[i].library)}</td>
-                            <td>${Library.getLibraryParishById(arrayBooks[i].library)}</td>
+                            <td>${Library.getCityById(Library.getLibraryCityById(arrayBooks[i].library))}</td>
+                            <td>${Library.getParishById(Library.getLibraryParishById(arrayBooks[i].library))}</td>
                             <td id='bookStatus_${arrayBooks[i].id}'>Disponível</td>
                             <td class='btn-center'>
                                 <a id='btnRequest_${arrayBooks[i].id}' class='request' href='#'>Requisitar</a>
@@ -166,8 +180,10 @@ function addLoadEvent(func) {
         strHtml += "</tbody>"
         tblBooks.innerHTML = strHtml
 
-        
-/*
+
+/////
+
+
         for (let i = 0; i < requests.length; i++) {
             for (let j = 0; j < arrayBooks.length; j++) {
                 let tempRequest = document.getElementById(`btnRequest_${arrayBooks[j].id}`)
@@ -176,7 +192,12 @@ function addLoadEvent(func) {
                 let bookStatus = document.getElementById(`bookStatus_${arrayBooks[j].id}`)
 
                 if (requests[i].userId == userCurrent) {
+                    //console.log("userCurrent   " + userCurrent + "    userId  " + requests[i].userId)
+                    //console.log("  ")
+
                     if (requests[i].bookId == arrayBooks[j].id) {
+                        //console.log("bookId   " + requests[i].bookId + "    id  " + requests[i].id)
+
                         tempRequest.style.display = "none"
                         tempNotify.style.display = "none"
                         requestUnavailable.style.display = "block"
@@ -204,9 +225,10 @@ function addLoadEvent(func) {
         for (let i = 0; i < bookRequest.length; i++) {
             bookRequest[i].addEventListener("click", function() {
                 let requestId = bookRequest[i].getAttribute("id")
-                Book.requestBookById(requestId.substring("btnRequest_".length))
+                
+                checkRequestValid(bookCurrent, Book.requestBookById(requestId.substring("btnRequest_".length)))
             })
-        }*/
+        }
     }
     
     /* comments */
@@ -323,13 +345,13 @@ addLoadEvent(function() {
             viewNotificationPanel()
         }
 
-        /* book select */
-        addSelectBookInfo(bookCurrent)
-        blockCommentByUser()
-
         /* tables */
         renderTableBooks(bookCurrent)
         renderTableComments(bookCurrent)
+
+        /* book select */
+        addSelectBookInfo(bookCurrent)
+        blockCommentByUserId()
     //
 
 
@@ -343,7 +365,7 @@ addLoadEvent(function() {
             if (checkBookValid() == true) {
                 frmDonate.reset()
             }
-
+            addRecentBooksToIndex()
             event.preventDefault()
         })
 

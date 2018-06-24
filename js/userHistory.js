@@ -19,6 +19,120 @@ function addLoadEvent(func) {
 //
 
 
+// --------------------------------------
+// RENDER TABLES
+
+    /* previous requests */
+    function renderTablePreviousRequests() {
+        let strHtml = ""    
+    
+        for (let i = 0; i < requests.length; i++) {
+            if (requests[i].userId == userCurrent && requests[i].deliveryDate != "") {
+                for (let j = 0; j < books.length; j++) {
+                    if (requests[i].bookId == books[j].id) {
+                        strHtml += `<tr>
+                                        <td>
+                                            <img class='cover-small' src='${books[j].bookCover}'>
+                                        </td>
+                                        <td>
+                                            <p><strong>${books[j].bookTitle}</strong></p>
+                                            <p>${books[j].bookAuthors}</p>
+                                        </td>
+                                        <td>
+                                            <a id='${requests[i].id}' class='view' data-toggle='modal' data-target='#modalViewRequestDetails'><i class="fa fa-book"></i></a>
+                                            <a id='${requests[i].id}' class='rating' data-toggle='modal' data-target='#modalRating'><i class='fa fa-star'></i></a>
+                                        </td>
+                                    </tr>`
+                    }
+                }
+            }
+        }    
+        strHtml += "</tbody>"
+        tblRequestsHistory.innerHTML = strHtml
+        
+        /* modal with previous requested book details */
+        let bookRequest = document.getElementsByClassName("view")
+
+        for (let i = 0; i < bookRequest.length; i++) {
+            bookRequest[i].addEventListener("click", function() {
+                let requestId = bookRequest[i].getAttribute("id")
+                modalRequestBookDetails.innerHTML = addPreviousRequestDetails(requestId)
+            })        
+        }
+        
+        /* modal to rate previous requested book */
+        let bookRating = document.getElementsByClassName("rating")
+
+        for (let i = 0; i < bookRating.length; i++) {
+            bookRating[i].addEventListener("click", function() {
+                let requestId = bookRequest[i].getAttribute("id")
+                addBookInfoToRating(requestId)
+
+                
+                frmRatings.addEventListener("submit", function(event) {
+                    let bookId = Request.getBookIdById(requestId)
+                    console.log("bookId")
+                    console.log(bookId)
+                    
+                    Book.rateBookById(bookId)                    
+                    localStorage.setItem("books", JSON.stringify(books))
+                    
+                    
+                    $('#modalRating').modal('hide')
+
+                    event.preventDefault()
+                })
+            })        
+        }
+    }
+
+    /* current requests */
+    function renderTableCurrentRequests() {
+        let strHtml = ""
+
+        for (let i = 0; i < requests.length; i++) {
+            if (requests[i].userId == userCurrent && requests[i].deliveryDate == "") {
+                for (let j = 0; j < books.length; j++) {                    
+                    if (requests[i].bookId == books[j].id) {
+                        strHtml += `<tr>
+                                        <a href='../index.html'>
+                                        <td>
+                                            <img class='cover-small' src='${books[j].bookCover}'>
+                                        </td>
+                                        <td>
+                                            <p><strong>${books[j].bookTitle}</strong></p>
+                                            <p>${books[j].bookAuthors}</p>
+                                        </td>
+                                        <td>
+                                            <a id='${requests[i].id}' class='deliver' data-toggle='modal' data-target='#modalDeliverBook'><i class="fa fa-calendar-check"></i></a>
+                                        </td>
+                                        </a>
+                                    </tr>`
+                    }
+                }
+            }
+        }    
+        strHtml += "</tbody>"
+        tblRequestsCurrent.innerHTML = strHtml
+        
+        /* modal with current requested book details and to deliver */
+        let deliverBook = document.getElementsByClassName("deliver")
+
+        for (let i = 0; i < deliverBook.length; i++) {
+            deliverBook[i].addEventListener("click", function() {
+                let requestId = deliverBook[i].getAttribute("id")
+                modalDeliverDetails.innerHTML = addCurrentRequestDetails(requestId)
+
+                frmDeliveries.addEventListener("submit", function(event) {
+                    checkBookDeliveryValid(requestId)
+                    event.preventDefault()
+                })
+            })
+        }
+    }
+//
+
+
 // ---------------------------------------
 // MODAL
     
@@ -130,7 +244,6 @@ function addLoadEvent(func) {
             }
         }
 
-
     ///////
 
         /* check if library selected is full */        
@@ -173,116 +286,6 @@ function addLoadEvent(func) {
                 showConfirmButton: true,
                 confirmButtonColor: '#ffd892',
                 allowOutsideClick: false
-            })
-        }
-    }
-//
-
-
-// --------------------------------------
-// USER HISTORY
-
-    /* previous requests */
-    function renderTablePreviousRequests() {
-        let strHtml = ""    
-    
-        for (let i = 0; i < requests.length; i++) {
-            if (requests[i].userId == userCurrent && requests[i].deliveryDate != "") {
-                for (let j = 0; j < books.length; j++) {
-                    if (requests[i].bookId == books[j].id) {
-                        strHtml += `<tr>
-                                        <td>
-                                            <img class='cover-small' src='${books[j].bookCover}'>
-                                        </td>
-                                        <td>
-                                            <p><strong>${books[j].bookTitle}</strong></p>
-                                            <p>${books[j].bookAuthors}</p>
-                                        </td>
-                                        <td>
-                                            <a id='${requests[i].id}' class='view' data-toggle='modal' data-target='#modalViewRequestDetails'><i class="fa fa-book"></i></a>
-                                            <a id='${requests[i].id}' class='rating' data-toggle='modal' data-target='#modalRating'><i class='fa fa-star'></i></a>
-                                        </td>
-                                    </tr>`
-                    }
-                }
-            }
-        }    
-        strHtml += "</tbody>"
-        tblRequestsHistory.innerHTML = strHtml
-        
-        /* modal with previous requested book details */
-        let bookRequest = document.getElementsByClassName("view")
-
-        for (let i = 0; i < bookRequest.length; i++) {
-            bookRequest[i].addEventListener("click", function() {
-                let requestId = bookRequest[i].getAttribute("id")
-                modalRequestBookDetails.innerHTML = addPreviousRequestDetails(requestId)
-            })        
-        }
-        
-        /* modal to rate previous requested book */
-        let bookRating = document.getElementsByClassName("rating")
-
-        for (let i = 0; i < bookRating.length; i++) {
-            bookRating[i].addEventListener("click", function() {
-                let requestId = bookRequest[i].getAttribute("id")
-                addBookInfoToRating(requestId)
-                
-                frmRatings.addEventListener("submit", function(event) {
-                    Book.rateBookById(bookId)
-                    localStorage.setItem("books", JSON.stringify(books))
-                    
-                    bookRequest.disabled = true
-
-                    
-                    $('#modalRating').modal('hide')
-                    event.preventDefault()
-                })
-            })        
-        }
-    }
-
-    /* current requests */
-    function renderTableCurrentRequests() {
-        let strHtml = ""
-
-        for (let i = 0; i < requests.length; i++) {
-            if (requests[i].userId == userCurrent && requests[i].deliveryDate == "") {
-                for (let j = 0; j < books.length; j++) {                    
-                    if (requests[i].bookId == books[j].id) {
-                        strHtml += `<tr>
-                                        <a href='../index.html'>
-                                        <td>
-                                            <img class='cover-small' src='${books[j].bookCover}'>
-                                        </td>
-                                        <td>
-                                            <p><strong>${books[j].bookTitle}</strong></p>
-                                            <p>${books[j].bookAuthors}</p>
-                                        </td>
-                                        <td>
-                                            <a id='${requests[i].id}' class='deliver' data-toggle='modal' data-target='#modalDeliverBook'><i class="fa fa-calendar-check"></i></a>
-                                        </td>
-                                        </a>
-                                    </tr>`
-                    }
-                }
-            }
-        }    
-        strHtml += "</tbody>"
-        tblRequestsCurrent.innerHTML = strHtml
-        
-        /* modal with current requested book details and to deliver */
-        let deliverBook = document.getElementsByClassName("deliver")
-
-        for (let i = 0; i < deliverBook.length; i++) {
-            deliverBook[i].addEventListener("click", function() {
-                let requestId = deliverBook[i].getAttribute("id")
-                modalDeliverDetails.innerHTML = addCurrentRequestDetails(requestId)
-
-                frmDeliveries.addEventListener("submit", function(event) {
-                    checkBookDeliveryValid(requestId)
-                    event.preventDefault()
-                })
             })
         }
     }
@@ -337,9 +340,6 @@ addLoadEvent(function() {
         let modalDeliverDetails = document.getElementById("modalDeliverDetails")
         let modalDeliverCity = document.getElementById("modalDeliverCity")
         let modalDeliverParish = document.getElementById("modalDeliverParish")
-
-        //////
-        let deliverLibraries = document.getElementById("deliverLibraries")
     //
 
 

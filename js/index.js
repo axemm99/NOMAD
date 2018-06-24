@@ -234,11 +234,11 @@ addLoadEvent(function() {
         loadRequests()
         console.log(requests)
 
-        loadLibraries()
-        console.log(libraries)
-
         loadWishlists()
         console.log(wishlists)
+
+        loadLibraries()
+        console.log(libraries)
 
         /* populate */        
         if (window.localStorage.length != 0) {
@@ -301,7 +301,7 @@ addLoadEvent(function() {
     // TIPPY
         
         // creates tooltip with log in for non logged users
-        tooltipLogIn.innerHTML = `<p>Faça <strong>log in</strong> para ver mais!</p>
+        tooltipLogIn.innerHTML = `<p>Faz <strong>log in</strong> para veres mais!</p>
                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalLogin">Log In</button>`
 
         // changes characteristics of the tool tip
@@ -356,7 +356,7 @@ addLoadEvent(function() {
             if (checkBookValid() == true) {
                 frmDonate.reset()
             }
-
+            addRecentBooksToIndex()
             event.preventDefault()
         })
 
@@ -408,7 +408,7 @@ addLoadEvent(function() {
     //
 
 /////////////////////////////////////////////////////////////////////////////
-
+/*
     addOptionsToSearchBar()
 
 
@@ -440,5 +440,5 @@ addLoadEvent(function() {
         let pagePath = (window.location.pathname).substring((window.location.pathname).lastIndexOf('/') + 1)
     
             window.location.href= pagePath + "categories.html"
-    }
+    }*/
 })

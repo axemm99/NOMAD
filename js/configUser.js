@@ -92,9 +92,10 @@ function addLoadEvent(func) {
         let userView = document.getElementsByClassName("view")
 
         for (let i = 0; i < userView.length; i++) {
-            userView[i].addEventListener("click", function() {
+            userView[i].addEventListener("click", function(event) {
                 let userId = userView[i].getAttribute("id")
-                User.viewUserById(userId)                
+                User.viewUserById(userId)     
+                event.preventDefault()           
             })        
         }
 
@@ -102,7 +103,7 @@ function addLoadEvent(func) {
         let userRemove = document.getElementsByClassName("remove")
 
         for (let i = 0; i < userRemove.length; i++) {
-            userRemove[i].addEventListener("click", function() {
+            userRemove[i].addEventListener("click", function(event) {
                 let userId = userRemove[i].getAttribute("id")
 
                 swal({
@@ -134,6 +135,7 @@ function addLoadEvent(func) {
                         renderTableUsers()
                     }
                 })
+                event.preventDefault()
             })
         }
     }
@@ -151,6 +153,9 @@ addLoadEvent(function() {
 
         loadRequests()
         console.log(requests)
+
+        loadWishlists()
+        console.log(wishlists)
     //
     
 
@@ -172,12 +177,14 @@ addLoadEvent(function() {
         let viewUserName = document.getElementById("viewUserName")
         let viewUserEmail = document.getElementById("viewUserEmail")
         let viewUserPassword = document.getElementById("viewUserPassword")
+        let viewUserFine = document.getElementById("viewUserFine")
         let viewUserPermissions = document.getElementById("viewUserPermissions")
         let viewUserPhoto = document.getElementById("viewUserPhoto")
 
         /* buttons */
         let btnEdit = document.getElementById("btnEdit")
         let btnClose = document.getElementById("btnClose")
+        let count = 0
 
         /* tables */
         let tblUsers = document.getElementById("tblUsers")
@@ -220,6 +227,15 @@ addLoadEvent(function() {
                     
                     User.editUserPermissionsById(tempId)
                     localStorage.setItem("users", JSON.stringify(users))
+
+                    swal({
+                        type: 'success',
+                        title: 'Alterado!',
+                        text: 'As informações foram alteradas com sucesso',
+                        showConfirmButton: true,
+                        confirmButtonColor: '#9fc490',
+                        allowOutsideClick: false
+                    })
                 }
             }
             $('#viewUserModal').modal('hide')
@@ -227,6 +243,7 @@ addLoadEvent(function() {
             renderTableUsers()
 
             viewUserPermissions.disabled = true
+            
             event.preventDefault()
         })
     //
@@ -237,7 +254,14 @@ addLoadEvent(function() {
     
         /* edit user */
         btnEdit.addEventListener("click", function(event) {
-            viewUserPermissions.disabled = false            
+            if (count == 0) {
+                viewUserPermissions.disabled = false
+                count = 1
+            }
+            else if (count == 1) {
+                viewUserPermissions.disabled = true
+                count = 0
+            }
             event.preventDefault()
         })
 

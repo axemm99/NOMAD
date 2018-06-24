@@ -30,7 +30,7 @@ function addLoadEvent(func) {
                 viewFine.value = users[i].fineValue
                 
                 if (users[i].userPhoto != "") {
-                viewPhoto.src = users[i].userPhoto
+                    viewPhoto.src = users[i].userPhoto
                 }
                 else {
                     viewPhoto.src = "../images/profileIcon.png"
@@ -97,12 +97,13 @@ function addLoadEvent(func) {
     
         for (let i = 0; i < users.length; i++) {
             if (userCurrent == users[i].id) {
-                strHtml = `<p>${users[i].fineValue}</p>`
+                strHtml = `<h6>Valor da multa: </h6>
+                            <p class="inline">${users[i].fineValue}€</p>`
             }
         }
         viewFineCurrent.innerHTML = strHtml
 
-        frmFine.addEventListener("submit", function(event) {    
+        frmFine.addEventListener("submit", function(event) {
             for (let i = 0; i < users.length; i++) {
                 if (users[i].id == userCurrent) {
                     users[i].fineValue -= parseInt(viewFinePay.value)
@@ -163,8 +164,6 @@ addLoadEvent(function() {
 
         /* user profile */
         addUserInfo()
-
-
         payPendentFine()
     //
 
