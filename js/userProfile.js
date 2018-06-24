@@ -107,8 +107,13 @@ function addLoadEvent(func) {
             for (let i = 0; i < users.length; i++) {
                 if (users[i].id == userCurrent) {
                     if(users[i].fineValue > 0){
-                        users[i].fineValue -= parseInt(viewFinePay.value)
-                        viewFine.value = users[i].fineValue
+                        if(viewFine.value >= viewFinePay.value){
+                            users[i].fineValue -= parseInt(viewFinePay.value)
+                            viewFine.value = users[i].fineValue
+                        }
+                        else{
+                            alert("Adicione um valor maior ou igual ao valor da sua multa")
+                        }
                     }
                     else{
                         alert("Já não tem multas por pagar!")
