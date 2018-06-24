@@ -154,16 +154,31 @@ function addLoadEvent(func) {
                         <tbody>`
 
         for (let i = 0; i < arrayBooks.length; i++) {
-            strHtml += `<tr>
-                            <td>${Library.getCityById(Library.getLibraryCityById(arrayBooks[i].library))}</td>
-                            <td>${Library.getParishById(Library.getLibraryParishById(arrayBooks[i].library))}</td>
-                            <td id='bookStatus_${arrayBooks[i].id}'>Disponível</td>
-                            <td class='btn-center'>
-                                <a id='btnRequest_${arrayBooks[i].id}' class='request' href='#'>Requisitar</a>
-                                <a id='btnNotify_${arrayBooks[i].id}' class='notify' href='#'>Notificar</a>
-                                <p id='requestUnavailable_${arrayBooks[i].id}'>Livro já requisitado</p>
-                            </td>
-                        </tr>`
+            if(userPermissions == 2){
+                strHtml += `<tr>
+                                <td>${Library.getCityById(Library.getLibraryCityById(arrayBooks[i].library))}</td>
+                                <td>${Library.getParishById(Library.getLibraryParishById(arrayBooks[i].library))}</td>
+                                <td id='bookStatus_${arrayBooks[i].id}'>Disponível</td>
+                                <td class='btn-center'>
+                                    <a id='btnRequest_${arrayBooks[i].id}' class='request' href='#'>Requisitar</a>
+                                    <a id='btnNotify_${arrayBooks[i].id}' class='notify' href='#'>Notificar</a>
+                                    <p id='requestUnavailable_${arrayBooks[i].id}'>Livro já requisitado</p>
+                                </td>
+                            </tr>`
+            }
+            else{
+                strHtml += `<tr>
+                                <td>${Library.getCityById(Library.getLibraryCityById(arrayBooks[i].library))}</td>
+                                <td>${Library.getParishById(Library.getLibraryParishById(arrayBooks[i].library))}</td>
+                                <td id='bookStatus_${arrayBooks[i].id}'>Disponível</td>
+                                <td class='btn-center'>
+                                    <a id='btnRequest_${arrayBooks[i].id}'>Requisitar</a>
+                                    <a id='btnNotify_${arrayBooks[i].id}'>Notificar</a>
+                                    <p id='requestUnavailable_${arrayBooks[i].id}'>Livro já requisitado</p>
+                                </td>
+                            </tr>`
+            }
+
         }
 
         strHtml += "</tbody>"
@@ -177,7 +192,7 @@ function addLoadEvent(func) {
                 let bookStatus = document.getElementById(`bookStatus_${arrayBooks[j].id}`)
 
             
-
+                
                 if (requests[i].bookId == arrayBooks[j].id) {
                     if (requests[i].userId == userCurrent && requests[i].deliveryDate == "") {
                         tempRequest.style.display = "none"
@@ -190,7 +205,7 @@ function addLoadEvent(func) {
                         tempNotify.style.display = "block"
                         requestUnavailable.style.display = "none"
                         bookStatus.innerHTML = "Indisponível"
-                    }
+                    }                    
                 }
                 else {
                     tempRequest.style.display = "block"
