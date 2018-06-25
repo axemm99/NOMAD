@@ -124,7 +124,7 @@ function addLoadEvent(func) {
             if (chbInvertSort.checked == true) {
                 sortBooks.reverse()
             }
-            addFilterBookToCatalog(categoryCurrent, sortBooks)
+            addFilterBookToCatalog(categoryCurrent, viewMode, sortBooks)
         }
     }
 
@@ -146,7 +146,7 @@ function addLoadEvent(func) {
                 })
                 sortBooks.reverse()
             }
-            addFilterBookToCatalog(categoryCurrent, sortBooks)
+            addFilterBookToCatalog(categoryCurrent, viewMode, sortBooks)
         }
     }
 
@@ -161,7 +161,7 @@ function addLoadEvent(func) {
             if (chbInvertSort.checked == true) {
                 sortBooks.reverse()
             }
-            addFilterBookToCatalog(categoryCurrent, sortBooks)      
+            addFilterBookToCatalog(categoryCurrent, viewMode, sortBooks)     
         }        
     }
 //
@@ -175,7 +175,7 @@ function addLoadEvent(func) {
         let strHtml = ""
 
         for (let i = 0; i < books.length; i++) {
-            if ((books[i].bookCategory) == categoryCurrent) {
+            if (books[i].bookCategory == categoryCurrent) {
                 if (viewMode == "grid") {
                     if (i == 0) {
                         strHtml += "<div class='row new-row text-center' style='margin: auto;'>"
@@ -233,31 +233,65 @@ function addLoadEvent(func) {
     }
 
     /* fill catalog with filtered books */
-    function addFilterBookToCatalog(categoryCurrent, sortBooks) {
+    function addFilterBookToCatalog(categoryCurrent, viewMode, filterBooks) {
         let strHtml = ""
-        
-        for (let i = 0; i < sortBooks.length; i++) {
-            if ((sortBooks[i].bookCategory) == categoryCurrent) {
-                if (i == 0) {
-                    strHtml += "<div class='row new-row text-center' style='margin: auto;'>"
+
+        console.log(filterBooks)
+
+
+        for (let i = 0; i < filterBooks.length; i++) {
+            if (filterBooks[i].bookCategory == categoryCurrent) {
+                if (viewMode == "grid") {
+                    if (i == 0) {
+                        strHtml += "<div class='row new-row text-center' style='margin: auto;'>"
+                    }
+
+                    strHtml += `<div class='book col-md-2'>
+                                    <a id='${filterBooks[i].id}' href='bookSelect.html' class='book-page'>
+                                        <img src='${filterBooks[i].bookCover}' class='img-fluid' width='140'/>
+                                    </a>
+                                    <a id='${filterBooks[i].id}' href='bookSelect.html' class='book-page'>
+                                        <h5>${filterBooks[i].bookTitle}</h5>
+                                    </a>
+                                        <a id='${filterBooks[i].id}' href='bookSelect.html' class='book-page'>
+                                            <p>${filterBooks[i].bookAuthors}</p>
+                                        </a>
+                                    <a id='${filterBooks[i].id}' href='bookSelect.html' class='book-page'>
+                                        ${convertRatingToStars(Book.calculateRating(filterBooks[i].bookRatings))}
+                                    </a>
+                                </div>`
+
+                    if (i == books.length - 1) {
+                        strHtml += "</div>"   
+                    }
                 }
+                else if (viewMode == "list") {
+                    let sinopse = ""
 
-                strHtml += `<div class='book col-md-2'>
-                                <a id='${sortBooks[i].id}' href='bookSelect.html' class='book-page'>
-                                    <img src='${sortBooks[i].bookCover}' class='img-fluid' width='140'/>
-                                </a>
-                                <a id='${sortBooks[i].id}' href='bookSelect.html' class='book-page'>
-                                    <h5>${sortBooks[i].bookTitle}</h5>
-                                </a>
-                                <p>${sortBooks[i].bookAuthors}</p>
-                                <a id='${sortBooks[i].id}' href='bookSelect.html' class='book-page'>
-                                    ${convertRatingToStars(Book.calculateRating(sortBooks[i].bookRatings))}
-                                </a>
-                            </div>`
+                    if (books[i].bookDescription.length > 150) {
+                        sinopse = books[i].bookDescription.substring(0, books[i].bookDescription.indexOf("", 150))
+                    }
 
-                if (i == sortBooks.length - 1) {
-                    strHtml += "</div>"   
-                }     
+                    strHtml += `<div class='row new-row' style='margin: 40px auto;'>
+                                    <div class='book col-md-2'>
+                                        <a id='${books[i].id}' href='bookSelect.html' class='book-page'>
+                                            <img src='${bookList[i].bookCover}' class='img-fluid' width='140' style='margin-bottom: 10px;'/>
+                                        </a>
+                                        <a id='${books[i].id}' href='bookSelect.html' class='book-page'>
+                                            ${convertRatingToStars(Book.calculateRating(books[i].bookRatings))}
+                                        </a>
+                                    </div>
+                                    <div class='book col-md-9'>
+                                        <a id='${books[i].id}' href='bookSelect.html' class='book-page'>
+                                            <h5>${books[i].bookTitle}</h5>
+                                        </a>
+                                        <a id='${books[i].id}' href='bookSelect.html' class='book-page'>
+                                            <p>${books[i].bookAuthors}</p>
+                                        </a>
+                                        <p>${sinopse}[...]</p>
+                                    </div>
+                                </div>`
+                }
             }
             catalogBooks.innerHTML = strHtml
         }
@@ -416,146 +450,47 @@ addLoadEvent(function() {
         /* filter */
         btnFilter.addEventListener("click", function(event) {
             let sortBooks = [...books].sort()
+            let filterBooks = []
+            let tempTags = [...new Set(Book.getBookTagsByCategory(categoryCurrent))]
+
+            console.log(tempTags)
 
             sortByTitle(sortBooks)
             sortByRating()
             sortByDonationDate(sortBooks)
 
-    /*        let strHtml = ""
-            for (var i = 0, cont=0; i < books.length; i++) {
-                if (categoryCurrent == books[i].bookCategory) {
-                    if ((books[i].bookAuthors == filterAuthor.value || filterAuthor.value == "") &&
-                        (books[i].libraryId == filterLibraryParish.value || filterLibraryParish.value == "")) {
-                        
-                        // Starts the row
-                        if (cont % 5 == 0) {
-                            strHtml += '<div class="row">'
-                        }
-        
-                        // Creates the book
-                        strHtml += `<div class='book col-md-2'>
-                                        <a id='${books[i].id}' href='bookSelect.html' class='book-page'>
-                                            <img src='${books[i].bookCover}' class='img-fluid' width='140'/>
-                                        </a>
-                                        <a id='${books[i].id}' href='bookSelect.html' class='book-page'>
-                                            <h5>${books[i].bookTitle}</h5>
-                                        </a>
-                                        <p>${books[i].bookAuthors}</p>
-                                        <a id='${books[i].id}' href='bookSelect.html' class='book-page'>
-                                            ${convertRatingToStars(books[i].bookRating)}
-                                        </a>
-                                    </div>`
-                        cont++
-                        // Ends the row
-                        if (cont % 5 == 4) {
-                            strHtml += `</div>`
+            //console.log(tempTags.includes(filterTag.value))
+
+            for (let i = 0; i < books.length; i++) {
+                if (filterTag.value != "") {
+                    for (let j = 0; j < tempTags.length; j++) {
+                        if (tempTags[i] == filterTag.value) {
+                            filterBooks.push(books[i])
                         }
                     }
                 }
-            }
-    
-            catalogBooks.innerHTML = strHtml
-    
-            bookPage()
-
-            function bookPage() {
-                let bookPageLoad = document.getElementsByClassName("BookPage")
-            
-                for (let i = 0; i < bookPageLoad.length; i++) {
-                    bookPageLoad[i].addEventListener("click", function () {            
-                        let bookId = bookPageLoad[i].getAttribute("id")
-            
-                        // Adds current book to sessionStorage
-                        let bookCurrent = sessionStorage.setItem("bookCurrent", bookId)
-                    })
+                else {
+                    if (books[i].bookCategory == categoryCurrent) {
+                        filterBooks.push(books[i])
+                    }
                 }
-            }*/
+            }
+            
+            let newFilterBooks = [...new Set(filterBooks)]
+
+            addFilterBookToCatalog(categoryCurrent, viewMode, newFilterBooks)
+
             event.preventDefault()
         })
 
-
-        /* filter */
-        /*btnFilter.addEventListener("submit", function(event) {
-            let strHtml = ""
-            let sortBooks = [...books].sort()
-
-            sortByTitle(sortBooks)
-            sortByRating()
-            sortByDonationDate(sortBooks)
-
-
-
-            // filter books by tag                             // ????????????????????????????????
-            if (filterTag.value != "Tags") {
-                for (let i = 0; i < books.length; i++) {
-                    if (books[i].bookTags == filterTag.value) {
-                        let tagId = books[i].id
-                        
-                        console.log("AutID_ " + tagId)
-
-                        renderCatalog(tagId)
-                    }
-                }
-            }
-            else {
-                renderCatalog()
-            }
-
-            // filter books by author                              // ????????????????????????????????
-            if (filterAuthor.value != "Autores") {
-                for (let i = 0; i < books.length; i++) {
-                    if (books[i].bookAuthors == filterAuthor.value) {
-                        let authorId = books[i].id
-
-                        addBookToCatalog(categoryCurrent, authorId, "", "")
-                    }
-                }
-            }
-
-            // filter books by library                              // ????????????????????????????????
-            if(filterLibraryParish.value != "Freguesia") {
-                for (let j = 0; j < libraries.length; j++) {
-                    if (filterLibraryParish.value == libraries[j].parish) {
-                        for (let i = 0; i < books.length; i++) {
-                            if (books[i].libraryId == libraries[j].id) {
-                                renderCatalog(libraryId)
-                            }
-                        }
-                    }
-                }
-            }
-            else {
-                renderCatalog()
-            }
-
-            event.preventDefault()
-        })*/
-
-
-        // Get the elements with class="column"
-
-        /* list view */
-        /*btnList.addEventListener ("click", function(){
-            for (let i = 0; i < listElements.length; i++) {
-                $(".book").removeClass("col-md-2")
-                $(".book").addClass("col-md-12", true)
-            }
-        })*/
-
         /* grid view */
-       /* btnGrid.addEventListener ("click", function(){
-            for (let i = 0; i < listElements.length; i++) {
-                $(".book").removeClass("col-md-12")
-                $(".book").addClass("col-md-2", true)
-            }
-        })*/
-
         btnGrid.addEventListener("click", function () {
             viewMode = "grid"
             addBookToCatalog(categoryCurrent, viewMode)
             getSelectBook()
         })
 
+        /* list view */
         btnList.addEventListener("click", function () {
             viewMode = "list"
             addBookToCatalog(categoryCurrent, viewMode)

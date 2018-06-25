@@ -67,6 +67,7 @@ function addLoadEvent(func) {
         if (strError == "") {          
             User.editUserPasswordById(userCurrent, tempPass)
             localStorage.setItem("users", JSON.stringify(users))
+
             viewPassword.value = newPass
 
             swal({
@@ -83,9 +84,9 @@ function addLoadEvent(func) {
             console.log(strError)
             swal({
                 type: 'error',
-                title: `Oops...`,
+                title: 'Oops...',
                 text: strError,
-                confirmButtonColor: '#FFD892',
+                confirmButtonColor: '#ffd892',
                 allowOutsideClick: false
             })
         }
@@ -106,17 +107,29 @@ function addLoadEvent(func) {
         frmFine.addEventListener("submit", function(event) {
             for (let i = 0; i < users.length; i++) {
                 if (users[i].id == userCurrent) {
-                    if(users[i].fineValue > 0){
-                        if(viewFine.value >= viewFinePay.value){
+                    if (users[i].fineValue > 0) {
+                        if (viewFine.value >= viewFinePay.value) {
                             users[i].fineValue -= parseInt(viewFinePay.value)
                             viewFine.value = users[i].fineValue
                         }
-                        else{
-                            alert("Adicione um valor maior ou igual ao valor da sua multa")
+                        else {
+                            swal({
+                                type: 'error',
+                                title: 'Oops...',
+                                text: 'Não pague um valor superior à sua multa!',
+                                confirmButtonColor: '#ffd892',
+                                allowOutsideClick: false                
+                            })
                         }
                     }
-                    else{
-                        alert("Já não tem multas por pagar!")
+                    else {
+                        swal({
+                            type: 'error',
+                            title: 'Oops...',
+                            text: 'Já não tem multas por pagar!',
+                            confirmButtonColor: '#ffd892',
+                            allowOutsideClick: false                
+                        })
                     }
                 }
             }

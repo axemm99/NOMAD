@@ -16,6 +16,7 @@ function addLoadEvent(func) {
         }
     }
 }
+//
 
 
 // --------------------------------------
@@ -50,33 +51,45 @@ function addLoadEvent(func) {
     /* input category */        
     function checkCategoryInputValid(tempCategories) {
         let strError = ""
-        let strTitle = ""
+        let tempIds = []
 
-        for (let i = 0; i < tempCategories.length; i++) {
-            if (tempCategories[i] == inputPreference.value) {
-                strTitle = 'Ohoh...'
-                strError = `Já tem essa opção na sua wishlist!`
+        if (tempCategories.length == 0) {
+            for (let i = 0; i < wishlists.length; i++) {
+                tempIds.push(wishlists[i].id)
             }
-        }   
+
+            if (tempIds.indexOf(userCurrent) == -1) {
+                wishlists[i].categoryList.push(parseInt(inputPreference.value))
+                localStorage.setItem("wishlists", JSON.stringify(wishlists))
+            }
+            else {
+                let newWishlist = new Wishlist(parseInt(userCurrent),
+                                                [parseInt(inputPreference.value)],
+                                                [],
+                                                [],
+                                                [],
+                                                [],
+                                                [],
+                                                [],
+                                                [])
+                saveWishlist(newWishlist)
+            }    
+        }
+        else {
+            if (tempCategories.indexOf(parseInt(inputPreference.value)) != -1) {
+                strError = 'Já tem essa opção na sua wishlist!'
+            }
+            else {
+                for (let i = 0; i < wishlists.length; i++) {
+                    if (wishlists[i].userId == userCurrent) {
+                        wishlists[i].categoryList.push(parseInt(inputPreference.value))
+                        localStorage.setItem("wishlists", JSON.stringify(wishlists))
+                    }
+                }
+            }
+        }
 
         if (strError == "") {
-            for (let i = 0; i < wishlists.length; i++) {
-                if (wishlists[i].userId == userCurrent) {
-                    wishlists[i].categoryList.push(parseInt(inputPreference.value))
-                }
-                else {
-                    let newWishlist = new Wishlist(parseInt(userCurrent),
-                                                    [parseInt(inputPreference.value)],
-                                                    [],
-                                                    [],
-                                                    [],
-                                                    [],
-                                                    [],
-                                                    [],
-                                                    [])
-                    saveWishlist(newWishlist)
-                }
-            }
             renderTableCategories()
             renderTableTags()
             renderTableLibraries()
@@ -84,7 +97,7 @@ function addLoadEvent(func) {
         else {
             swal({
                 type: 'error',
-                title: strTitle,
+                title: 'Ohoh...',
                 text: strError,
                 confirmButtonColor: '#ffd892',
                 allowOutsideClick: false
@@ -95,33 +108,46 @@ function addLoadEvent(func) {
     /* input category */        
     function checkTagInputValid(tempTags) {
         let strError = ""
-        let strTitle = ""
+        let tempIds = []
 
-        for (let i = 0; i < tempTags.length; i++) {
-            if (tempTags[i] == inputPreference.value) {
-                strTitle = 'Ohoh...'
-                strError = `Já tem essa opção na sua wishlist!`
+        if (tempTags.length == 0) {
+            for (let i = 0; i < wishlists.length; i++) {
+                tempIds.push(wishlists[i].id)
             }
-        }   
+
+            if (tempIds.indexOf(userCurrent) == -1) {
+                wishlists[i].tagList.push(parseInt(inputPreference.value))
+                localStorage.setItem("wishlists", JSON.stringify(wishlists))
+            }
+            else {
+                let newWishlist = new Wishlist(parseInt(userCurrent),
+                                                [],
+                                                [parseInt(inputPreference.value)],
+                                                [],
+                                                [],
+                                                [],
+                                                [],
+                                                [],
+                                                [])
+                saveWishlist(newWishlist)
+            }    
+        }
+        else {
+            if (tempTags.indexOf(parseInt(inputPreference.value)) != -1) {
+                strError = 'Já tem essa opção na sua wishlist!'
+            }
+            else {
+                for (let i = 0; i < wishlists.length; i++) {
+                    if (wishlists[i].userId == userCurrent) {
+                        wishlists[i].tagList.push(parseInt(inputPreference.value))
+                        localStorage.setItem("wishlists", JSON.stringify(wishlists))
+                        console.log("n 7")
+                    }
+                }
+            }
+        }
 
         if (strError == "") {
-            for (let i = 0; i < wishlists.length; i++) {
-                if (wishlists[i].userId == userCurrent) {
-                    wishlists[i].tagList.push(parseInt(inputPreference.value))
-                }
-                else {
-                    let newWishlist = new Wishlist(parseInt(userCurrent),
-                                                    [],
-                                                    [parseInt(inputPreference.value)],
-                                                    [],
-                                                    [],
-                                                    [],
-                                                    [],
-                                                    [],
-                                                    [])
-                    saveWishlist(newWishlist)
-                }
-            }
             renderTableCategories()
             renderTableTags()
             renderTableLibraries()
@@ -129,7 +155,7 @@ function addLoadEvent(func) {
         else {
             swal({
                 type: 'error',
-                title: strTitle,
+                title: 'Ohoh...',
                 text: strError,
                 confirmButtonColor: '#ffd892',
                 allowOutsideClick: false
@@ -140,33 +166,45 @@ function addLoadEvent(func) {
     /* input library */        
     function checkLibraryInputValid(tempLibraries) {
         let strError = ""
-        let strTitle = ""
+        let tempIds = []
 
-        for (let i = 0; i < tempLibraries.length; i++) {
-            if (tempLibraries[i] == inputPreference.value) {
-                strTitle = 'Ohoh...'
-                strError = `Já tem essa opção na sua wishlist!`
+        if (tempLibraries.length == 0) {
+            for (let i = 0; i < wishlists.length; i++) {
+                tempIds.push(wishlists[i].id)
             }
-        }   
+
+            if (tempIds.indexOf(userCurrent) == -1) {
+                wishlists[i].libaryList.push(parseInt(inputPreference.value))
+                localStorage.setItem("wishlists", JSON.stringify(wishlists))
+            }
+            else {
+                let newWishlist = new Wishlist(parseInt(userCurrent),
+                                                [],
+                                                [],
+                                                [],
+                                                [parseInt(inputPreference.value)],
+                                                [],
+                                                [],
+                                                [],
+                                                [])
+                saveWishlist(newWishlist)
+            }    
+        }
+        else {
+            if (tempLibraries.indexOf(parseInt(inputPreference.value)) != -1) {
+                strError = 'Já tem essa opção na sua wishlist!'
+            }
+            else {
+                for (let i = 0; i < wishlists.length; i++) {
+                    if (wishlists[i].userId == userCurrent) {
+                        wishlists[i].libraryList.push(parseInt(inputPreference.value))
+                        localStorage.setItem("wishlists", JSON.stringify(wishlists))
+                    }
+                }
+            }
+        }
 
         if (strError == "") {
-            for (let i = 0; i < wishlists.length; i++) {
-                if (wishlists[i].userId == userCurrent) {
-                    wishlists[i].libraryList.push(parseInt(inputPreference.value))
-                }
-                else {
-                    let newWishlist = new Wishlist(parseInt(userCurrent),
-                                                    [],
-                                                    [],
-                                                    [],
-                                                    [parseInt(inputPreference.value)],
-                                                    [],
-                                                    [],
-                                                    [],
-                                                    [])
-                    saveWishlist(newWishlist)
-                }
-            }
             renderTableCategories()
             renderTableTags()
             renderTableLibraries()
@@ -174,7 +212,7 @@ function addLoadEvent(func) {
         else {
             swal({
                 type: 'error',
-                title: strTitle,
+                title: 'Ohoh...',
                 text: strError,
                 confirmButtonColor: '#ffd892',
                 allowOutsideClick: false
@@ -246,7 +284,7 @@ function addLoadEvent(func) {
         strHtml += "</tbody>"    
         tblCategories.innerHTML = strHtml
         
-        // REMOVE LINK FROM TABLE
+        /* remove select category preference */
         let categorieRemove = document.getElementsByClassName("remove")
 
         for (let i = 0; i < categorieRemove.length; i++) {
@@ -255,7 +293,7 @@ function addLoadEvent(func) {
                 let newCategories = Wishlist.removeWishlistPreferencesByCategoryId(categoryId)
 
                 for (let i = 0; i < wishlists.length; i++) {
-                    if(wishlists[i].userId == userCurrent){
+                    if (wishlists[i].userId == userCurrent) {
                         Wishlist.editWishlistCategoriesByUserId(userCurrent, newCategories)
                         localStorage.setItem("wishlists", JSON.stringify(wishlists))
                     }
@@ -312,10 +350,10 @@ function addLoadEvent(func) {
     function renderTableLibraries() {
         let tempLibraries = Wishlist.getLibrariesByUserId(userCurrent)
         let strHtml = `<thead>
-                        <tr>
-                            <th class='w-100' colspan='2'>Bibliotecas</th>
-                            <th class='w-2'></th>
-                        </tr>
+                            <tr>
+                                <th class='w-100' colspan='2'>Bibliotecas</th>
+                                <th class='w-2'></th>
+                            </tr>
                         </thead>
                         <tbody>`
 
@@ -333,7 +371,7 @@ function addLoadEvent(func) {
         strHtml += "</tbody>"
         tblLibraries.innerHTML = strHtml
         
-        // REMOVE LINK FROM TABLE
+        /* remove library */
         let libraryRemove = document.getElementsByClassName("remove")
 
         for (let i = 0; i < libraryRemove.length; i++) {
@@ -398,15 +436,6 @@ addLoadEvent(function() {
         let tblCategories = document.getElementById("tblTags")
         let tblTags = document.getElementById("tblTags")
         let tblLibraries = document.getElementById("tblLibraries")
-
-        /* wishlist arrays */
-        let tempWishlist = {   //////
-                                id: 0,
-                                userId: 0,
-                                tagList: ""
-        }
-
-        let tempArray = []   //////
     //
 
 

@@ -70,9 +70,9 @@ function addLoadEvent(func) {
 
                 
                 frmRatings.addEventListener("submit", function(event) {
-                    let bookId = Request.getBookIdById(requestId)
+                    let bookId = Request.getBookById(requestId)
                     console.log("bookId")
-                    console.log("hhh: " + bookId)
+                    console.log(bookId)
                     
                     Book.rateBookById(bookId)                    
                     localStorage.setItem("books", JSON.stringify(books))
@@ -169,10 +169,7 @@ function addLoadEvent(func) {
         let strHtml = ""
         let checkFine = 0
 
-
-        
-       // delayedDays(id)
-
+        //delayedDays(id)
         for (let i = 0; i < users.length; i++) {
             if (users[i].id == userCurrent) {
                 checkFine = users[i].fineValue
@@ -211,9 +208,6 @@ function addLoadEvent(func) {
             }
         }
         return strHtml
-
-
-        ////////////////////////////////////////////
     }
 
     /* add book details to modal: rating */
@@ -297,7 +291,7 @@ function addLoadEvent(func) {
         }
     }
 
-
+/*
     function delayedDays(id){
         let delay
         let timeDifference
@@ -318,7 +312,7 @@ function addLoadEvent(func) {
 
 
        // calculateFineValue()
-    }
+    }*/
 //
 
 
@@ -370,8 +364,8 @@ addLoadEvent(function() {
         let modalDeliverDetails = document.getElementById("modalDeliverDetails")
         let modalDeliverCity = document.getElementById("modalDeliverCity")
         let modalDeliverParish = document.getElementById("modalDeliverParish")
-
-        /*buttons*/
+        
+        /* buttons */
         let btnModalRating = document.getElementById("btnModalRating")
     //
 
@@ -402,7 +396,6 @@ addLoadEvent(function() {
 
         btnModalRating.addEventListener("click", function(event){
             $('#modalViewRequestDetails').modal('hide')
-
             event.preventDefault()
         })
 
@@ -412,5 +405,3 @@ addLoadEvent(function() {
              event.preventDefault()
         })*/
 })
-
-

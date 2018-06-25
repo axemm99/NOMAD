@@ -21,13 +21,13 @@ function addLoadEvent(func) {
 // --------------------------------------
 // CATALOG
 
-    /* favourites */                                                  //??????????????????????????????????????
+    /* favourites */
     function addFavouritesToCatalog() {
         let strHtml = "<h1>Favoritas</h1>"
         let tempIds = []
         let tempCategories = []
 
-        // searchs in the wishlist array for the current user category list
+        // searchs the wishlist array for the current user category list
         for (let i = 0; i < wishlists.length; i++) {
             if (wishlists[i].userId == userCurrent) {
                 tempIds = wishlists[i].categoryList
@@ -92,7 +92,7 @@ function addLoadEvent(func) {
             }
         }
 
-        //se clicar no botao guarda num array na local storage
+        // se clicar no botao guarda num array na local storage
         // associar array de favoritas ao user id
         // ao chegar a 5 pára
         // se na cruz remove a categoria dos favoritos

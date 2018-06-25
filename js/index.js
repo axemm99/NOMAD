@@ -110,14 +110,14 @@ function addLoadEvent(func) {
         // creates html for the popular books section
         for (let i = 0; i < sortBooksRating.length; i++) {
             if (i == 0) {
-                strHtml += "<div class='row'>"
+                strHtml += "<div class='row text-center'>"
             }
 
             if (userCurrent == -1) {
                 if (i >= 0 & i <= 4) {
-                    strHtml += `<div class='book col-md-2'>                                
+                    strHtml += `<div class='book col-md-2 text-center'>                                
                                     <h6 id="badgeNumbers">${i+1}</h6>
-                                    <img src='${sortBooksRating[i].bookCover}' class='img-fluid book-tippy' width='140'/>
+                                    <img src='${sortBooksRating[i].bookCover}' class='img-fluid book-tippy' width='160'/>
                                     <h5>${sortBooksRating[i].bookTitle}</h5>
                                     <p>${sortBooksRating[i].bookAuthors}</p>
                                     <div>${convertRatingToStars(Book.calculateRating(sortBooksRating[i].bookRatings))}</div>
@@ -126,10 +126,10 @@ function addLoadEvent(func) {
             }
             else {
                 if (i >= 0 & i <= 4) {
-                    strHtml += `<div class='book col-md-2'>
+                    strHtml += `<div class='book col-md-2 text-center'>
                                     <h6 id="badgeNumbers">${i+1}</h6>
                                     <a id='${sortBooksRating[i].id}' href='html/bookSelect.html' class='book-page'>
-                                        <img src='${sortBooksRating[i].bookCover}' class='img-fluid' width='140'/>
+                                        <img src='${sortBooksRating[i].bookCover}' class='img-fluid' width='160'/>
                                     </a>
                                     <a id='${sortBooksRating[i].id}' href='html/bookSelect.html' class='book-page'>
                                         <h5>${sortBooksRating[i].bookTitle}</h5>
@@ -171,8 +171,8 @@ function addLoadEvent(func) {
 
             if (userCurrent == -1) {
                 if (i >= 0 & i <= 4) {
-                    strHtml += `<div class='book col-md-2'>
-                                    <img src='${sortBooksRecent[i].bookCover}' class='img-fluid book-tippy' width='140'/>
+                    strHtml += `<div class='book col-md-2 text-center'>
+                                    <img src='${sortBooksRecent[i].bookCover}' class='img-fluid book-tippy' width='160'/>
                                     <h5>${sortBooksRecent[i].bookTitle}</h5>
                                     <p>${sortBooksRecent[i].bookAuthors}</p>
                                     <div>${convertRatingToStars(Book.calculateRating(sortBooksRecent[i].bookRatings))}</div>
@@ -181,9 +181,9 @@ function addLoadEvent(func) {
             }
             else {
                 if (i >= 0 & i <= 4) {
-                    strHtml += `<div class='book col-md-2'>
+                    strHtml += `<div class='book col-md-2 text-center'>
                                     <a id='${sortBooksRecent[i].id}' href='html/bookSelect.html' class='book-page'>
-                                        <img src='${sortBooksRecent[i].bookCover}' class='img-fluid' width='140'/>
+                                        <img src='${sortBooksRecent[i].bookCover}' class='img-fluid' width='160'/>
                                     </a>
                                     <a id='${sortBooksRecent[i].id}' href='html/bookSelect.html' class='book-page'>
                                         <h5>${sortBooksRecent[i].bookTitle}</h5>

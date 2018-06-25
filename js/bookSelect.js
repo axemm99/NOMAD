@@ -154,7 +154,7 @@ function addLoadEvent(func) {
                         <tbody>`
 
         for (let i = 0; i < arrayBooks.length; i++) {
-            if(userPermissions == 2){
+            if (userPermissions == 2) {
                 strHtml += `<tr>
                                 <td>${Library.getCityById(Library.getLibraryCityById(arrayBooks[i].library))}</td>
                                 <td>${Library.getParishById(Library.getLibraryParishById(arrayBooks[i].library))}</td>
@@ -166,7 +166,7 @@ function addLoadEvent(func) {
                                 </td>
                             </tr>`
             }
-            else{
+            else {
                 strHtml += `<tr>
                                 <td>${Library.getCityById(Library.getLibraryCityById(arrayBooks[i].library))}</td>
                                 <td>${Library.getParishById(Library.getLibraryParishById(arrayBooks[i].library))}</td>
@@ -178,7 +178,6 @@ function addLoadEvent(func) {
                                 </td>
                             </tr>`
             }
-
         }
 
         strHtml += "</tbody>"
@@ -191,10 +190,8 @@ function addLoadEvent(func) {
                 let requestUnavailable = document.getElementById(`requestUnavailable_${arrayBooks[j].id}`)
                 let bookStatus = document.getElementById(`bookStatus_${arrayBooks[j].id}`)
 
-            
-                
-                if (requests[i].bookId == arrayBooks[j].id) {
-                    if (requests[i].userId == userCurrent && requests[i].deliveryDate == "") {
+                if (requests[i].bookId == arrayBooks[j].id && requests[i].deliveryDate == "") {
+                    if (requests[i].userId == userCurrent) {
                         tempRequest.style.display = "none"
                         tempNotify.style.display = "none"
                         requestUnavailable.style.display = "block"
@@ -205,7 +202,7 @@ function addLoadEvent(func) {
                         tempNotify.style.display = "block"
                         requestUnavailable.style.display = "none"
                         bookStatus.innerHTML = "Indisponível"
-                    }                    
+                    }
                 }
                 else {
                     tempRequest.style.display = "block"
