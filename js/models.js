@@ -1665,7 +1665,7 @@
     if (!localStorage.wishlists) {
         wishlist01 = new Wishlist(3, [2, 3], [1, 3, 8], [1, 4, 6], [1, 2], [1], [2, 3], [1, 2], [1])
         wishlists.push(wishlist01)
-        wishlist02 = new Wishlist(5, [4], [2, 3], [1], [2, 3], [2], [1, 3], [2, 5], [2])
+        wishlist02 = new Wishlist(4, [4], [2, 3], [1], [2, 3], [2], [1, 3], [2, 5], [2])
         wishlists.push(wishlist02)
     }
 
