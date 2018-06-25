@@ -123,11 +123,24 @@
         }
 
         // CALCULATE FINE VALUE
-        static calculateFineValue(days){      
+        static calculateFineValue(days){   
+            let tempFineValue = 0
+            
             for (let i = 0; i < users.length; i++) {
                 if (users[i].id == userCurrent) { 
                     if (days > config.requestDays) {
-                        users[i].fineValue += config.fineValue          
+                        if(users[i].fineValue < config.fineMax){
+                            tempFineValue = users[i].fineValue + (days * config.fineValue)       
+                            if(tempFineValue < config.fineMax){
+                                users[i].fineValue = tempFineValue
+                            }
+                            else{
+                                users[i].fineValue = config.fineMax
+                            }
+                        }   
+                        else{
+                            users[i].fineValue = config.fineMax
+                        }
                     }
                 }
             }
@@ -143,8 +156,13 @@
                     for (let i = 0; i < days; i++) {
                         if(users[j].fineValue < config.fineMax){
                             if(days > config.requestDays){
-                                cont = cont + config.fineValue
-                                return cont
+                                cont = days * config.fineValue
+                                if(cont < config.fineMax){
+                                    return cont
+                                }
+                                else{
+                                    return config.fineMax
+                                }
                             }
                         }
                         else{
