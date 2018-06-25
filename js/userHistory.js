@@ -183,13 +183,13 @@ function addLoadEvent(func) {
             return Math.floor((Date.UTC(dt2.getFullYear(), dt2.getMonth(), dt2.getDate()) - Date.UTC(dt1.getFullYear(), dt1.getMonth(), dt1.getDate()) ) /(1000 * 60 * 60 * 24));
         }
         let delayedDays = differenceDays(today, dateRequest)
-        console.log(User.calculateFineValue(delayedDays))
+        console.log(User.calculateFineValue2(delayedDays))
 
 
         //delayedDays(id)
         for (let i = 0; i < users.length; i++) {
             if (users[i].id == userCurrent) {
-                checkFine = User.calculateFineValue(delayedDays)
+                checkFine = User.calculateFineValue2(delayedDays)
             }            
         }
 
