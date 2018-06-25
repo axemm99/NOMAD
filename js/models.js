@@ -136,13 +136,14 @@
         // CALCULATE FINE VALUE
         static calculateFineValue2(days){    
             let cont = 0
-
+            console.log(config.requestDays)
+            console.log(days)
             for (let j = 0; j < users.length; j++) {
                 if(users[j].id == userCurrent){
                     for (let i = 0; i < days; i++) {
                         if(users[j].fineValue < config.fineMax){
                             if(days > config.requestDays){
-                                cont += config.fineValue
+                                cont = cont + config.fineValue
                                 return cont
                             }
                         }
