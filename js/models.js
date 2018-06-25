@@ -858,15 +858,6 @@
             }
         }
         
-        // REQUEST BOOK ID
-        static requestBookById(id) {
-            for (let i = 0; i < requests.length; i++) {
-                if (requests[i].id == id && requests[i].userId == userCurrent) {
-                    requests[i].deliveryDate = getCurrentDate()
-                }
-            }
-        }
-        
         // UPDATE DELIVERY DATE BY REQUEST ID
         static receiveRequestBookById(id) {
             for (let i = 0; i < requests.length; i++) {
