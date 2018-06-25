@@ -653,8 +653,8 @@ class Book {
 
                 viewBookCity.value = Library.getCityById(Library.getLibraryCityById(books[i].libraryId))
                 viewBookParish.value = Library.getParishById(Library.getLibraryParishById(books[i].libraryId))                   
-                viewBookCategory.value = Category.getCategoryById(books[i].bookCategory)
-                viewBookTags.value = books[i].bookTags
+                viewBookCategory.selectedIndex = books[i].bookCategory
+              //  viewBookTags.value.selectedIndex = books[i].bookTags
 
                 //
 
