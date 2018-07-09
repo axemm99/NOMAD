@@ -110,9 +110,8 @@ function addLoadEvent(func) {
 // SORT
 
     /* sort by title */
-    function sortByTitle(sortBooks) { 
+    function sortByTitle(viewMode, sortBooks) { 
         if (selectSort.value == "Título") {
-            console.log(selectSort.value)
             sortBooks.sort(function(a, b) {
                 let txtA = a.bookTitle.toUpperCase()
                 let txtB = b.bookTitle.toUpperCase()
@@ -124,12 +123,13 @@ function addLoadEvent(func) {
             if (chbInvertSort.checked == true) {
                 sortBooks.reverse()
             }
+            
             addFilterBookToCatalog(categoryCurrent, viewMode, sortBooks)
         }
     }
 
     /* sort by rating */
-    function sortByRating() {
+    function sortByRating(viewMode) {
         if (selectSort.value == "Pontuação") {
             let sortBooks = books.slice(0)
 
@@ -151,7 +151,7 @@ function addLoadEvent(func) {
     }
 
     /* sort book by rating */
-    function sortByDonationDate(sortBooks) {
+    function sortByDonationDate(viewMode, sortBooks) {
         if (selectSort.value == "Data de doação") {
             sortBooks.sort(function(a, b) {
                 return new Date(b.donationDate) - new Date(a.donationDate)
@@ -455,9 +455,9 @@ addLoadEvent(function() {
 
             console.log(tempTags)
 
-            sortByTitle(sortBooks)
-            sortByRating()
-            sortByDonationDate(sortBooks)
+            sortByTitle(viewMode, sortBooks)
+            sortByRating(viewMode)
+            sortByDonationDate(viewMode, sortBooks)
 
             //console.log(tempTags.includes(filterTag.value))
 

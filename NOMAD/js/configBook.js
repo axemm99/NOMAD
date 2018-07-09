@@ -111,7 +111,7 @@ function addLoadEvent(func) {
                     text: 'Não poderá reverter esta ação.',
                     type: 'warning',
                     showCancelButton: true,
-                    confirmButtonColor: '#FFD892',
+                    confirmButtonColor: '#ffd892',
                     cancelButtonColor: '#ba9378',
                     confirmButtonText: 'Sim',
                     cancelButtonText: 'Não',
@@ -123,7 +123,7 @@ function addLoadEvent(func) {
                             title: 'Eliminado!',
                             text: `O livro "${Book.getBookTitleById(bookId)}" foi eliminado.`,
                             showConfirmButton: true,
-                            confirmButtonColor: '#FFD892'
+                            confirmButtonColor: '#ffd892'
                         })
 
                         Book.removeBookById(bookId)

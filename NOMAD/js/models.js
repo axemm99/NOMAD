@@ -123,22 +123,22 @@
         }
 
         // CALCULATE FINE VALUE
-        static calculateFineValue(days){   
+        static calculateFineValue(days) {   
             let tempFineValue = 0
             
             for (let i = 0; i < users.length; i++) {
                 if (users[i].id == userCurrent) { 
                     if (days > config.requestDays) {
-                        if(users[i].fineValue < config.fineMax){
+                        if (users[i].fineValue < config.fineMax) {
                             tempFineValue = users[i].fineValue + (days * config.fineValue)       
-                            if(tempFineValue < config.fineMax){
+                            if (tempFineValue < config.fineMax) {
                                 users[i].fineValue = tempFineValue
                             }
-                            else{
+                            else {
                                 users[i].fineValue = config.fineMax
                             }
                         }   
-                        else{
+                        else {
                             users[i].fineValue = config.fineMax
                         }
                     }
@@ -146,33 +146,32 @@
             }
         }
 
-        // CALCULATE FINE VALUE
-        static calculateFineValue2(days){    
+        // CALCULATE FINE VALUE BY REQUEST
+        static calculateFineValueByRequest(days) {    
             let cont = 0
-            console.log(config.requestDays)
-            console.log(days)
+            
             for (let j = 0; j < users.length; j++) {
-                if(users[j].id == userCurrent){
+                if (users[j].id == userCurrent) {
                     for (let i = 0; i < days; i++) {
-                        if(users[j].fineValue < config.fineMax){
-                            if(days > config.requestDays){
+                        if (users[j].fineValue < config.fineMax) {
+                            if (days > config.requestDays) {
                                 cont = days * config.fineValue
-                                if(cont < config.fineMax){
+
+                                if (cont < config.fineMax) {
                                     return cont
                                 }
-                                else{
+                                else {
                                     return config.fineMax
                                 }
                             }
                         }
-                        else{
+                        else {
                             return config.fineMax
                         }
                     }
                 }
             }
         }
-    
 
         // CONVERT PERMISSIONS VALUE
         static convertPermissions(permissions) {
@@ -661,6 +660,9 @@
 
         // VIEW BOOK BY ID
         static viewBookById(id) {
+            let tempTags = []
+
+
             for (let i = 0; i < books.length; i++) {
                 if(books[i].id == id) {
                     viewBookTitle.value = books[i].bookTitle
@@ -685,15 +687,12 @@
                         viewBookParish.innerHTML = addParishToModal(viewBookCity.value)   
                     }
 
-                    viewBookCity.value = Library.getCityById(Library.getLibraryCityById(books[i].libraryId))
-                    viewBookParish.value = Library.getParishById(Library.getLibraryParishById(books[i].libraryId))                   
+                    viewBookCity.selectedIndex = books[i].libraryId
+                    viewBookParish.selectedIndex = Library.getParishById(Library.getLibraryParishById(books[i].libraryId))                   
                     viewBookCategory.selectedIndex = books[i].bookCategory
-                    viewBookCategory.value = Category.getCategoryById(books[i].bookCategory)
-                    viewBookTags.value = books[i].bookTags
-
-                    //
-
-                    
+                    for (let j = 0; j < books[i].bookTags; j++) {
+                        viewBookTags.selectedIndex = (books[i].bookTags)[j]
+                    }                   
                     viewBookCondition.value = books[i].bookCondition
                     viewBookDonor.value = books[i].bookDonor
                     viewBookDonate.value = books[i].bookDonation
@@ -1378,7 +1377,7 @@
     let user07 = ""
     let user08 = ""
 
-                    // userName, userEmail, userPassword, userPhoto, userPermissions, fineValue
+                    // userName, userEmail, userPassword, userPhoto, userPermissions, fineValue, last login
     if (!localStorage.users) {
         user01 = new User("a", "a@a.a", 12345, "https://image.flaticon.com/icons/svg/270/270023.svg", 0, 0, "2018-06-02")
         users.push(user01)
@@ -1436,7 +1435,7 @@
         categories.push(category10)
         category11 = new Category("dicionários")
         categories.push(category11)
-        category12 = new Category("enciclopédias")
+        category12 = new Category("culinária")
         categories.push(category12)
     }
 
@@ -1468,8 +1467,9 @@
     let tag25 = ""
     let tag26 = ""
     let tag27 = ""
+    let tag28 = ""
 
-                    // name
+                        // name
     if (!localStorage.tags) {
         tag01 = new Tag("romance")
         tags.push(tag01)
@@ -1480,8 +1480,6 @@
         tag04 = new Tag("desenho")
         tags.push(tag04)
         tag05 = new Tag("infantil")
-        tags.push(tag05)
-        tag05 = new Tag("juvenil")
         tags.push(tag05)
         tag06 = new Tag("terror")
         tags.push(tag06)
@@ -1497,11 +1495,11 @@
         tags.push(tag11)
         tag12 = new Tag("mitologias")
         tags.push(tag12)
-        tag13 = new Tag("judaica")
+        tag13 = new Tag("judaísmo")
         tags.push(tag13)
         tag14 = new Tag("alemão")
         tags.push(tag14)
-        tag15 = new Tag("francês")
+        tag15 = new Tag("françês")
         tags.push(tag15)
         tag16 = new Tag("português")
         tags.push(tag16)
@@ -1509,7 +1507,7 @@
         tags.push(tag17)
         tag18 = new Tag("educadores")
         tags.push(tag18)
-        tag19 = new Tag("africa")
+        tag19 = new Tag("cartas")
         tags.push(tag19)
         tag20 = new Tag("atlas")
         tags.push(tag20)
@@ -1527,6 +1525,8 @@
         tags.push(tag26)
         tag27 = new Tag("puericultura")
         tags.push(tag27)
+        tag28 = new Tag("juvenil")
+        tags.push(tag28)
     }
 
     /* books */
@@ -1605,7 +1605,7 @@
 
                         // userId, bookId, comment
     if (!localStorage.comments) {
-        comment01 = new Review(3, 1, "É um livro bom! Aconcelho.")
+        comment01 = new Review(3, 1, "É um livro bom! Recomendo.")
         comments.push(comment01)
         comment02 = new Review(2, 1, "Não presta!")
         comments.push(comment02)
@@ -1640,21 +1640,21 @@
     let request06 = ""
     let request07 = ""
 
-                        // userId, bookId, requestDate, deliveryDate
+                            // userId, bookId, requestDate, deliveryDate
     if (!localStorage.requests) {
-        request01 = new Request(4 , 4 , "2018-03-20" , "2018-06-15")
+        request01 = new Request(4 , 4, "2018-03-20" , "2018-06-15")
         requests.push(request01)
-        request02 = new Request(3 , 5 , "2018-05-04" , "2018-06-20")
+        request02 = new Request(3 , 5, "2018-05-04" , "2018-06-20")
         requests.push(request02)
-        request03 = new Request(3 , 2 , "2018-05-11" , "2018-07-25")
+        request03 = new Request(3 , 2, "2018-05-11" , "2018-07-25")
         requests.push(request03)
-        request04 = new Request(3 , 1 , "2018-05-11" , "2018-06-20")
+        request04 = new Request(3 , 1, "2018-05-11" , "2018-06-20")
         requests.push(request04)
-        request05 = new Request(3 , 5 , "2018-05-04" , "2018-06-20")
+        request05 = new Request(3 , 5, "2018-05-04" , "2018-06-20")
         requests.push(request05)
-        request06= new Request(4 , 2 , "2018-05-11" , "")
+        request06= new Request(4 , 2, "2018-05-11" , "")
         requests.push(request06)
-        request07 = new Request(3 , 1 , "2018-05-11" , "")
+        request07 = new Request(3 , 8, "2018-05-11" , "")
         requests.push(request07)
     }  
 
@@ -1665,7 +1665,7 @@
     if (!localStorage.wishlists) {
         wishlist01 = new Wishlist(3, [2, 3], [1, 3, 8], [1, 4, 6], [1, 2], [1], [2, 3], [1, 2], [1])
         wishlists.push(wishlist01)
-        wishlist02 = new Wishlist(4, [4], [2, 3], [1], [2, 3], [2], [1, 3], [2, 5], [2])
+        wishlist02 = new Wishlist(9, [4], [2, 3], [1], [2, 3], [2], [1, 3], [2, 5], [2])
         wishlists.push(wishlist02)
     }
 
@@ -1763,8 +1763,7 @@
                                         tempArray[i]._libraryId)
                 books.push(newBook)
             }
-        }        
-        localStorage.getItem("books")
+        }
     }
 
     /* comments */
@@ -2024,13 +2023,12 @@
     optLogout.addEventListener("click", function () {
         userCurrent = sessionStorage.setItem("userCurrent", -1)
         userPermissions = sessionStorage.setItem("userPermissions", -1)
-
         homePage()
     })
 
-    /* return homepage */
+    /* return to homepage */
     function homePage() {
-        // checks which html page is open
+        // check which html page is open
         let pagePath = (window.location.pathname).substring((window.location.pathname).lastIndexOf('/') + 1)
 
         if (pagePath != "index.html") {
@@ -2044,7 +2042,7 @@
 
 
 // --------------------------------------
-// NOTIFICATIONS                                     //????????????????????????????????????
+// NOTIFICATIONS
 
     /* panel */
     let accordion = document.getElementsByClassName("accordion")
@@ -2276,9 +2274,6 @@
         return tempPath
     }
 //
-
-
-
 
 
 // --------------------------------------

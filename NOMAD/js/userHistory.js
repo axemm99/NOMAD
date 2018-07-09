@@ -169,28 +169,25 @@ function addLoadEvent(func) {
         let strHtml = ""
         let checkFine = 0
         let today
-        let dateRequest
+        let requestDate
 
         for (let i = 0; i < requests.length; i++) {
-            dateRequest = requests[i].requestDate
+            requestDate = requests[i].requestDate
             today = getCurrentDate()
             
         }
 
         let differenceDays = function(date1, date2) {
-            dt1 = new Date(date1);
-            dt2 = new Date(date2);
-            return Math.floor((Date.UTC(dt2.getFullYear(), dt2.getMonth(), dt2.getDate()) - Date.UTC(dt1.getFullYear(), dt1.getMonth(), dt1.getDate()) ) /(1000 * 60 * 60 * 24));
+            dt1 = new Date(date1)
+            dt2 = new Date(date2)
+            return Math.floor((Date.UTC(dt2.getFullYear(), dt2.getMonth(), dt2.getDate()) - Date.UTC(dt1.getFullYear(), dt1.getMonth(), dt1.getDate()) ) /(1000 * 60 * 60 * 24))
         }
         
-        let delayedDays = differenceDays(dateRequest, today)
-        console.log("666666: " + User.calculateFineValue2(delayedDays))
+        let delayedDays = differenceDays(requestDate, today)
 
-
-        //delayedDays(id)
         for (let i = 0; i < users.length; i++) {
             if (users[i].id == userCurrent) {
-                checkFine = User.calculateFineValue2(delayedDays)
+                checkFine = User.calculateFineValueByRequest(delayedDays)
             }            
         }
 
@@ -212,7 +209,7 @@ function addLoadEvent(func) {
                                             <td><strong>Data de entrega prevista:</strong> </td>
                                         </tr>
                                         <tr>
-                                            <td><strong>Dias em atraso:</strong> ${delayedDays} </td>
+                                            <td><strong>Dias em atraso: </strong> ${delayedDays} </td>
                                         </tr>
                                         <tr style='border-bottom: solid 1px #dee2e6;'>
                                             <td style='padding-bottom: 30px !important;'><strong>Valor da multa:</strong> ${checkFine} €</td>

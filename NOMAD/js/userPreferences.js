@@ -53,14 +53,29 @@ function addLoadEvent(func) {
         let strError = ""
         let tempIds = []
 
+        // 1 verificar se o tempCategorias está vazio
+            // se sim,
+                // 1.1 verificar se o userCurrent tem alguma wishlist
+                    // sem sim 
+
+
+
         if (tempCategories.length == 0) {
             for (let i = 0; i < wishlists.length; i++) {
-                tempIds.push(wishlists[i].id)
+                tempIds.push(wishlists[i].userId)
             }
 
-            if (tempIds.indexOf(userCurrent) == -1) {
-                wishlists[i].categoryList.push(parseInt(inputPreference.value))
-                localStorage.setItem("wishlists", JSON.stringify(wishlists))
+            console.log(tempIds)
+
+            console.log(tempIds.indexOf(userCurrent))
+
+            if (tempIds.indexOf(userCurrent) != -1) {
+                for (let i = 0; i < wishlists.length; i++) {
+                    if (wishlists[i].userId == userCurrent) {
+                        wishlists[i].categoryList.push(parseInt(inputPreference.value))
+                        localStorage.setItem("wishlists", JSON.stringify(wishlists))
+                    }
+                }
             }
             else {
                 let newWishlist = new Wishlist(parseInt(userCurrent),
@@ -105,19 +120,26 @@ function addLoadEvent(func) {
         }
     }
     
-    /* input category */        
-    function checkTagInputValid(tempTags) {
+    /* input tag */        
+    function checkTagInputValid(tempTags) {        
         let strError = ""
         let tempIds = []
 
         if (tempTags.length == 0) {
             for (let i = 0; i < wishlists.length; i++) {
-                tempIds.push(wishlists[i].id)
+                tempIds.push(wishlists[i].userId)
             }
 
-            if (tempIds.indexOf(userCurrent) == -1) {
-                wishlists[i].tagList.push(parseInt(inputPreference.value))
-                localStorage.setItem("wishlists", JSON.stringify(wishlists))
+            console.log(tempIds)
+
+            console.log(tempIds.indexOf(userCurrent))
+            if (tempIds.indexOf(userCurrent) != -1) {
+                for (let i = 0; i < wishlists.length; i++) {
+                    if (wishlists[i].userId == userCurrent) {
+                        wishlists[i].tagList.push(parseInt(inputPreference.value))
+                        localStorage.setItem("wishlists", JSON.stringify(wishlists))
+                    }
+                }
             }
             else {
                 let newWishlist = new Wishlist(parseInt(userCurrent),
@@ -141,7 +163,6 @@ function addLoadEvent(func) {
                     if (wishlists[i].userId == userCurrent) {
                         wishlists[i].tagList.push(parseInt(inputPreference.value))
                         localStorage.setItem("wishlists", JSON.stringify(wishlists))
-                        console.log("n 7")
                     }
                 }
             }
@@ -170,12 +191,16 @@ function addLoadEvent(func) {
 
         if (tempLibraries.length == 0) {
             for (let i = 0; i < wishlists.length; i++) {
-                tempIds.push(wishlists[i].id)
+                tempIds.push(wishlists[i].userId)
             }
 
             if (tempIds.indexOf(userCurrent) == -1) {
-                wishlists[i].libaryList.push(parseInt(inputPreference.value))
-                localStorage.setItem("wishlists", JSON.stringify(wishlists))
+                for (let i = 0; i < wishlists.length; i++) {
+                    if (wishlists[i].userId == userCurrent) {
+                        wishlists[i].libaryList.push(parseInt(inputPreference.value))
+                        localStorage.setItem("wishlists", JSON.stringify(wishlists))
+                    }
+                }
             }
             else {
                 let newWishlist = new Wishlist(parseInt(userCurrent),
@@ -197,7 +222,7 @@ function addLoadEvent(func) {
             else {
                 for (let i = 0; i < wishlists.length; i++) {
                     if (wishlists[i].userId == userCurrent) {
-                        wishlists[i].libraryList.push(parseInt(inputPreference.value))
+                        wishlists[i].libaryList.push(parseInt(inputPreference.value))
                         localStorage.setItem("wishlists", JSON.stringify(wishlists))
                     }
                 }

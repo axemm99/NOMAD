@@ -150,6 +150,30 @@ addLoadEvent(function() {
     // LOAD LOCAL STORAGE
         loadUsers()
         console.log(users)
+
+        loadCategories()
+        console.log(categories)
+
+        loadTags()
+        console.log(tags)
+
+        loadBooks()
+        console.log(books)
+
+        loadComments()
+        console.log(comments)
+
+        loadRequests()
+        console.log(requests)
+
+        loadWishlists()
+        console.log(wishlists)
+
+        loadLibraries()
+        console.log(libraries)
+
+        loadConfig()
+        console.log(config) 
     //
     
     
@@ -188,6 +212,11 @@ addLoadEvent(function() {
         /* user profile */
         addUserInfo()
         payPendentFine()
+
+        /* notifications */
+        if (userPermissions == 2) {
+            viewNotificationPanel()
+        }
     //
 
 

@@ -16,6 +16,7 @@ function addLoadEvent(func) {
         }
     }
 }
+//
 
 
 // --------------------------------------
@@ -58,7 +59,7 @@ function addLoadEvent(func) {
     function checkUserValid(newUser) {
         let strError = ""
 
-        // compares if email was already registered
+        // compares if email is already registered
         for (let i = 0; i < users.length; i++) {
             if (users[i].userEmail == modalRegisterEmail.value) {
                 strError = `O email "${modalRegisterEmail.value}" já está registado!`
@@ -377,7 +378,7 @@ addLoadEvent(function() {
     // --------------------------------------
     // BUTTONS
 
-        /* donate start */                                        //??????????????????????
+        /* donate start */
         optDonate.addEventListener("click", function(event) {    
             count = 0
             viewDonateStep(count)

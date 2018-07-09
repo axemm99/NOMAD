@@ -14,47 +14,43 @@
         <!-- Font Awesome -->
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.11/css/all.css" integrity="sha384-p2jx59pefphTFIpeqCcISO9MdVfIm4pNnsL08A6v5vaQc4owkQqxMV8kg4Yvhaw/" crossorigin="anonymous">
 
-        <!-- Owl Carousel -->
-        <link rel="stylesheet" href="node_modules/OwlCarousel2-2.3.4/dist/assets/owl.carousel.min.css">
-        <link rel="stylesheet" href="node_modules/OwlCarousel2-2.3.4/dist/assets/owl.theme.default.min.css">
-
         <!-- Custom CSS -->
-        <link rel="stylesheet" type="text/css" href="css/general.css">    
-        <link rel="stylesheet" type="text/css" href="css/index.css">    
+        <link rel="stylesheet" type="text/css" href="../css/general.css">
+        <link rel="stylesheet" type="text/css" href="../css/index.css">
 
         <!-- Favicon -->
-        <link rel="icon" href="images/favicon_b.png" type="image/png" sizes="16x16">
+        <link rel="icon" href="../images/favicon_b.png" type="image/png" sizes="16x16">
 
         <!-- Custom Font -->
-        <link href="https://fonts.googleapis.com/css?family=Yantramanav:100,300,400,700" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Yantramanav:100,300,400,500,700,900" rel="stylesheet">
     </head>
 
     <body>
         <!-- NAV BAR -->
-        <div class="container-fluid top col-md-8"> 
+        <div class="container-fluid top col-lg-8">
             <nav class="navbar navbar-expand-lg navbar-custom">
-                <a class="navbar-brand" href="#">
-                    <img src="images/logo.png" height="50"/>
+                <a class="navbar-brand" href="../index.html">
+                    <img src="../images/logo.png" height="50"/>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
-                    <img src="images/menu.png" width="28"/>
+                    <img src="../images/menu.png" width="28"/>
                 </button>
                 <div class="collapse navbar-collapse" id="collapsibleNavId">
                     <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-                        <li class="nav-item text active">
-                            <a id="optHome" class="nav-link" href="index.html">Início</a>
+                        <li class="nav-item text">
+                            <a id="optHome" class="nav-link" href="../index.html">Início</a>
                         </li>
                         <li class="nav-item text">
-                            <a id="optCatalog" class="nav-link" href="html/categories.html">Catálogo</a>
+                            <a id="optCatalog" class="nav-link" href="categories.html">Catálogo</a>
                         </li>
                         <li class="nav-item text">
-                            <a id="optMap" class="nav-link" href="html/map.html">Bibliotecas</a>
+                            <a id="optMap" class="nav-link" href="map.html">Bibliotecas</a>
                         </li>
 
                         <!-- SEARCH -->
                         <li id="optSearch" class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img src="images/search.png" height="32" width="32">
+                                <img src="../images/search.png" height="32" width="32">
                             </a>
                             <div class="dropdown-menu" aria-labelledby="dropdownId">
                                 <input type="search" id="inputSearch" class="form-control" aria-describedby="searchId">
@@ -64,14 +60,15 @@
                         <!-- PROFILE -->
                         <li id="optUser" class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img src="images/profile_s.png" id="userIconLogIn" height="32" width="32">
+                                <img src="../images/profile_o.png" id="userIconLogIn" height="32" width="32">
                             </a>
                             <div class="dropdown-menu" aria-labelledby="dropdownId">
-                                <a id="optLogin" class="dropdown-item" data-toggle="modal" data-target="#modalLogin" href="#">Log in</a>
-                                <a id="optRegister" class="dropdown-item" data-toggle="modal" data-target="#modalRegister" href="#">Registar</a>
-                                <a id="optProfile" class="dropdown-item" href="html/userProfile.html">Perfil</a>
-                                <a id="optHistory" class="dropdown-item" href="html/userHistory.html">Histórico</a>
-                                <a id="optPreferences" class="dropdown-item" href="html/userPreferences.html">Preferências</a>
+                                <a id="optLogin" class="dropdown-item" data-toggle="modal" data-target="#loginModal" href="#">Log in</a>
+                                <a id="optRegister" class="dropdown-item" data-toggle="modal" data-target="#registerModal" href="#">Registar</a>
+                                <a id="optProfile" class="dropdown-item" href="userProfile.html">Perfil</a>
+																															   
+                                <a id="optHistory" class="dropdown-item" href="userHistory.html">Histórico</a>
+                                <a id="optPreferences" class="dropdown-item" href="userPreferences.html">Preferências</a>
                                 <a id="optLogout" class="dropdown-item" href="#">Log Out</a>
                             </div>
                         </li>
@@ -79,7 +76,7 @@
                         <!-- NOTIFICATIONS -->
                         <li id="optAlerts" class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img src="images/notification.png" width="32"/>
+                                <img src="../images/notification.png" width="32"/>
                             </a>
                             <div id="notificationPanel" class="dropdown-menu">
                                 <!-- CATEGORIES -->
@@ -122,21 +119,21 @@
                         <!-- DONATE -->
                         <li id="optDonate" class="nav-item">
                             <a class="nav-link" data-toggle="modal" data-target="#modalDonate" href="#">
-                                <img src="images/donate.png" height="32"/>
+                                <img src="../images/donate.png" height="32"/>
                             </a>
                         </li>
 
                         <!-- CONFIG-->
                         <li id="optConfig" class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img src="images/config.png" width="32"/>
+                                <img src="../images/config.png" width="32"/>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="dropdownId">
-                                <a id="optConfigBooks" class="dropdown-item" href="html/configBook.html">Gestor de Livros</a>
-                                <a id="optConfigGeneral" class="dropdown-item" href="html/configGeneral.html">Configurações Gerais</a>
-                                <a id="optConfigUsers" class="dropdown-item" href="html/configUser.html">Gestor de Utilizadores</a>
-                                <a id="optConfigLibraries" class="dropdown-item" href="html/configLibrary.html">Gestor de Bibliotecas</a>
-                                <a id="optStatistics" class="dropdown-item" href="html/statistics.html">Estatísticas</a>
+                                <a id="optConfigBooks" class="dropdown-item" href="configBook.html">Gestor de Livros</a>
+                                <a id="optConfigGeneral" class="dropdown-item" href="configGeneral.html">Configurações Gerais</a>
+                                <a id="optConfigUsers" class="dropdown-item" href="configUser.html">Gestor de Utilizadores</a>
+                                <a id="optConfigLibraries" class="dropdown-item" href="configLibrary.html">Gestor de Bibliotecas</a>
+                                <a id="optStatistics" class="dropdown-item" href="statistics.html">Estatísticas</a>
                             </div>
                         </li>
                     </ul>
@@ -144,39 +141,19 @@
             </nav>
         </div>
 
-        <!-- CAROUSEL -->
-        <div class="bar invisble">
-            <div class="container-fluid">
-                <div class="owl-carousel owl-theme">
-                    <div class="item">
-                        <img src="images/header_1.png" class="img-fluid carousel" alt="">
-                    </div>
-                    <div class="item">
-                        <img src="images/header_2.png" class="img-fluid carousel" alt="">
-                    </div>
-                    <div class="item">
-                        <img src="images/header_3.png" class="img-fluid carousel" alt="">
-                    </div>
-                    <div class="item">
-                        <img src="images/header_4.png" class="img-fluid carousel" alt="">
-                    </div>
-                    <div class="item">
-                        <img src="images/header_5.png" class="img-fluid carousel" alt="">
-                    </div>
-                </div>
-            </div>
+        <!-- TOP BAR BACK OFFICE-->
+        <div class="bar midoffice">
         </div>
-        
-        <!-- BOOKS -->
-        <div class="container-fluid middle-catalog col-lg-7">
-            <!-- POPULAR BOOKS -->
-            <div id="popularBooks" class="inner">
-                <h1>DESTAQUES</h1>
-            </div>
-            
-            <!-- NEW BOOKS -->
-            <div id="recentBooks" class="inner">
-                <h1 class="bottom">NOVIDADES</h1>
+
+        <!-- CONFIG -->
+        <div class="container-fluid middle col-lg-7">
+            <h1>Gestor de Livros</h1>
+
+            <!-- TABLE BOOKS -->
+            <div class="form-group col-md-12">
+                <div class="table-responsive">
+                    <table id="tblBooks" class="table table-curved table-sm"></table>
+                </div>
             </div>
         </div>
 
@@ -199,90 +176,6 @@
             <p>Website criado por Mariana Moreira, Isabela da Costa e Inês Moreira</p>
         </div>
 
-        <!-- TOOL TIP LOG IN -->
-        <div id="tooltipLogIn" style="display: none;">
-        </div>
-
-        <!-- MODAL LOG IN -->
-        <div class="modal fade" id="modalLogin" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="modalTitleId" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header text-center">
-                        <img class="modal-title" src="images/favicon_w.png" width="32"/>
-                        <button type="button" id="btnClose" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true"><i class="fa fa-times"></i></span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <form id="frmLogin">
-                            <!-- E-MAIL -->
-                            <div class="form-group">
-                                <label for="modalLoginEmail">E-mail</label>
-                                <input type="email" class="form-control" id="modalLoginEmail" required>                        
-                            </div>
-
-                            <!--PASSWORD-->
-                            <div class="form-group">
-                                <label for="modalLoginPassword">Password</label>
-                                <input type="password" class="form-control" id="modalLoginPassword" required>                        
-                            </div>
-
-                            <!--BUTTON -->
-                            <div class="modal-footer">
-                                <input type="submit" class="btn btn-primary" value="Log in"/>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- MODAL REGISTER -->
-        <div class="modal fade" id="modalRegister" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="modalTitleId" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header text-center">
-                        <img class="modal-title" src="images/favicon_w.png" width="48"/>
-                        <button type="button" id="btnClose" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true"><i class="fa fa-times"></i></span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <form id="frmRegister">
-                            <!-- NAME -->
-                            <div class="form-group">
-                                <label for="modalRegisterName">Nome</label>
-                                <input type="text" class="form-control" id="modalRegisterName" value="ana" required>
-                            </div>
-
-                            <!-- E-MAIL -->
-                            <div class="form-group">
-                                <label for="modalRegisterEmail">E-mail</label>
-                                <input type="email" class="form-control" id="modalRegisterEmail" value="ana@ana.pt" required>                        
-                            </div>
-
-                            <!--PASSWORD-->
-                            <div class="form-group">
-                                <label for="modalRegisterPassword">Password</label>
-                                <input minlength="5" maxlength="10" type="password" class="form-control" id="modalRegisterPassword" required>                        
-                            </div>
-
-                            <!-- PHOTO -->
-                            <div class="form-group">
-                                <label for="modalRegisterPhoto">Fotografia</label>
-                                <input type="url" value="" class="form-control" id="modalRegisterPhoto">
-                            </div>
-
-                            <!--BUTTON -->
-                            <div class="modal-footer">
-                                <input type="submit" class="btn btn-primary" value="Registar"/>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <!-- MODAL DONATE -->
         <div class="modal fade" id="modalDonate" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="modalTitleId" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -300,32 +193,32 @@
                                     <!-- TITLE -->
                                     <div class="form-group">
                                         <label for="modalDonateTitle">Título</label>
-                                        <input type="text" class="form-control" id="modalDonateTitle" value="a">                        
+                                        <input type="text" class="form-control" id="modalDonateTitle" value="Confia">                        
                                     </div>
 
                                     <!-- AUTHORS -->
                                     <div class="form-group">
                                         <label for="modalDonateAuthors">Autores</label>
-                                        <input type="text" class="form-control" id="modalDonateAuthors" value="a">
+                                        <input type="text" class="form-control" id="modalDonateAuthors" value="Sofia Ribeiro">
                                     </div>
 
                                     <!-- PUBLISHER -->
                                     <div class="form-group">
                                         <label for="modalDonatePublisher">Editora</label>
-                                        <input type="text" class="form-control" id="modalDonatePublisher" value="a">
+                                        <input type="text" class="form-control" id="modalDonatePublisher" value="Matéria Prima">
                                     </div>
 
                                     <div class="row">
                                         <!-- YEAR -->
                                         <div class="form-group col-md-6">
                                             <label for="modalDonateYear">Ano</label>
-                                            <input type="number" id="modalDonateYear"  class="form-control inline" value="2012">
+                                            <input type="number" id="modalDonateYear"  class="form-control inline" value="2018">
                                         </div>
 
                                         <!-- PAGES -->
                                         <div class="form-group col-md-6">
                                             <label for="modalDonatePages">Nº de páginas</label>
-                                            <input type="number" id="modalDonatePages" class="form-control inline" value="10">                    
+                                            <input type="number" id="modalDonatePages" class="form-control inline" value="232">                    
                                         </div>
                                     </div>
                                 </div>
@@ -396,7 +289,7 @@
                                         <div class="row">
                                             <div class="form-group col-md-6">
                                                 <label for="modalDonateCover">Capa</label>
-                                                <input type="url" id="modalDonateCover" class="form-control" value="http://covilgeek.com.br/wp-content/uploads/2015/02/o-nome-do-vento-capa.jpg">                        
+                                                <input type="url" id="modalDonateCover" class="form-control" value="https://img.wook.pt/images/confia-sofia-ribeiro/MXwyMjAwNzQxOXwxNzg3MzExOXwxNTI4MzI2MDAwMDAw/502x">                        
                                             </div>
                                             <div class="form-group viewURL col-md-6">
                                                 <img src="" id="modalViewCover" class="img-fluid img-thumbnail" >                
@@ -406,7 +299,7 @@
 
                                         <!-- DESCRIPTION -->
                                         <label for="modalDonateDescription">Sinopse</label>
-                                        <textarea id="modalDonateDescription" class="form-control" rows="3" value="aaaa"></textarea>    
+                                        <textarea id="modalDonateDescription" class="form-control" rows="3" value=""></textarea>    
                                     </div>
                                 </div>
                             </div>
@@ -422,37 +315,136 @@
                 </div>
             </div>
         </div>
-        
+
+        <!-- MODAL VIEW BOOK -->
+        <div class="modal fade" id="viewBookModal" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="modalTitleId" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header text-center">
+                        <h4 class="modal-title" id="modalTitleId">Detalhes</h4>
+                        <button type="button" id="btnClose" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true"></span><i class="fa fa-times"></i></span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="frmViewBooks">
+                            <div class="row">
+                                <!-- BOOK COVER -->
+                                <div class="form-group col-md-12 text-center">
+                                    <img id="viewBookCover" class="img-fluid img-thumbnail" src="" alt="">                 
+                                </div>
+
+                                <!-- TITLE -->
+                                <div class="form-group col-md-12">
+                                    <label for="viewBookTitle">Título</label>
+                                    <input type="text" class="form-control" id="viewBookTitle" readonly>
+                                </div>
+            
+                                <!-- AUTHORS -->
+                                <div class="form-group col-md-12">
+                                    <label for="viewBookAuthors">Autor(es)</label>
+                                    <input type="text" id="viewBookAuthors" class="form-control" readonly>
+                                </div>
+            
+                                <!-- PUBLISHER -->
+                                <div class="form-group col-md-6">
+                                    <label for="viewBookPublisher">Editora</label>
+                                    <input type="text" id="viewBookPublisher" class="form-control" readonly>
+                                </div>
+
+                                <!-- YEAR -->
+                                <div class="form-group col-md-6">
+                                    <label for="viewBookYear">Ano</label>
+                                    <input type="number" id="viewBookYear" class="form-control inline" readonly>
+                                </div>
+
+                                <!-- PAGES -->
+                                <div class="form-group col-md-6">
+                                    <label for="viewBookPages">Páginas</label>
+                                    <input type="number" id="viewBookPages" class="form-control inline" readonly>                    
+                                </div>
+
+                                <!-- CONDITION -->
+                                <div class="form-group col-md-6">
+                                    <label for="viewBookCondition">Estado</label>
+                                    <select id="viewBookCondition" class="form-control">
+                                        <option value="Bom">Bom</option>
+                                        <option value="Aceitável">Aceitável</option>
+                                        <option value="Fraco">Fraco</option>
+                                    </select>
+                                </div>
+                                <hr>
+
+                                <!-- LIBRARY -->
+                                <div class="form-group col-md-6">
+                                    <label for="viewBookCity">Cidade</label>
+                                    <select id="viewBookCity" class="form-control inline">
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="viewBookParish">Freguesia</label>
+                                    <select id="viewBookParish" class="form-control inline">
+                                    </select>
+                                </div>
+                                
+                                <!-- CATEGORY -->
+                                <div class="form-group col-md-6">
+                                    <label for="viewBookCategory">Categoria</label>
+                                    <select id="viewBookCategory" class="form-control inline">
+                                    </select>
+                                </div>
+
+                                <!-- TAG -->
+                                <div class="form-group col-md-6">
+                                    <label for="viewBookTags">Tag</label>
+                                    <select id="viewBookTags" class="form-control inline" size="4" multiple>
+                                    </select>
+                                </div>
+                                <hr>
+
+                                <!-- DONOR NAME -->
+                                <div class="form-group col-md-6">
+                                    <label for="viewBookDonor">Nome do doador</label>
+                                    <input type="text" id="viewBookDonor" class="form-control inline" readonly>                        
+                                </div>
+
+                                <!-- DONATION DATE -->
+                                <div class="form-group col-md-6">
+                                    <label for="viewBookDonate">Data de doação</label>
+                                    <input type="date" id="viewBookDonate" class="form-control inline" readonly>
+                                </div>
+                                <hr>
+
+                                <!-- DESCRIPTION -->
+                                <div class="form-group col-md-12">
+                                    <label for="viewBookDescription">Descrição</label>
+                                    <textarea id="viewBookDescription" class="form-control" rows="5" readonly></textarea>
+                                </div>
+            
+                                <!-- BUTTONS -->
+                                <div class="form-group buttons col-md-12">
+                                    <input type="submit" id="btnSubmit" class="btn btn-modal btn-secondary" value="Submeter"/>
+                                    <button type="button" id="btnEdit" class="btn btn-modal btn-edit mr-2"><i class="fa fa-pen-square fa-2x"></i></button>																   
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
-        <!-- Tippy -->
-        <script src="node_modules/tippy.js/dist/tippy.all.min.js"></script>
 
-        <!-- Sweet Alert -->
-        <script src="node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
-        
-        <!-- Owl Carousel -->
-        <script src="node_modules/OwlCarousel2-2.3.4/docs/assets/vendors/jquery.min.js"></script>
-        <script src="node_modules/OwlCarousel2-2.3.4/dist/owl.carousel.min.js"></script>
-        <script type="text/JavaScript">
-            $('.owl-carousel').owlCarousel({
-                center: true,
-                loop: true,
-                margin: 10,
-                autoplay: true,
-                autoplayTimeout: 4000,
-                responsive: {
-                    0: {
-                        items: 3
-                    }
-                }
-            })
-        </script>
+        <!-- Others JS -->
+        <script src="../node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBwpPEcOyiz4v8GA9Hwo4W_LYlYQmfArS0"></script>
 
         <!-- Custom JS -->
-        <script src="js/portugal.js"></script>
-        <script src="js/models.js"></script>
-        <script src="js/index.js"></script>
+        <script src="../js/portugal.js"></script>
+        <script src="../js/models.js"></script>
+        <script src="../js/configBook.js"></script>
+														 
+												   
 
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->

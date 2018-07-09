@@ -179,6 +179,15 @@ addLoadEvent(function() {
         loadBooks()
         console.log(books)
 
+        loadComments()
+        console.log(comments)
+
+        loadRequests()
+        console.log(requests)
+
+        loadWishlists()
+        console.log(wishlists)
+
         loadLibraries()
         console.log(libraries)
 
@@ -215,6 +224,12 @@ addLoadEvent(function() {
         modalDonateCategories.innerHTML = addCategoriesToModal()
         modalDonateTags.innerHTML = addTagsToModal()
         modalDonateCity.innerHTML = addCitiesToModal()
+
+        /* notifications */
+        if (userPermissions == 2) {
+            viewNotificationPanel()
+        }
+
     //
 
     

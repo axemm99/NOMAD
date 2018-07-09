@@ -158,6 +158,9 @@ addLoadEvent(function() {
 
         loadLibraries()
         console.log(libraries)
+
+        loadConfig()
+        console.log(config) 
     //
     
     
@@ -208,7 +211,6 @@ addLoadEvent(function() {
         frmDonate.addEventListener("submit", function(event){
             checkBookValid()
 
-            event.preventDefault()
             if (checkBookValid() == true) {
                 frmDonate.reset()
             }
