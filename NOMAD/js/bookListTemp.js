@@ -72,6 +72,34 @@ function addLoadEvent(func) {
         filterAuthor.innerHTML = strHtml
     }
 
+
+
+
+
+
+
+    ////////////////////////////////
+
+    function filterByAuthors(){
+        for (let i = 0; i < books.length; i++) {
+            if(books[i].bookAuthors == modalDonateAuthors.value){
+               // addBookToCatalog()
+               filterBooks.push(books[i])
+               addFilterBookToCatalog(books[i].bookCategory, "grid", filterBooks)
+            }     
+            else{
+                
+            }       
+        }
+    }
+
+
+
+
+
+
+
+
     /* libraries */
     function addLibrariesCityToFilter() {
         let strHtml = "<option value='Cidade'>Cidade</option>"
@@ -457,7 +485,8 @@ addLoadEvent(function() {
 
             sortByTitle(viewMode, sortBooks)
             sortByRating(viewMode)
-            sortByDonationDate(viewMode, sortBooks)
+            sortByDonationDate(viewMode, sortBooks)            
+            filterByAuthors()
 
             //console.log(tempTags.includes(filterTag.value))
 
