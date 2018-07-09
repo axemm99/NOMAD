@@ -52,6 +52,38 @@ function addLoadEvent(func) {
         filterTag.innerHTML = strHtml
     }
 
+
+
+
+
+
+
+    ////////////////////////////////
+
+    function filterByTags(){
+        let tempArray = []
+
+        for (let i = 0; i < books.length; i++) {
+            if(parseInt(books[i].bookTags) == parseInt(filterTag.value)){
+               // addBookToCatalog()
+               tempArray.push(books[i])
+               addFilterBookToCatalog(books[i].bookCategory, "grid", tempArray)
+            }     
+            else{
+                
+            }       
+        }
+    }
+
+
+
+
+
+
+
+
+
+
     /* authors */
     function addAuthorsToFilter() {
         let strHtml = "<option value='Autores'>Autores</option>"
@@ -81,14 +113,19 @@ function addLoadEvent(func) {
     ////////////////////////////////
 
     function filterByAuthors(){
+        let tempArray = []        
+        let allBooks = []
+
         for (let i = 0; i < books.length; i++) {
-            if(books[i].bookAuthors == modalDonateAuthors.value){
-               // addBookToCatalog()
-               filterBooks.push(books[i])
-               addFilterBookToCatalog(books[i].bookCategory, "grid", filterBooks)
+            if(books[i].bookAuthors == filterAuthor.value){
+               tempArray.push(books[i])
+               addFilterBookToCatalog(books[i].bookCategory, "grid", tempArray)
             }     
-            else{
-                
+            else if(filterAuthor.value == "Autores"){
+               /* for (let i = 0; i < books.length; i++) {
+                    allBooks.push(books[i])
+                    addFilterBookToCatalog(books[i].bookCategory, "grid", allBooks)
+                }*/
             }       
         }
     }
@@ -131,6 +168,40 @@ function addLoadEvent(func) {
 
         filterLibraryParish.innerHTML = strHtml
     }
+
+
+
+
+
+
+
+    ////////////////////////////////
+
+    function filterByLibrary(){
+        let tempArray = []        
+        let allBooks = []
+
+        for (let i = 0; i < books.length; i++) {
+            if(books[i].bookCity == filterLibraryCity.value && books[i].bookParish == filterLibraryParish.value){
+               tempArray.push(books[i])
+               addFilterBookToCatalog(books[i].bookCategory, "grid", tempArray)
+            }     
+            else if(filterAuthor.value == "Autores"){
+               /* for (let i = 0; i < books.length; i++) {
+                    allBooks.push(books[i])
+                    addFilterBookToCatalog(books[i].bookCategory, "grid", allBooks)
+                }*/
+            }       
+        }
+    }
+
+
+
+
+
+
+
+
 //
 
 
@@ -487,6 +558,8 @@ addLoadEvent(function() {
             sortByRating(viewMode)
             sortByDonationDate(viewMode, sortBooks)            
             filterByAuthors()
+            filterByTags()
+            filterByLibrary()
 
             //console.log(tempTags.includes(filterTag.value))
 
