@@ -65,7 +65,6 @@ function addLoadEvent(func) {
 
         for (let i = 0; i < books.length; i++) {
             if(parseInt(books[i].bookTags) == parseInt(filterTag.value)){
-               // addBookToCatalog()
                tempArray.push(books[i])
                addFilterBookToCatalog(books[i].bookCategory, "grid", tempArray)
             }     
